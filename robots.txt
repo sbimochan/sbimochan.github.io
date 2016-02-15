@@ -1,0 +1,8 @@
+User-Agent: *
+Disallow: 
+Disallow: /email.txt
+Disallow: /cgi-bin/
+Disallow: /scripts/
+Disallow: /tmp/
+ 
+Sitemap: http://sbimochan.com.np/sitemap.xml
