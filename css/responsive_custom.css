@@ -1,0 +1,214 @@
+/*--------------------------------------------------------------------------
+   
+
+    Typebig Resume / CV
+
+    * Css override for mobile viewports
+
+
+--------------------------------------------------------------------------*/
+
+/* #Tablet (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 768px */
+
+    @media only screen and (min-width: 768px) and (max-width: 959px) {
+		#section-works .item .work-info {
+			margin: 16px 20px 16px 0;
+		}
+
+			#section-works .item h4 {
+				font-size: 14px;
+				line-height: 23px;
+				margin-bottom: 10px;
+			}
+    }
+
+
+/*  #Mobile (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 320px */
+
+    @media only screen and (max-width: 767px) {
+
+        /* Adjust the site logo top/bottom margins */
+        #section-header {
+        }
+
+        	#section-profileImage {
+        		height: 240px;
+        	}
+
+        	#section-profileImage #box-name {
+        		margin-top: 80px;
+        	}
+
+				#section-profileImage #box-name h2 {
+					color: #fff;
+					font: normal bold 25px/35px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+					letter-spacing: 3px;
+					text-transform: uppercase;
+				}
+
+			p.intro {
+				font: normal 13px/24px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+				margin-bottom: 30px;
+			}
+
+		#section-resume {
+			padding: 60px 0;
+		}
+
+		#section-resume img.image-profile {
+			margin: 20px 0 30px 0;
+		}
+
+
+		.box-skill {
+			display: block;
+			float: none;
+			width: auto;
+		}
+
+			.box-skill .box-inner {
+				background: transparent;
+				height: auto;
+				padding: 0;
+			}
+
+			.box-skill.even .box-inner {
+				background: #fff;
+			}
+
+			.box-skill h4 {
+				color: #333;
+			}
+
+				.box-skill div > p {
+					color: #999;
+					font: normal 13px/23px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+					margin: 10px 0 30px 0;
+				}
+
+
+				.box-skill div > p.last {
+					margin-bottom: 0;
+				}
+
+
+	#section-works {
+		color: #222;
+		background: #f5f5f5;
+		font: normal 16px/26px 'PT Serif', Georgia, serif;
+		padding: 60px 0;
+	}
+
+			#section-works .item {
+				background: transparent;
+			}
+
+			#section-works .item.last {
+				margin-bottom: 0px;
+			}
+
+				#section-works .img-wrap {
+					margin-bottom: 15px;
+				}
+
+			#section-works .item .work-info {
+				margin: 0;
+			}
+
+				#section-works .item span.category {
+					color: #999;
+					font: normal 11px/21px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+					text-transform: uppercase;
+					letter-spacing: 2px;
+				}
+
+				#section-works .item h4 {
+					font-size: 14px;
+					line-height: 23px;
+					margin-bottom: 10px;
+				}
+
+					#section-works a:hover .item h4 {
+						color: #333;
+					}
+
+				#section-works .item p {
+					color: #aaa;
+					font: normal 12px/22px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+				}
+
+					#section-works a:hover .item p {
+						color: #777;
+					}
+
+
+		.reveal-modal {
+			margin-left: -300px;
+			width: 600px;
+		}
+
+			.reveal-modal .box-modal {
+				padding: 10px 15px 15px 15px;
+			}
+
+				.reveal-modal .box-modal h4 {
+					font: normal 13px/21px 'PT Serif', Georgia, serif;
+					margin-bottom: 10px;
+				}
+
+				.reveal-modal .box-modal p {
+					font: normal 11px/21px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+				}
+
+			.reveal-modal a.link-details,
+			.reveal-modal a.close-reveal-modal {
+				padding: 10px 15px;
+			}
+
+		#section-contact input, 
+		#section-contact textarea, 
+		#section-contact select { 
+			width: 260px;
+		}
+
+		#section-contact label.placeholder {
+			display: none;
+		}
+
+        /* Adjust footer social media menu */
+        #section-footer ul#social {
+            float: none;
+        }
+
+	        #section-footer p {
+	            margin: 40px 0 39px 0;
+	        }
+
+            #section-footer ul#social li a {
+                border-right: none;
+                margin-right: 1px;
+                padding: 15px;
+                margin-top: 1px;
+            }
+
+            #section-footer ul#social li a img {
+                width: 16px;
+            }
+    }
+
+
+
+/* #Mobile (Landscape)
+================================================== */
+
+    /* Note: Design for a width of 480px */
+
+    @media only screen and (min-width: 480px) and (max-width: 767px) {
+
+    }
