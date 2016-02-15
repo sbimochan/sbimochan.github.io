@@ -1,0 +1,180 @@
+/*--------------------------------------------------------------------------
+   
+
+    Typebig Resume / CV
+    
+    * Optimizations for print
+    * A lot of the contents are hidden for printing
+    
+    
+--------------------------------------------------------------------------*/
+
+@media print {
+
+	#section-topbar,
+	#section-contact,
+	#section-works, 
+	#section-footer {
+	  display: none;
+	}
+
+	body {
+	  padding: 0!important;
+	}
+
+	/* Profile Image (Full background) */
+	#section-profileImage  {
+		background: transparent;
+		height: auto;
+	}
+
+		#section-profileImage #box-name {
+			color: #333;
+			font-size: 16px;
+			line-height: 26px;
+			margin-top: 30px!important;
+			text-align: center;
+		}
+
+			#section-profileImage #box-name h2 {
+				color: #222!important;
+			}
+
+
+			#section-profileImage #box-name p {
+				color: #666!important;
+				font: normal normal 14px/24px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+				margin-top: 5px;
+				margin-bottom: 40px;
+			}
+
+			#section-profileImage #box-name a {
+				color: #666!important;
+			}
+
+	#section-about {
+	  padding: 0;
+	  margin-bottom: 40px;
+	}
+
+	p.intro {
+		color: #777;
+		font: normal 17px/30px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+
+	#section-resume {
+	  padding: 0;
+	}
+
+	h3 {
+	  color: #bbb!important;
+	}
+
+	  h3 span.underline {
+	     border-bottom: 1px solid #bbb!important;
+	  }
+
+	#section-about p.intro {
+	  color: #333;
+	}
+
+	a.link-print,
+	a.link-pdf {
+	  display: none;
+	}
+
+	#section-resume {
+		padding: 0;
+	}
+
+		#section-resume h3 {
+			color: #444;
+			font: normal 300 12px/28px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+			padding-top: 0;
+			text-transform: uppercase;
+		}
+
+			#section-resume h3 span.underline {
+				padding-bottom: 3px;
+				border-bottom: 1px solid #444;
+			}
+
+		#section-resume img.profile-image {
+
+		}
+		
+		#section-resume .block {
+			margin-bottom: 40px;
+		}
+
+			#section-resume .block.last {
+				margin-bottom: 0px;
+			}
+			
+			#section-resume .item {
+				margin-bottom: 40px;
+			}
+
+			#section-resume .item > div {
+				padding-top: 0;
+			}
+			
+			#section-resume .item h4 {
+				font: normal 17px/27px 'PT Serif', Georgia, serif;
+			}
+		
+			#section-resume .item div h4 + p {
+				color: #666;
+				font: normal 17px/27px 'PT Serif', Georgia, serif;
+				margin-top: 0;
+			}
+
+			#section-resume .item div p.desc {
+				color: #999;
+				font: normal 17px/27px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+				margin-top: 15px;
+			}
+			
+			#section-resume .item div > p.date {
+				color: #555!important;
+				font: normal 13px/23px 'PT Serif', Georgia, serif;
+			}
+			
+			#section-resume .item div > p.date span.label {
+				display: inline-block;
+				color: #bbb;
+				background: #111;
+				padding: 0;
+			}
+
+		.box-skill {
+			width: auto;
+			float: none;
+			margin-bottom: 40px;
+
+			position: relative;
+			/* Assign a random z-index to let jQuery check for css @media print and turn off hover effects */
+			z-index: 1726;
+		}
+
+			.box-skill .box-inner {
+				padding: 0;
+				background: transparent;
+				height: auto;
+			}
+
+			.box-skill.even .box-inner {
+				background: transparent;
+			}
+
+			.box-skill h4 {
+				color: #333;
+				font: bold 17px/27px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+				text-transform: uppercase;
+				letter-spacing: 2px;
+			}
+
+				.box-skill div > p {
+					display: none;
+				}
+}
