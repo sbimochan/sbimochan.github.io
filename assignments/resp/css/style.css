@@ -1,0 +1,234 @@
+@media screen and (min-width: 1024px) {
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        display: block;
+        padding-right: 10px;
+    }
+
+    .search-box {
+        float: left;
+        margin: 0 4px;
+        background: url(../images/search.png);
+        width: 80%;
+        height: 20px;
+    }
+
+    .search-box input {
+        border: none;
+        background: none;
+        height: 20px;
+        width: 97%;
+        padding: 0 0 0 6px;
+        font-size: 9px;
+        font-family: "Arial";
+        background: url(../images/cross.png);
+        background-repeat: no-repeat;
+        background-position: right;
+    }
+
+    .search-btn {
+        float: left;
+        padding: 0 4px;
+    }
+
+    .search-btn input {
+        background: url(../images/search-btn.png);
+        border: none;
+        outline: none;
+        height: 20px;
+        width: 53px;
+        font-size: 8px;
+        color: #f3f5f2;
+        padding: 0;
+    }
+
+    .settings {
+        float: right;
+    }
+
+    .profile-username a {
+        text-decoration: none;
+        float: right;
+        color: #000;
+        padding-top: 8px;
+        padding-bottom: 12px;
+        font-size: 16px;
+        font-family: "Arial";
+    }
+
+
+    .download-ico {
+        /*position: absolute;*/
+        right: 14px;
+        bottom: 15px;
+    }
+
+    .burger-ico {
+        /*position: absolute;*/
+        right: 14px;
+        bottom: 15px;
+    }
+
+    .article-content.below ul li a {
+        width: 12.6em;
+    }
+
+    .main-content {
+        float: right;
+        background-color: #fff;
+        width: 32.375em;
+    }
+
+    .entry-title {
+        color: #373737;
+        font-size: 30px;
+        /*margin-bottom: 12px;*/
+        font-family: "Arial";
+        padding-top: 12px;
+        line-height: 0px;
+        padding-bottom: 20px;
+        /*background-color: red;*/
+    }
+
+    .entry-tabs {
+        background: url(../images/entry-bg.png);
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 65px;
+        border-bottom: 2px solid #2fc1da;
+        /* content: "";
+        display: table;*/
+    }
+
+    .left {
+        float: left;
+    }
+
+    .tab-section {
+        padding: 0 5px;
+    }
+
+    .tab-section span {
+        display: block;
+        text-align: center;
+        padding-top: 14px;
+        padding-bottom: 11px;
+        font-size: 11px;
+    }
+
+    .tab-list .active {
+        background: url(../images/tab-bg-active.png);
+        background-repeat: no-repeat;
+    }
+
+    .tab-list .active a {
+        color: #fff;
+    }
+
+    .tab-list ul li {
+        background: url(../images/tab-bg.png);
+        background-repeat: no-repeat;
+        float: left;
+        line-height: 30px;
+        margin: 0 5px;
+        width: 7.125em;
+        text-align: center;
+        height: 28px;
+    }
+
+    .tab-list ul li a {
+        color: black;
+        font-size: 12px;
+        display: block;
+    }
+
+    .entry-lists ul li {
+        padding: 15px 0px;
+        border-bottom: 1px solid #d8d8d8;
+    }
+
+    .profile-title a {
+        text-decoration: none;
+        color: black;
+
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .member-by {
+        font-size: 11px;
+        padding-right: 6px;
+        color: #616161;
+    }
+
+    .member-by a {
+        color: #51aebf;
+        font-weight: bold;
+    }
+
+    .member-date {
+        padding: 0 6px;
+        font-size: 11px;
+        color: #616161;
+        border-left: 1px solid #888888;
+    }
+
+    .subscribed {
+        padding: 0 6px;
+        border-left: 1px solid #888888;
+        color: #70961d;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    .from-topic-box {
+
+        font-size: 11px;
+        color: #616161;
+    }
+
+    .new-entry {
+        color: #51aebf;
+    }
+
+    .tab-list ul li:hover {
+        background: url("../images/tab-bg-active.png");
+    }
+
+    .menu ul li.burger {
+        display: none;
+    }
+
+    .crop {
+        position: absolute;
+    }
+
+    .profile-menu ul li.home {
+        padding-right: 5px;
+    }
+
+    .article-content ul li a {
+        width: 80%;
+        display: inline-block;
+    }
+
+    .article-content ul li a.clickable-icon {
+        float: right;
+        width: auto;
+    }
+
+    .below {
+        clear: both;
+    }
+
+    .menu ul li.active {
+        color: red;
+    }
+
+    .main-content-desc {
+        float: right;
+        width: 430px;
+    }
+}
+/*responsive*/
