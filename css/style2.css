@@ -6,9 +6,11 @@ body {
     color: #333;
     background: #fff;
     font: 14px/22px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+    -webkit-font-smoothing: antialiased;
+    /* Fix for webkit rendering */
     -webkit-text-size-adjust: 100%;
 }
+
 
 
 
@@ -17,36 +19,87 @@ body {
         2. Typography
 --------------------------------------------------------------------------*/
 
+
 /* Headings Default */
-h1 { font-size: 17px; line-height: 20px; font-weight: bold; }
-h2 { font-size: 18px; line-height: 27px; }
-h3 { font-size: 14px; line-height: 22px; }
-h4 { font-size: 13px; line-height: 23px; }
-h6 { font-size: 12px; line-height: 14px; }
+
+h1 {
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 18px;
+    line-height: 27px;
+}
+
+h3 {
+    font-size: 14px;
+    line-height: 22px;
+}
+
+h4 {
+    font-size: 13px;
+    line-height: 23px;
+}
+
+h6 {
+    font-size: 12px;
+    line-height: 14px;
+}
+
 
 /* Links */
-a, a:visited { color: #333; text-decoration: none; underline; outline: 0; }
-a:hover, a:focus { color: #000; }
-p a, p a:visited { line-height: inherit; }
+
+a,
+a:visited {
+    color: #333;
+    text-decoration: none;
+    underline;
+    outline: 0;
+}
+
+a:hover,
+a:focus {
+    color: #000;
+}
+
+p a,
+p a:visited {
+    line-height: inherit;
+}
+
 
 
 /* Highlighted Text */
-::selection { 
-    background: #FFAE19; 
-    color:#fff; 
-    text-shadow: none; 
+
+::selection {
+    background: #FFAE19;
+    color: #fff;
+    text-shadow: none;
 }
+
 
 /* Firefox */
-::-moz-selection { 
-    background: #df4244; 
-    color:#fff; 
-    text-shadow: none; 
+
+::-moz-selection {
+    background: #df4244;
+    color: #fff;
+    text-shadow: none;
 }
 
-em, .italic { font-style: italic; }
-strong { font-weight: bold; }
-small { font-size: 80%; }
+em,
+.italic {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+small {
+    font-size: 80%;
+}
 
 .font-color-primary {
     color: #44bbaa;
@@ -63,11 +116,14 @@ small { font-size: 80%; }
 
 
 
+
 /*--------------------------------------------------------------------------
         3. Page Sections
 --------------------------------------------------------------------------*/
 
+
 /* Common Elements */
+
 img {
     max-width: 100%;
 }
@@ -76,15 +132,16 @@ h3 {
     font: normal 300 12px/22px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
 }
 
-h5 { 
+h5 {
     font: normal 11px/21px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 3px;
 }
+
 
 
 
@@ -95,8 +152,12 @@ h5 {
         * This is the fixed top navigation
 ---------------------------------------------------*/
 
+
 /* Topbar (fixed) */
+
+
 /* Please refer to responsive_custom.css for CSS in smaller viewport */
+
 #section-topbar {
     position: fixed;
     top: 0;
@@ -104,7 +165,7 @@ h5 {
     right: 0;
     z-index: 100;
     overflow: visible;
-    font: normal 16px/24px  'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: normal 16px/24px 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #section-topbar a {
@@ -118,11 +179,13 @@ h5 {
     opacity: 0.8;
 }
 
+
 /*
         Top Bar
 
         By default, top navigation bar uses "fixed" position
 */
+
 #section-topbar ul#nav {
     display: inline-block;
     position: relative;
@@ -132,11 +195,11 @@ h5 {
     border-right: 1px solid #222;
 
     /* For IE, the outcast */
-    zoom:1;
+    zoom: 1;
     *display: inline;
 }
 
-#section-topbar ul#nav > li {
+#section-topbar ul#nav>li {
     display: block;
     float: left;
     padding: 0;
@@ -164,21 +227,21 @@ h5 {
 
 #section-topbar ul#nav .active a:hover {
     background: #8A0707;
-
-
 }
+
 @media only screen and (max-width: 460px) {
     #section-topbar ul#nav img {
-        width:25px;
+        width: 25px;
     }
     #section-topbar ul#nav a {
 
         padding: 12px 12px 12px 12px;
-
-    }	
+    }
 }
 
+
 /* jQuery UI tooltip for menu items */
+
 .ui-tooltip {
     color: #eee;
     background: #222;
@@ -198,22 +261,26 @@ body .ui-tooltip {
 
 
 
+
 /*---------------------------------------------------
         3.2 Header
 
         Includes full-width background iamge and intro paragraph
 ---------------------------------------------------*/
 
-#section-intro {
-}
+#section-intro {}
+
 
 /* Profile Image (Full background) */
-#section-profileImage  {
-    background: #222 url('https://i1036.photobucket.com/albums/a441/sbimochan/profile_main3_zpsdirqfb4s.jpg') no-repeat center center;
+
+#section-profileImage {
+    background: #222 url(http://sbimochan.com.np/images/bigimages/landing.jpg) no-repeat center center;
+    
     background-size: cover;
     height: 510px;
 }
-#section-profileImage-Movie  {
+
+#section-profileImage-Movie {
     height: 510px;
     overflow: hidden;
     position: relative;
@@ -229,7 +296,7 @@ body .ui-tooltip {
 
 #section-profileImage #box-name h2 {
     color: #fff;
-    font: normal  36px/46px  'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: normal 36px/46px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: 3px;
     text-transform: uppercase;
 }
@@ -249,9 +316,20 @@ body .ui-tooltip {
     color: #df4244;
 }
 
+
 /* About */
-.logo {background-image: url('../images/anthony-wiktor-logo.png');width:334px; height:195px; margin:0 auto;}
-.logo:hover {background-image: url('../images/anthony-wiktor-logo-hover.png');}
+
+.logo {
+    background-image: url('../images/anthony-wiktor-logo.png');
+    width: 334px;
+    height: 195px;
+    margin: 0 auto;
+}
+
+.logo:hover {
+    background-image: url('../images/anthony-wiktor-logo-hover.png');
+}
+
 #section-about {
     color: #fff;
     background: #323232;
@@ -261,7 +339,8 @@ body .ui-tooltip {
 
 #section-about h3 span.underline {
     padding-bottom: 3px;
-    border-bottom: 1px solid #fff; line-height:29px;
+    border-bottom: 1px solid #fff;
+    line-height: 29px;
 }
 
 p.intro {
@@ -269,7 +348,9 @@ p.intro {
     font: normal 13px/29px 'museo_slab500', 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-a.link-print, a.link-pdf, a.link-li {
+a.link-print,
+a.link-pdf,
+a.link-li {
     color: #fff;
     font: normal 11px/21px 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     letter-spacing: 1px;
@@ -288,11 +369,14 @@ a.link-pdf {
 }
 
 a.link-li {
-    background: url('../images/icons/icon_li.png') no-repeat left center; opacity:0.6;
+    background: url('../images/icons/icon_li.png') no-repeat left center;
+    opacity: 0.6;
 }
+
 a.link-li:hover {
-    opacity:1;
+    opacity: 1;
 }
+
 
 /*---------------------------------------------------
         3.3 Resume
@@ -341,9 +425,7 @@ a.link-li:hover {
     margin-bottom: 15px;
 }
 
-#section-resume img.profile-image {
-
-}
+#section-resume img.profile-image {}
 
 #section-resume .block {
     margin-bottom: 40px;
@@ -368,12 +450,12 @@ a.link-li:hover {
     margin-bottom: 10px;
 }
 
-#section-resume .item > div {
+#section-resume .item>div {
     padding-top: 15px;
 }
 
-#section-resume .item.no-border > div,
-#section-resume .item > div.no-border { 
+#section-resume .item.no-border>div,
+#section-resume .item>div.no-border {
     border-top: none;
 }
 
@@ -382,7 +464,7 @@ a.link-li:hover {
     font: normal 16px/26px 'museo_slab500', 'PT Serif', Georgia, serif;
 }
 
-#section-resume .item div h4 + p {
+#section-resume .item div h4+p {
     color: #666;
     font: normal 14px/24px 'PT Serif', Georgia, serif;
     margin-top: 0;
@@ -394,12 +476,12 @@ a.link-li:hover {
     margin-top: 15px;
 }
 
-#section-resume .item div > p.date {
+#section-resume .item div>p.date {
     color: #444;
     font: normal 13px/23px 'PT Serif', Georgia, serif;
 }
 
-#section-resume .item div > p.date span.label {
+#section-resume .item div>p.date span.label {
     display: inline-block;
     color: #aaa;
     background: #111;
@@ -435,18 +517,18 @@ a.link-li:hover {
     letter-spacing: 0px;
 }
 
-.box-skill.hoverClass h4 {
-}
+.box-skill.hoverClass h4 {}
 
-.box-skill div > p {
+.box-skill div>p {
     color: #fff;
     font: normal 13px/23px 'museo_slab500', 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin-top: 15px;
 }
 
-.box-skill.hoverClass div > p {
+.box-skill.hoverClass div>p {
     display: block;
 }
+
 
 
 
@@ -455,24 +537,23 @@ a.link-li:hover {
         3.4 Works
 ---------------------------------------------------*/
 
+
 /* Isotope grid */
 
-#section-worksgrid {
+#section-worksgrid {}
 
-}
-
-#section-worksgrid a{
-cursor: url(../images/cross.png), auto;
-
+#section-worksgrid a {
+    cursor: url(../images/cross.png), auto;
 }
 
 #section-worksgrid .item {
-    line-height: 0; 
+    line-height: 0;
 }
 
 #section-worksgrid .item img {
-    width: 100%; 
+    width: 100%;
 }
+
 
 /**** Isotope Filtering ****/
 
@@ -484,6 +565,7 @@ cursor: url(../images/cross.png), auto;
     pointer-events: none;
     z-index: 1;
 }
+
 
 /**** Isotope CSS3 transitions ****/
 
@@ -506,11 +588,12 @@ cursor: url(../images/cross.png), auto;
 
 .isotope .isotope-item {
     -webkit-transition-property: -webkit-transform, opacity;
-    -moz-transition-property:    -moz-transform, opacity;
-    -ms-transition-property:     -ms-transform, opacity;
-    -o-transition-property:      -o-transform, opacity;
-    transition-property:         transform, opacity;
+    -moz-transition-property: -moz-transform, opacity;
+    -ms-transition-property: -ms-transform, opacity;
+    -o-transition-property: -o-transform, opacity;
+    transition-property: transform, opacity;
 }
+
 
 /**** disabling Isotope CSS3 transitions ****/
 
@@ -545,9 +628,7 @@ cursor: url(../images/cross.png), auto;
     margin-bottom: 0px;
 }
 
-#section-works a:hover .item {
-
-}
+#section-works a:hover .item {}
 
 #section-works .img-wrap {
 
@@ -572,7 +653,7 @@ cursor: url(../images/cross.png), auto;
     font-size: 17px;
     line-height: 28px;
     margin: 5px 0 0px 0;
-    color:#df4244;
+    color: #df4244;
 }
 
 #section-works a:hover .item h4 {
@@ -580,9 +661,10 @@ cursor: url(../images/cross.png), auto;
 }
 
 
-#section-works .item p {margin-top:20px;
-                        color: #aaa;
-                        font: normal 13px/24px 'museo_slab500', 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+#section-works .item p {
+    margin-top: 20px;
+    color: #aaa;
+    font: normal 13px/24px 'museo_slab500', 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 #section-works a:hover .item p {
@@ -591,35 +673,40 @@ cursor: url(../images/cross.png), auto;
 
 
 
+
 /*---------------------------------------------------
         3.4.1 jQuery Reveal Plugin
 ---------------------------------------------------*/
 
+
 /* CSS for jQuery Reveal Plugin Maintained for Foundation. foundation.zurb.com Free to use under the MIT license. http://www.opensource.org/licenses/mit-license.php */
+
+
 /* Reveal Modals ---------------------- */
-.reveal-modal-bg { 
-    position: fixed; 
-    height: 100%; 
-    width: 100%; 
-    background: #000; 
-    background: rgba(0, 0, 0, 0.55); 
-    z-index: 40; 
-    display: none; 
-    top: 0; 
-    left: 0; 
+
+.reveal-modal-bg {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 40;
+    display: none;
+    top: 0;
+    left: 0;
 }
 
-.reveal-modal { 
-    background: #fff; 
-    visibility: hidden; 
-    display: none; 
-    top: 100px; 
-    left: 50%; 
-    margin-left: -300px; 
-    width: 600px; 
-    position: absolute; 
-    z-index: 41; 
-    padding: 0; 
+.reveal-modal {
+    background: #fff;
+    visibility: hidden;
+    display: none;
+    top: 100px;
+    left: 50%;
+    margin-left: -300px;
+    width: 600px;
+    position: absolute;
+    z-index: 41;
+    padding: 0;
 }
 
 .reveal-modal .box-modal {
@@ -668,7 +755,13 @@ cursor: url(../images/cross.png), auto;
     background: #000;
 }
 
-@media print { .reveal-modal { border: solid 1px black; background: #fff; } }
+@media print {
+    .reveal-modal {
+        border: solid 1px black;
+        background: #fff;
+    }
+}
+
 
 
 
@@ -700,14 +793,16 @@ cursor: url(../images/cross.png), auto;
     margin-bottom: 40px;
 }
 
+
 /* Register Form */
+
 #section-contact form {
     margin-bottom: 40px;
 }
 
 #section-contact form p,
 #section-contact label,
-#section-contact legend { 
+#section-contact legend {
     font: normal 13px/23px 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -718,21 +813,21 @@ cursor: url(../images/cross.png), auto;
     margin: 6px 0;
 }
 
-#section-contact input, 
-#section-contact textarea, 
-#section-contact select { 
-    width: 280px; 
-    padding: 14px 20px; 
-    color: #eee; 
+#section-contact input,
+#section-contact textarea,
+#section-contact select {
+    width: 280px;
+    padding: 14px 20px;
+    color: #eee;
     background: #333;
-    margin: 0 0 35px 0; 
+    margin: 0 0 35px 0;
     border: 0;
     outline: none;
 }
 
-#section-contact input:focus, 
-#section-contact textarea:focus, 
-#section-contact select:focus { 
+#section-contact input:focus,
+#section-contact textarea:focus,
+#section-contact select:focus {
     color: #fff;
     background-color: #df4244;
 }
@@ -743,8 +838,8 @@ cursor: url(../images/cross.png), auto;
     letter-spacing: 4px;
     display: block;
     cursor: pointer;
-    color:#fff;
-    background:#df4244;
+    color: #fff;
+    background: #df4244;
     padding: 20px 28px;
     border: none;
     -moz-border-radius: 3px;
@@ -753,16 +848,18 @@ cursor: url(../images/cross.png), auto;
     border-radius: 3px;
 }
 
-#section-contact button.submit:hover { 
+#section-contact button.submit:hover {
     color: #df4244;
-    background: #fff; 
+    background: #fff;
 }
 
-#section-contact span.required { 
+#section-contact span.required {
     color: #df4244;
-    font-size: 13px;  
-} /* Select the color of the * if the field is required. */
+    font-size: 13px;
+}
 
+
+/* Select the color of the * if the field is required. */
 
 #contact-warning,
 #contact-success {
@@ -785,12 +882,14 @@ cursor: url(../images/cross.png), auto;
     margin-bottom: 30px;
 }
 
+
 /* HTML5 Placeholder */
+
 ::-webkit-input-placeholder {
     color: #df4244;
 }
 
-:-moz-placeholder {  
+:-moz-placeholder {
     color: #df4244;
 }
 
@@ -798,7 +897,7 @@ cursor: url(../images/cross.png), auto;
 #box-references {}
 
 #box-references h3 {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 #box-references p.desc {
@@ -831,16 +930,14 @@ cursor: url(../images/cross.png), auto;
 }
 
 
-#box-testimonials {
-
-}
+#box-testimonials {}
 
 #box-testimonials .item {
     margin-top: 30px;
-} 
+}
 
 #box-testimonials h3 {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 #box-testimonials blockquote p.quote {
@@ -864,6 +961,7 @@ cursor: url(../images/cross.png), auto;
 
 
 
+
 /*---------------------------------------------------
         3.6 Footer
 ---------------------------------------------------*/
@@ -878,9 +976,13 @@ cursor: url(../images/cross.png), auto;
     margin-top: 32px;
 }
 
-#section-footer a { color: #666; }
+#section-footer a {
+    color: #666;
+}
 
-#section-footer a:hover { color: #df4244; }
+#section-footer a:hover {
+    color: #df4244;
+}
 
 
 #section-footer ul#social {
@@ -903,12 +1005,12 @@ cursor: url(../images/cross.png), auto;
     #section-footer ul#social li a {
         background: #df4244;
     }
-
 }
 
 #section-footer ul#social li a:hover {
     background: #df4244;
 }
+
 #section-footer ul#social li.aiga a {
 
     padding: 30px 10px;
@@ -925,7 +1027,7 @@ cursor: url(../images/cross.png), auto;
 
 #section-footer ul#social li.beh a:hover {
     background: #3b5998;
-}	
+}
 
 #section-footer ul#social li.linkedin a:hover {
     background: #1983bd;
@@ -933,7 +1035,7 @@ cursor: url(../images/cross.png), auto;
 
 #section-footer ul#social li.dribble a:hover {
     background: #ea4c89;
-}	
+}
 
 
 
@@ -942,174 +1044,246 @@ cursor: url(../images/cross.png), auto;
     font-family: 'museo_slab500';
     src: url('../fonts/aw_slab_500-webfont.eot');
     src: url('../fonts/aw_slab_500-webfontd41d.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/aw_slab_500-webfont.woff') format('woff'),
-        url('../fonts/aw_slab_500-webfont.ttf') format('truetype'),
-        url('../fonts/aw_slab_500-webfont.svg#museo_slab500') format('svg');
+    url('../fonts/aw_slab_500-webfont.woff') format('woff'),
+    url('../fonts/aw_slab_500-webfont.ttf') format('truetype'),
+    url('../fonts/aw_slab_500-webfont.svg#museo_slab500') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
-.behance-out{ width:100%; background:#333; text-align: center;  }
-.behance-out a { background: #333; display: block; padding: 45px 0; transition: all 0.5s ease 0s; }
-.behance-out a:hover{background:#0087cb; padding: 60px 0; transition: all 0.5s ease 0s;}
-.behance img{ max-width:100%; }
+
+.behance-out {
+    width: 100%;
+    background: #333;
+    text-align: center;
+}
+
+.behance-out a {
+    background: #333;
+    display: block;
+    padding: 45px 0;
+    transition: all 0.5s ease 0s;
+}
+
+.behance-out a:hover {
+    background: #0087cb;
+    padding: 60px 0;
+    transition: all 0.5s ease 0s;
+}
+
+.behance img {
+    max-width: 100%;
+}
+
 
 
 /***** new *****/
-#section-worksgrid .item a { width: 100%; height: 50%; min-height: 185px; max-height: 315px; overflow: hidden; display: inline-block; }
-#section-worksgrid .item img { opacity: 1; z-index: 10; position: relative; top: 0; left: 0; }
-#section-worksgrid .item span { z-index: 20; position: absolute; width: 100%; height: 100%; 
-           top: 0px; left: 0px;     opacity: 0;
+
+#section-worksgrid .item a {
+    width: 100%;
+    height: 50%;
+    min-height: 185px;
+    max-height: 315px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+#section-worksgrid .item img {
+    opacity: 1;
+    z-index: 10;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#section-worksgrid .item span {
+    z-index: 20;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
     -webkit-transition: opacity 1.0s;
-    -moz-transition:    opacity 1.0s;
-    -o-transition:      opacity 1.0s; }
-			#section-worksgrid .item:hover span { z-index: 20; position: absolute; width: 100%; height: 100%; 
-            display: inline-block; top: 0px; left: 0px; opacity: 1; }
+    -moz-transition: opacity 1.0s;
+    -o-transition: opacity 1.0s;
+}
+
+#section-worksgrid .item:hover span {
+    z-index: 20;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    top: 0px;
+    left: 0px;
+    opacity: 1;
+}
+
 .cd-top {
-  display: inline-block;
-  height: 40px;
-  width: 40px;
-  position: fixed;
-  bottom: 40px;
-  right: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  /* image replacement properties */
-  overflow: hidden;
-  text-indent: 100%;
-  white-space: nowrap;
-  background: #3B1A58 url(../images/cd-top-arrow.svg) no-repeat center 50%;
-  visibility: hidden;
-  opacity: 0;
-  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
-  -moz-transition: opacity .3s 0s, visibility 0s .3s;
-  transition: opacity .3s 0s, visibility 0s .3s;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    bottom: 40px;
+    right: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    /* image replacement properties */
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background: #3B1A58 url(../images/cd-top-arrow.svg) no-repeat center 50%;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+    -moz-transition: opacity .3s 0s, visibility 0s .3s;
+    transition: opacity .3s 0s, visibility 0s .3s;
 }
-.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
-  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
-  -moz-transition: opacity .3s 0s, visibility 0s 0s;
-  transition: opacity .3s 0s, visibility 0s 0s;
-}
-.cd-top.cd-is-visible {
-  /* the button becomes visible */
-  visibility: visible;
-  opacity: 1;
-  z-index: 999;
-}
-.cd-top.cd-fade-out {
-  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
-  opacity: .5;
-}
+
+.cd-top.cd-is-visible,
+.cd-top.cd-fade-out,
 .no-touch .cd-top:hover {
-  background-color: #3B1A58;
-  opacity: 1;
+    -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+    -moz-transition: opacity .3s 0s, visibility 0s 0s;
+    transition: opacity .3s 0s, visibility 0s 0s;
 }
+
+.cd-top.cd-is-visible {
+    /* the button becomes visible */
+    visibility: visible;
+    opacity: 1;
+    z-index: 999;
+}
+
+.cd-top.cd-fade-out {
+    /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+    opacity: .5;
+}
+
+.no-touch .cd-top:hover {
+    background-color: #3B1A58;
+    opacity: 1;
+}
+
 @media only screen and (min-width: 768px) {
-  .cd-top {
-    right: 20px;
-    bottom: 20px;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .cd-top {
-    height: 60px;
-    width: 60px;
-    right: 30px;
-    bottom: 30px;
-  }
-}
-#section-intro #section-profileImage-Movie {
-            overflow: hidden;
-            position: relative;
-
-        }
-        #section-intro {
-            position:relative;
-            left:0px;
-            top:0px;
-            z-index:10;
-
-        }
-        video#myvideo {
-            position: fixed;
-            top: -100px;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: 1;
-            background: url(images/profile_main3.jpg) no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-            background-origin: content-box;
-        }
-        #section-worksgrid {
-            width: 100%;
-            height: 100%;
-            background-attachment: fixed;
-            background-size: 100% 100%;
-            position: relative;
-            background-color: white;
-            z-index: 20;
-        }
-        #section-about, #section-resume, #section-contact, #section-footer, .behance-out {
-            position: relative;
-            z-index: 20;
-            opacity:0.97;
-        }
-         #working-section{
-            background-image: url(https://i1036.photobucket.com/albums/a441/sbimochan/bg-small-blur_zps1bktc6al.jpg);
-            height: 400px;
-            background-size: cover;
-            background-attachment: fixed;
-            background-origin: content-box;
-            background-repeat: no-repeat;
-            background-color: black;
-        }
-        /*for device more than 400px*/
-         @media only screen and (min-width: 400px) {
-        #working-section{
-            background-image: url(https://i1036.photobucket.com/albums/a441/sbimochan/bg-big-blur_zpsmnoio7m8.jpg);
-            height: 750px;
-            background-size: cover;
-            background-attachment: fixed;
-            background-origin: content-box;
-            background-repeat: no-repeat;
-             background-color: black;
-        }}
-        #working-section-iphone {
-            background-image: url(https://i1036.photobucket.com/albums/a441/sbimochan/bg-big-blur_zpsmnoio7m8.jpg);
-            height: 400px;
-            background-size: cover;
-            background-position: top center;
-            background-repeat: no-repeat;
-             background-color: black;
-        }
-        .appear {
-            visibility: hidden;
+    .cd-top {
+        right: 20px;
+        bottom: 20px;
     }
-    #Pcontainer {
-  height: 45px;
-  width: 100%;
-  
- 
-  position: relative;
-            z-index: 20;
-           
+}
+
+@media only screen and (min-width: 1024px) {
+    .cd-top {
+        height: 60px;
+        width: 60px;
+        right: 30px;
+        bottom: 30px;
+    }
+}
+
+#section-intro #section-profileImage-Movie {
+    overflow: hidden;
+    position: relative;
+}
+
+#section-intro {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+}
+
+video#myvideo {
+    position: fixed;
+    top: -100px;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1;
+    background: url(images/profile_main3.jpg) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-origin: content-box;
+}
+
+#section-worksgrid {
+    width: 100%;
+    height: 100%;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    position: relative;
+    background-color: white;
+    z-index: 20;
+}
+
+#section-about,
+#section-resume,
+#section-contact,
+#section-footer,
+.behance-out {
+    position: relative;
+    z-index: 20;
+    opacity: 0.97;
+}
+
+#working-section {
+    background-image: url(https://i1036.photobucket.com/albums/a441/sbimochan/bg-small-blur_zps1bktc6al.jpg);
+    height: 400px;
+    background-size: cover;
+    background-attachment: fixed;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+
+/*for device more than 400px*/
+
+@media only screen and (min-width: 400px) {
+    #working-section {
+        background-image: url(http://sbimochan.com.np/images/bigimages/landing.jpg);
+        height: 750px;
+        background-size: cover;
+        background-attachment: fixed;
+        background-origin: content-box;
+        background-repeat: no-repeat;
+        background-color: black;
+    }
+}
+
+#working-section-iphone {
+    background-image: url(http://sbimochan.com.np/images/bigimages/landing.jpg);
+    height: 400px;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+.appear {
+    visibility: hidden;
+}
+
+#Pcontainer {
+    height: 45px;
+    width: 100%;
+
+
+    position: relative;
+    z-index: 20;
+
 
     padding: 40px 0px;
-
 }
 
 #portfolio {
-  z-index: 100;
-  position: absolute;
-  color: #383838;
-  font-size: 36px;
-  font-weight: bold;
-  left: 115px;
-  top: 50px;
+    z-index: 100;
+    position: absolute;
+    color: #383838;
+    font-size: 36px;
+    font-weight: bold;
+    left: 115px;
+    top: 50px;
 }
-
-
