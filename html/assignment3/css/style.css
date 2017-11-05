@@ -18,7 +18,12 @@
 .header-bottom .contents .title{
 	font-family: 'Open Sans', sans-serif;
 	font-size: 20px;
-
+	color:#7F8C8C;
+}
+.triangle{
+	position: absolute;
+	margin-top: -5px;
+	/*background-image: url("../images/header-triangle.png");*/
 }
 .title-box{
 	float: left;
