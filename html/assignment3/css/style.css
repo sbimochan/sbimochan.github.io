@@ -87,6 +87,9 @@
 }*/
 .slider-images{
 	position: relative;
+	width: 1170px;
+	height: 700px;
+	background: #fff;
 }
 .slider-images img{
 	border-radius: 5px;
@@ -137,7 +140,7 @@
 	font-size: 16px;
 	color: #7F8C8C;
 	 font-weight: bolder;
-	 float: left;
+	
 }
 .project-desc p{
 	font-size: 14px;
@@ -165,7 +168,7 @@
 	font-size: 13px;
 }
 .project-details ul li .about{
-	/*float: left;*/
+	
 	font-size:13px;
 	width: 50px;
 }
@@ -248,4 +251,102 @@ span.overlay-desc{
 	display: block;
 	margin-top:60px;
 	margin-left: 35%;
+}
+.first p{
+	font-size: 13px;
+	width: 362px;
+	line-height: 23.4px;
+	padding-bottom: 20px;
+}
+.blog-header {
+    padding-left: 3px;
+    margin-top: 7px;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.2;
+    font-family: "OpenSans";
+    
+    }
+.blog-image{
+	width: 70px;
+	height: 70px;
+	background-color: #5E9F99;
+	border-radius: 5px;
+	display: inline-block;
+	float: left;
+	margin-right:18px; 
+}
+.footer-contents{
+	color:#fff;
+	font-size: 13px;
+	width: 1170px;
+	margin:auto;
+}
+.first ul li a{
+	font-size: 20px;
+	font-weight: 600;
+	color:#fff;
+}
+.footer-heads{
+	padding-bottom: 30px;
+	padding-top: 25px;
+}
+.middle{
+	font-size: 20px;
+	color:#3B6360;
+	font-weight: bolder;
+}
+.footer-lists{
+	line-height: 23.4px;
+}
+.blog-desc{
+	 font-size: 13px;
+    font-family: "OpenSans";
+    text-align: left;
+    margin-bottom: 0;
+
+    line-height: 19.5px;
+}
+.date{
+	font-size: 13px;
+    font-family: "OpenSans";
+    opacity: 0.5;
+    color: #000;
+    text-align: left;
+    font-size: 13px;
+    line-height: 19.5px;
+}
+.fa-picture-o{
+	margin-left: 30%;
+	margin-top:30%;
+	color:#AECECB;
+}
+.copyright{
+	float: left;
+	line-height: 50px;
+}
+.social{
+	float: right;
+}
+.social ul li{
+	display: inline-block;
+}
+.social ul li a i{
+	font-size: 20px;
+	padding-left: 25px;
+	line-height: 50px;
+	color:#fff;
+}
+.blog-container{
+	min-height: 70px;
+    margin-bottom: 15px;
+}
+.blog-container ul li{
+	display: inline-block;
+	padding-bottom: 20px;
+}
+.slider-noimg{
+	color:#ECECEC;
+	margin-top: 322px;
+    margin-left: 545px;
 }

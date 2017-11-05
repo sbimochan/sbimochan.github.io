@@ -90,12 +90,34 @@
 .footer-wrapper{
 	background-color: #76c7c0;
 }
+/*.footer-contents{
+	width: 73.125em;
+    margin: auto;
+}*/
 .footer-top{
-	min-height: 300px;
+	padding-top: 20px;
 	
 	background:url("../images/footer-top-img.png");
 	background-repeat: repeat-x;
 }
 .footer-bottom{
 	background-color: #6ab3ad;
+}
+.column{
+	width: 33.33%;
+	float: left;
+}
+
+.first{
+	min-height: 220px;
+
+}
+
+.col-inner-left{
+	width: 50%;
+	float: left;
+}
+.col-inner-right{
+width: 50%;
+float: right;
 }
