@@ -507,7 +507,12 @@ span.overlay-desc {
 .footer-lists li a{
     color:#fff;
 }
-
+.col-inner-left{
+    float: left;
+}
+.col-inner-right{
+    float: right;
+}
 
 @media (min-width: 1024px) {
 
