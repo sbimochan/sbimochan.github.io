@@ -1,0 +1,199 @@
+.main-wrapper{
+	width: 100%;
+	background:#f3f3f3;
+}
+.header-top{
+	min-height: 80px;
+	position: relative;
+    background-color: #76C7C0;
+
+}
+
+.top-ruler {
+    background: url('../images/navbar-background-bottom.png') repeat-x;
+    height: 8px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.header-bottom {
+
+    height: 80px;
+    background: #ECECEC;
+}
+
+.contents {
+    width: 100%;
+    margin: 0 auto;
+    line-height: 80px;
+}
+
+
+
+.header-top .contents ul {
+    list-style-type: none;
+    /*font-family: Open Sans;*/
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    line-height: 15.6px;
+    font-weight: 600;
+}
+.slider-nav {
+    height: 120px;
+    /*background-color: purple;*/
+}
+.footer-wrapper {
+    background-color: #76c7c0;
+}
+
+
+
+
+@media (min-width: 1024px) {
+    .main-wrapper {
+    background: #f3f3f3;
+    /*width: 100%;*/
+    min-width: 93.75em;
+}
+
+.container {
+    width: 73.125em;
+    /*1170*/
+    background-color: #F3F3F3;
+    margin: 0 auto;
+    content: "";
+    display: table;
+}
+
+.header-top {
+    /*background: white;*/
+    min-height: 80px;
+    /*80*/
+    /*padding-left: 172px;
+	padding-right: 167px;*/
+    position: relative;
+    background-color: #76C7C0;
+}
+
+.top-ruler {
+    background: url('../images/navbar-background-bottom.png') repeat-x;
+    height: 8px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.header-bottom {
+
+    height: 80px;
+    background: #ECECEC;
+}
+
+.contents {
+    width: 73.125em;
+    margin: 0 auto;
+    line-height: 80px;
+}
+
+.logo {
+    /*padding-top:28px;*/
+    float: left;
+}
+
+.header-top .contents ul {
+    list-style-type: none;
+    /*font-family: Open Sans;*/
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    line-height: 15.6px;
+    font-weight: 600;
+}
+
+.main-menu {
+    padding-top: 30px;
+    float: right;
+}
+
+.title-slider {
+    height: 140px;
+    line-height: 140px;
+}
+
+.main-slider-components {
+    height: 820px;
+    /*background-color: green;*/
+}
+
+.main-slider {
+    height: 700px;
+    background-color: grey;
+}
+
+.slider-nav {
+    height: 120px;
+    /*background-color: purple;*/
+}
+
+.project-desc-container {
+    padding-bottom: 95px;
+    /*background-color: aqua;*/
+}
+
+.project-desc {
+    /*background-color: white;*/
+    float: left;
+}
+
+.project-details {
+    /*background-color: green;*/
+    float: right;
+}
+
+.related-projects {
+    height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    /*background-color: red;*/
+}
+
+.footer-wrapper {
+    background-color: #76c7c0;
+}
+
+
+/*.footer-contents{
+	width: 73.125em;
+    margin: auto;
+}*/
+
+.footer-top {
+    padding-top: 20px;
+
+    background: url("../images/footer-top-img.png");
+    background-repeat: repeat-x;
+}
+
+.footer-bottom {
+    background-color: #6ab3ad;
+}
+
+.column {
+    width: 33.33%;
+    float: left;
+}
+
+.first {
+    min-height: 220px;
+}
+
+.col-inner-left {
+    width: 50%;
+    float: left;
+}
+
+.col-inner-right {
+    width: 50%;
+    float: right;
+}
+}

@@ -1,12 +1,17 @@
+
+
 .main-wrapper{
 	background: #f3f3f3;
- 
+ 	/*width: 100%;*/
+ 	min-width: 93.75em;
 }
 .container{
 	width: 73.125em; 
 	/*1170*/
 	background-color: #F3F3F3;
-	margin: auto;
+	margin: 0 auto;
+	content:"";
+	display: table;
 }
 .header-top{
 	/*background: white;*/
@@ -32,7 +37,7 @@
 }
 .contents{
 	width: 73.125em;
-	margin:auto;
+	margin:0 auto;
 	line-height: 80px;
 }
 .logo{
@@ -122,3 +127,4 @@
 width: 50%;
 float: right;
 }
+
