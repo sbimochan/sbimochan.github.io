@@ -1,6 +1,8 @@
 .logo{
     width: 192px;
     padding:28px 0px;
+    display: block;
+    margin:auto;
 }
 .related-preview{
     /*width: 48%;*/
@@ -8,10 +10,7 @@
 .dropdown-content{
     display: none;
 }
-.logo{
-    
-    display: block;
-}
+
 .main-menu ul li{
     width: 100%;
     text-align: center;
@@ -197,6 +196,7 @@
     max-width: 60px;
 }
 .project-desc-title {
+    padding:10px;
     font-size: 16px;
     color: #7F8C8C;
     font-weight: bolder;
@@ -205,6 +205,8 @@
 .project-desc p {
     font-size: 14px;
     line-height: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .project-desc {
@@ -224,7 +226,8 @@
 
 .project-details {
     padding-left: 0px;
-    width: 100%;
+    /*width: 100%;*/
+    padding:0px 10px;
     /*margin:none;*/
     /*background-color: blue;*/
 }
@@ -295,11 +298,11 @@ li.related-image:hover .overlay {
 
 .overlay-icons {
     margin-top: 115px;
-    margin-left: 90px;
+    margin-left: 20px;
 }
 
 .overlay-icon {
-    position: absolute;
+    /*position: absolute;*/
     padding-top: 4px;
     padding-left: 4px;
     color: #fff;
@@ -348,6 +351,8 @@ span.overlay-desc {
 .footer-contents {
     color: #fff;
     font-size: 13px;
+    padding-left: 10px;
+    padding-right: 10px;
     /*width: 100px;*/
     /*margin: auto;*/
 }
@@ -463,13 +468,50 @@ span.overlay-desc {
 .social ul li a:hover .fa-rss {
     color: #f26522;
 }
-
+.main-menu ul li ul li{
+    display: none;
+}
+.main-menu ul li:hover ul li{
+    display: block;
+    transition-delay: 2s;
+}
 /*responsive start for desktop*/
+.main-menu ul li:not(:first-child){
+    display: none;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #76C7C0;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-left: 350px;
+    margin-top: 32px;
+}
 
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropbtn:hover .dropdown-content {
+    display: block;
+}
+.footer-lists li a{
+    color:#fff;
+}
 
 
 @media (min-width: 1024px) {
-    .title-slider .titles {
+
+.title-slider .titles {
     float: left;
 }
 
@@ -573,7 +615,6 @@ span.overlay-desc {
 .arrow-container:hover {
     background-color: #E2534B;
 }
-
 
 
 /*.slider-images{
@@ -796,11 +837,11 @@ li.related-image:hover .overlay {
 
 .overlay-icons {
     margin-top: 115px;
-    margin-left: 90px;
+    margin-left: 20px;
 }
 
 .overlay-icon {
-    position: absolute;
+    /*position: absolute;*/
     padding-top: 4px;
     padding-left: 4px;
     color: #fff;
@@ -949,7 +990,9 @@ span.overlay-desc {
     position: relative;
     display: inline-block;
 }
-
+.main-menu ul li:first-child{
+    display: none;
+}
 .dropdown-content {
     display: none;
     position: absolute;
@@ -992,6 +1035,7 @@ span.overlay-desc {
 .social ul li a:hover .fa-rss {
     color: #f26522;
 }
-
-.main-menu ul li.dropbtn:before {}
+.footer-lists li a{
+    color:#fff;
 }
+
