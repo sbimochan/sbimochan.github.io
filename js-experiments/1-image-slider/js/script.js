@@ -3,8 +3,6 @@ var imageContainer = document.createElement('ul');
 var imageViewer = document.createElement("div");
 imageViewer.id="container";
 
-var posLeft = 0;
-
 mainWrapper.appendChild(imageViewer);
 var next = document.getElementById('next');
 var prev = document.getElementById('prev');
