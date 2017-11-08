@@ -1,7 +1,7 @@
 var mainWrapper = document.getElementById('wrapper');
 var imageContainer = document.createElement('ul');
 var imageViewer = document.createElement("div");
-imageViewer.id="container";
+imageViewer.id = "container";
 
 mainWrapper.appendChild(imageViewer);
 var next = document.getElementById('next');
@@ -49,26 +49,33 @@ function check(value) {
 
     return value;
 }
-
+var prevStopper=null;
 function animateNext(percent) {
-
-    var stopper = setInterval(function() {
+    if(prevStopper){
+        return;
+    }
+    prevStopper = setInterval(function() {
         percent -= 2.5;
         console.log('next', percent);
         imageContainer.style.left = percent + "%";
         if (Math.abs(percent % 100) == 0) {
-            clearInterval(stopper);
+            clearInterval(prevStopper);
+            prevStopper=null;
         }
     }, 25);
 }
 
 function animatePrev(percent) {
-    var stopper = setInterval(function() {
+    if(prevStopper){
+        return;
+    }
+    prevStopper = setInterval(function() {
         percent += 2.5;
         console.log('prev', percent);
         imageContainer.style.left = percent + "%";
         if (Math.abs(percent % 100) == 0) {
-            clearInterval(stopper);
+            clearInterval(prevStopper);
+            prevStopper=null;
         }
     }, 25);
 }
@@ -87,7 +94,7 @@ next.onclick = function() {
         imgNumber++; //2
         imgNumber = check(imgNumber);
         var percent = -(imgNumber - 1) * 100;
-        console.log('newnext', imgNumber);   
+        console.log('newnext', imgNumber);
         animateNext(percent);
         preventClick();
     }
