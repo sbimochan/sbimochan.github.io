@@ -71,7 +71,7 @@
     color: #E1524B;
 }
 .title-slide-buttons{
-    width: 100%;
+    /* width: 100%; */
 
 }
 .title-slider{
@@ -298,7 +298,7 @@ li.related-image:hover .overlay {
 
 .overlay-icons {
     margin-top: 115px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
 }
 
 .overlay-icon {
@@ -315,7 +315,7 @@ li.related-image:hover .overlay {
 span.overlay-desc {
     display: block;
     margin-top: 60px;
-    margin-left: 35%;
+    /* margin-left: 35%; */
 }
 .related-image-ul{
     text-align: center;
@@ -513,9 +513,21 @@ span.overlay-desc {
 .col-inner-right{
     float: right;
 }
-
+.logobtm{
+    width:192px;
+    padding:20px 0px;
+    margin:auto;
+}
 @media (min-width: 1024px) {
 
+.logobtm{
+    padding:0px 0px;
+    display: inline-block;
+}
+.logo {
+    
+        float: left;
+    }
 .title-slider .titles {
     float: left;
 }
@@ -1043,4 +1055,7 @@ span.overlay-desc {
 .footer-lists li a{
     color:#fff;
 }
-
+.title-slide-buttons{
+    margin-top:45px;
+} 
+}
