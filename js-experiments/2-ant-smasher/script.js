@@ -5,7 +5,9 @@ box.style.position = "relative";
 box.id = "box";
 box.style.width = "600px";
 box.style.height = "600px";
-box.style.background = "#567d46";
+box.style.margin="auto";
+// box.style.background = "#567d46";
+box.style.border="2px solid black";
 wrapper.appendChild(box);
 var allAnts = [];
 // var scoreNo = [];
@@ -85,15 +87,15 @@ function triggerGame(){
                   var gameOver = document.getElementById("gameover");
             gameOver.style.display = "block";
             }
-        }, 300);
+        }, 500);
 
     }
-    var that = this;
+    // var that = this;
 
 }
 
 function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min )) + min;
 }
 for (var i = 0; i < 10; i++) {
     antAlive++;

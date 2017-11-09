@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ant smasher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
     #wrapper{
         position: relative;
@@ -18,10 +19,21 @@
     }
     #play{
         position: absolute;
-        top:30%;
-        left: 16%;
+        /* top:30%;
+        left: 16%; */
+        margin:20%;
         padding:20px;
+        background-color: yellowgreen;
+        border-radius: 10px;
+        box-shadow: 10px 10px 5px #888888;
         z-index: 5;
+    }
+    #score{
+        color:crimson;
+    }
+    .dashboard{
+        margin-left:40%;
+        padding-top:10px;
     }
     </style>
 </head>
@@ -35,7 +47,10 @@
         <button onclick="gameOver()">Restart</button>
         <!-- <span id="score"></span> -->
     </div>
-     You scored:<span id="score"></span>
+    <div class="dashboard">
+        <strong>You scored: <span id="score"></span></strong> 
+    </div>
+   
     <script src="script.js"></script>
 </body>
 
