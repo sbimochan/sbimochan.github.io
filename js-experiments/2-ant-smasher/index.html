@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Ant smasher</title>
+    <meta charset="UTF-8">
+    <title>Ant smasher</title>
+    <style>
+    #wrapper{
+        position: relative;
+    }
+    #gameover {
+        width: 600px;
+        height: 600px;
+        background-color: yellow;
+        display: none;
+        position: absolute;
+        top: 0;
+    }
+    #play{
+        position: absolute;
+        top:30%;
+        left: 16%;
+        padding:20px;
+        z-index: 5;
+    }
+    </style>
 </head>
+
 <body>
-	<div id="wrapper">
+    <div id="wrapper">
+        <button id="play" onclick="triggerGame()">Play</button>
     </div>
+    <div id="gameover">
+        <strong>You won</strong>
+        <button onclick="gameOver()">Restart</button>
+        <!-- <span id="score"></span> -->
+    </div>
+     You scored:<span id="score"></span>
     <script src="script.js"></script>
 </body>
+
 </html>

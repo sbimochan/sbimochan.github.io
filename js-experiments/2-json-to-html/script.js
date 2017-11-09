@@ -24,37 +24,45 @@ var data = [{
                 backgroundColor: 'brown',
                 float: 'right'
             },
+        },
+        {
+            tagName: 'div',
+            className: 'box',
+            styles: {
+                width: "30px",
+                height: "30px",
+                backgroundColor: 'aqua',
+                float: 'right'
+            },
         }
     ]
 }];
 
+
 var body = document.getElementsByTagName('body')[0];
+var arrLen = data.length;
+var objLen = Object.keys(data[0]).length;
 
-var tagName = document.createElement(data[0].tagName);
-body.appendChild(tagName);
-tagName.className = data[0].className;
-// var width=data[0].styles.width;
-// tagName.style+width;
-tagName.style.width = data[0].styles.width;
-tagName.style.height = data[0].styles.height;
-tagName.style.backgroundColor = data[0].styles.backgroundColor;
+for (var i = 0; i < arrLen; i++) {
+    JsontoHTML(data[i]);
+}
 
-var tagNameChild0 = document.createElement(data[0].children[0].tagName);
-tagNameChild0.className = data[0].children[0].className;
-tagNameChild0.style.width = data[0].children[0].styles.width;
-tagNameChild0.style.height = data[0].children[0].styles.height;
-tagNameChild0.style.background = data[0].children[0].styles.backgroundColor;
-tagName.appendChild(tagNameChild0);
+function JsontoHTML(keys) {
+    var parent = convertIndividualJSONtoHtml(keys);
+    // console.log(parent);
+    for (var i = 0; i < keys.children.length; i++) {
+        parent.appendChild(convertIndividualJSONtoHtml(keys.children[i]));
+    }
+    body.appendChild(parent);
 
-var tagNameChild1 = document.createElement(data[0].children[1].tagName);
-tagNameChild1.className = data[0].children[1].className;
-tagNameChild1.style.width = data[0].children[1].styles.width;
-tagNameChild1.style.height = data[0].children[1].styles.height;
-tagNameChild1.style.background = data[0].children[1].styles.backgroundColor;
-tagNameChild1.style.float = data[0].children[1].styles.float;
-tagName.appendChild(tagNameChild1);
-var stylesNum=Object.keys(data[0].styles).length;
+}
 
-
-// console.log(Object.keys(data[0]).length);
-// tagName.style.
+function convertIndividualJSONtoHtml(keys) {
+    var element = document.createElement(keys.tagName);
+    element.setAttribute('class', keys.className);
+    for (style in keys.styles) {
+        element.style[style] = keys.styles[style];
+    }
+    return element;
+    // console.log(element);
+}

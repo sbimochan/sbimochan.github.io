@@ -49,9 +49,10 @@ function check(value) {
 
     return value;
 }
-var prevStopper=null;
+var prevStopper = null;
+
 function animateNext(percent) {
-    if(prevStopper){
+    if (prevStopper) {
         return;
     }
     prevStopper = setInterval(function() {
@@ -60,13 +61,13 @@ function animateNext(percent) {
         imageContainer.style.left = percent + "%";
         if (Math.abs(percent % 100) == 0) {
             clearInterval(prevStopper);
-            prevStopper=null;
+            prevStopper = null;
         }
     }, 25);
 }
 
 function animatePrev(percent) {
-    if(prevStopper){
+    if (prevStopper) {
         return;
     }
     prevStopper = setInterval(function() {
@@ -75,7 +76,7 @@ function animatePrev(percent) {
         imageContainer.style.left = percent + "%";
         if (Math.abs(percent % 100) == 0) {
             clearInterval(prevStopper);
-            prevStopper=null;
+            prevStopper = null;
         }
     }, 25);
 }
