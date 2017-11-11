@@ -1,158 +1,198 @@
-var wrapper = document.getElementById("wrapper");
-var box = document.createElement("div");
-var playbtn=document.getElementById("play");
-box.style.position = "relative";
-box.id = "box";
-box.style.width = "600px";
-box.style.height = "600px";
-box.style.margin="auto";
-// box.style.background = "#567d46";
-box.style.border="2px solid black";
-wrapper.appendChild(box);
-var allAnts = [];
-// var scoreNo = [];
-var smashScore=0;
-// console.log(allAnts);
-var antAlive=0;
 
+function World(){
+  this.wrapper = document.createElement("div");
+  this.wrapper.style.width = "1000px";
+  this.wrapper.style.height = "600px";
+  this.wrapper.style.position = "relative";
+  this.wrapper.style.backgroundImage="url(carpet3.jpg)";
+  this.wrapper.style.backgroundRepeat="repeat";
+  this.wrapper.style.display = "none";
+  document.body.appendChild(this.wrapper);
 
+  //game start
+  this.gameMenuWrapper = document.createElement("div");
+  this.gameMenuWrapper.style.backgroundColor = "aqua";
+  this.gameMenuWrapper.style.width = "900px";
+  this.gameMenuWrapper.style.height = "600px";
+  this.gameMenuWrapper.style.fontWeight = "600";
+  this.gameMenuWrapper.style.display="block";
+  this.gameMenuWrapper.innerHTML = "Ant smasher!";
+  this.gameMenuWrapper.textAlign = "center";
+  document.body.appendChild(this.gameMenuWrapper);
 
-function triggerGame(){
+  //play button
+  var playBtn = document.createElement("button");
+  playBtn.style.fontSize = "20px";
+  playBtn.style.borderRadius = "7px";
+  playBtn.style.padding = "20px";
+  playBtn.style.boxShadow = "10px 10px 5px #888888 ";
+  playBtn.innerHTML = "Start Game";
+  this.gameMenuWrapper.appendChild(playBtn);
+ 
 
-    playbtn.style.display="none";
-    function Ant(antId) {
-    this.element = document.createElement('div');
-    this.element.id = antId;
-    this.element.className = "antClass";
-    this.element.style.width = "50px";
-    this.element.style.height = "37px";
-    this.element.style.backgroundImage = "url(ant.png)";
-    this.element.style.position = "absolute";
-    this.element.style.top = getRandomInt(1, 550) + "px";
-    this.element.style.left = getRandomInt(1, 550) + "px";
-    box.appendChild(this.element);
-    this.x = getRandomInt(0, 550);
-    this.y = getRandomInt(0, 550);
-    this.dx = getRandomInt(-2, 2);
-    this.dy = getRandomInt(-2, 2);
+  //game over wrapper
+  this.gameOverWrapper = document.createElement("div");
+  this.gameOverWrapper.style.backgroundColor = "orange";
+  this.gameOverWrapper.style.width = "1000px";
+  this.gameOverWrapper.style.height = "600px";
+  this.gameOverWrapper.style.display="block";
+  this.gameOverWrapper.style.fontWeight = "600";
+  this.gameOverWrapper.innerHTML = "Congratulation! You've smashed all ants";
+  this.gameOverWrapper.textAlign = "center";
+  document.body.appendChild(this.gameOverWrapper);
 
+  //play button
+  var playBtnAgain = document.createElement("button");
+  playBtnAgain.style.fontSize = "20px";
+  playBtnAgain.style.borderRadius = "7px";
+  playBtnAgain.style.padding = "20px";
+  playBtnAgain.style.boxShadow = "10px 10px 5px #888888 ";
+  playBtnAgain.innerHTML = "Play Again";
+  this.gameOverWrapper.appendChild(playBtnAgain);
 
+  var that = this;
+  const antGroup = [];
+  //play btn function
+  playBtn.onclick=function(){
+    that.gameMenuWrapper.style.display="none";
+    that.gameOverWrapper.style.display="none";
+    that.wrapper.style.display="block";
+    that.start();
+  };
+  playBtnAgain.onclick=function(){
+    that.gameOverWrapper.style.display="none";
+    that.gameMenuWrapper.style.display="block";
+    that.wrapper.style.display="none";
+  };
+  this.start = function(){
+    // console.log("started game");
+    var tempWrapper=document.createElement('div');
+    tempWrapper.style.width="100%";
+    tempWrapper.style.height="500px";
+    tempWrapper.style.position="relative";
 
-    this.updatePosition = function() {
-        this.x = this.x + this.dx;
-        this.y = this.y + this.dy;
-
-        this.element.style.top = this.y + "px";
-        this.element.style.left = this.x + "px";
-        // console.log('left-coordinate',this.element.style.top);
-        // console.log('right-coordinate',this.element.style.left);
-        var leftCoordinate = this.element.style.left;
-        var topCoordinate = this.element.style.top;
-        // if(leftCoordinate==this.dx){
-        //     console.log("collided");
-        // }
-
-        if (this.x >= 550) {
-            this.dx = -this.dx;
-        }
-        if (this.x < 10) {
-            this.dx = -this.dx;
-        }
-        if (this.y > 500) {
-            this.dy = -this.dy;
-        }
-        if (this.y < 10) {
-            this.dy = -this.dy;
-        }
-        // console.log('x',this.x);
-        // console.log('y',this.y);
-    }
-
-    // var __ant = document.getElementsByClassName('antClass');
-
+    this.wrapper.appendChild(tempWrapper);
     
-    this.element.onclick = function() {
-        var blood = this;
-        antAlive--;
-        smashScore++;
+    for(i=0;i<5;i++){
+      var ant=document.createElement('div');
+      ant.style.height=antHeight+"px";
+      ant.style.width=antWidth+"px";
+      ant.style.backgroundImage="url(ant.png)";
+      ant.style.position="absolute";
+      tempWrapper.appendChild(ant);
+      antGroup.push(new Ant(ant));
 
-        blood.style.backgroundImage = "url(blood.png)";
-        blood.style.backgroundRepeat = "no-repeat";
-        setTimeout(function() {
-  
-             box.removeChild(blood);
-           
-            document.getElementById('score').innerHTML = smashScore;
-            if(antAlive==0){
-                  var gameOver = document.getElementById("gameover");
-            gameOver.style.display = "block";
-            }
-        }, 500);
+      ant.onclick=(function(selectedAnt){
+        return function(){
+          
+          selectedAnt.killAnt();
+          antGroup.splice(antGroup.indexOf(selectedAnt),1);
+          this.onclick=null;
+        };
 
+      })(antGroup[i]); //callback
     }
-    // var that = this;
+    this.beginInterval(antGroup,tempWrapper);
+  };
 
+  //setInterval
+  this.beginInterval=function(antGroup,tempWrapper){
+    var flag=setInterval(function(){
+      collisionDetection(antGroup);
+      for(var i=0;i<antGroup.length;i++){
+        antGroup[i].updatePosition();
+      }
+      if(antGroup.length==0){
+        clearInterval(flag);
+        that.gameOverWrapper.style.display="block";
+        that.wrapper.removeChild(tempWrapper);
+        that.wrapper.style.display="none";
+      }
+    },80);
+  };
+}
+antHeight=37;
+antWidth=50;
+maxWidth=850;
+maxHeight=600;
+//Random number generator------------------------------------------------------------------------
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min )) + min;
+function Ant(item){
+  this.element=item;
+
+  this.x=getRandomNumber(10,980);
+  this.y=getRandomNumber(10,550);
+  this.dx=getRandomNumber(-3,3);
+  this.dy=getRandomNumber(-3,3);
+
+  this.updatePosition=function(){
+    this.boundryCheck();
+    this.x=this.x+this.dx;
+    this.y=this.y+this.dy;
+    this.element.style.top=this.y+"px";
+    this.element.style.left=this.x+"px";
+  };
+
+  this.killAnt = function(){
+    this.element.style.backgroundImage="url('blood.png')";
+    this.x=0;
+    this.y=0;
+  };
+  this.boundryCheck=function(){
+    if(this.x+antWidth>=maxWidth){
+      this.dx=-this.dx;
+    }else if(this.x<0){
+      this.dx=-this.dx;
+    }
+    if(this.y+antHeight>=maxHeight){
+      this.dy=-this.dy;
+    }else if(this.y<0){
+      this.dy=-this.dy;
+    };
+  }
 }
-for (var i = 0; i < 10; i++) {
-    antAlive++;
-    var ant = new Ant("ant" + i);
-    allAnts.push(ant);
+var world = new World;
+world.gameOverWrapper.style.display="none";
 
-}
-setInterval(function() {
-    allAnts.forEach(function(ant) {
-        collisionCheck();
-        ant.updatePosition();
-    })
-}, 10);
 
-var collisionCheck=function(){
-
-    for(var i=0;i<allAnts.length;i++){
-        for(var j=i;j<allAnts.length;j++){
-            if(allAnts[i]===allAnts[j]){
-                continue;
+var collisionDetection=function(specifiedGroup){
+  specifiedGroup.forEach(function(ant1){
+    specifiedGroup.forEach(function(ant2){
+      if(ant1==ant2){
+        //do nothing
+      }
+      else{
+        if(ant1.x+30 >ant2.x &&
+          ant1.x<ant2.x+30 &&
+          ant1.y+17 >ant2.y &&
+          ant1.y<ant2.y+17
+        ){
+          if (ant1.x > ant2.x) {
+            ant1.dx = Math.abs(ant1.dx);
+            ant2.dx = -Math.abs(ant2.dx);
+            if (ant1.y > ant2.y) {
+              ant1.dy = Math.abs(ant1.dy);
+              ant2.dy = -Math.abs(ant2.dy);
+            } else {
+              ant2.dy = Math.abs(ant2.dy);
+              ant1.dy = -Math.abs(ant1.dy);
             }
-            var topA=allAnts[i].y;
-
-            // console.log('top',topA);
-            // var bottomA=allAnts[i].y+allAnts[i].height;
-             var bottomA=allAnts[i].y+50;
-            var leftA=allAnts[i].x;
-            var rightA=allAnts[i].x+37;
-            // console.log('top',bottomA);
-
-            var topB=allAnts[j].y;
-            var bottomB=allAnts[j].y+50;
-            var leftB=allAnts[j].x;
-            var rightB=allAnts[j].x+37;
-            if((rightA>leftB )&&(leftA<rightB)&&(bottomA>topB)&&(topA<bottomB)){
-                // console.log('condition');
-                // clearInterval(gameOver);
-                allAnts[i].dx = allAnts[i].dx*-1;
-                allAnts[j].dx = allAnts[j].dx*-1;
-                allAnts[i].dy = allAnts[i].dy*-1;
-                allAnts[j].dy = allAnts[j].dy*-1;
-                // gameover=setInterval(gameLoop,100);
+          } else {
+            ant2.dx = Math.abs(ant2.dx);
+            ant1.dx = -Math.abs(ant1.dx);
+            if (ant1.y > ant2.y) {
+              ant1.dy = Math.abs(ant1.dy);
+              ant2.dy = -Math.abs(ant2.dy);
+            } else {
+              ant2.dy = Math.abs(ant2.dy);
+              ant1.dy = -Math.abs(ant1.dy);
             }
-
+          }
         }
-    }
-}
-
-}
-function gameOver(){
-    gameover.style.display="none";
-    triggerGame();
-}
-
-
-document.body.onkeyup = function(e){
-    if(e.keyCode == 32){
-        triggerGame();
-    }
+      }
+    });
+  });
 }
