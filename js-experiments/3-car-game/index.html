@@ -4,19 +4,32 @@
 	<meta charset="UTF-8">
 	<title>Car Game</title>
 	<style>
-		#container{
-			width:300px;
-			height: 400px;
-			
-		}
+		  #track{
+      height: 650px;
+      width: 600px;
+      background-image: url("track.png");
+      position: relative;
+
+      background-repeat: repeat-y;
+      margin: auto;
+    }
+    #car{
+      height: 220px;
+      width: 116px;
+      position: absolute;
+      left: 60px;
+      bottom: 5px;
+      background-image: url('car2.png');
+    }
 	</style>
 </head>
 <body>
-<div id="wrapper">
-	<div id="container">
-		
+<div id="track">
+	<div id="car">
+
 	</div>
 </div>
+<strong><span id="gameover"></span></strong>
 <script src="script.js"></script>
 </body>
 </html>
