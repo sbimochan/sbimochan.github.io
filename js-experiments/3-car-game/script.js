@@ -31,10 +31,10 @@ function Car(carDiv, track) {
       this.x = 430;
     }
   };
+  gameOver = function() {
+    document.getElementById("gameover").innerHTML = "Game Over!";
+  };
 }
-gameOver = function() {
-  document.getElementById("gameover").innerHTML = "Game Over!";
-};
 carDiv = document.getElementById("car");
 trackDiv = document.getElementById("track");
 var car = new Car(carDiv, trackDiv);
@@ -65,33 +65,40 @@ function Obstacle() {
   this.updatePosition = function() {
     this.y = this.y + 1;
     this.obstacle.style.top = this.y + "px";
+   
+    if(this.y >500){
+      // console.log(trackDiv);
+      trackDiv.removeChild(this.obstacle);
+    }
   };
   // this.obstacle.style.paddingLeft = getRandomInt(2, 10) + "px";
   this.obstacle.style.paddingRight = getRandomInt(2, 10) + "px";
 
-  this.obstaclePosition=function(){
+  this.obstaclePosition = function() {
     positions = [30, 260, 450];
     var position = positions[Math.floor(Math.random() * positions.length)];
     return position;
-  }
+  };
   this.obstacle.style.left = this.obstaclePosition() + "px";
   this.obstacle.style.position = "absolute";
   trackDiv.appendChild(this.obstacle);
   // setInterval(this.approachCar,1000);
 }
-
+var obstacles = [];
 function createObstacle(number) {
-  for(i=0;i<number;i++){
-
+  for (i = 0; i < number; i++) {
     obstacle = new Obstacle();
+    obstacles.push(obstacle);
   }
-  
 }
-var track=document.getElementById('track');
+var track = document.getElementById("track");
 
 createObstacle(3);
 setInterval(function() {
-  obstacle.updatePosition();
+  obstacles.forEach(function (obstacle) {
+    
+    obstacle.updatePosition();
+  })
 }, 10);
 // setInterval(createObstacle, 3000);
 
