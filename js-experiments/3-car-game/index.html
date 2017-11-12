@@ -27,13 +27,16 @@
       width: 600px;
       margin:auto;
       position: absolute;
-      background-color: "yellow";
+      background-color: yellow;
         
     }
     #gameoverTitle{
       font-size: 42px;
       text-align: center;
 
+    }
+    .score{
+      font-size: 40px;
     }
 	</style>
 </head>
@@ -44,9 +47,13 @@
   </div>
   <div id="gameoverScreen">
 <span id="gameoverTitle">Game Over</span>
+<div class="score">
+   Score:
+  <span id="score"></span>
+</div> 
   </div>
 </div>
-Score: <span id="score"></span>
+
 <strong><span id="gameover"></span></strong>
 <script src="script.js"></script>
 </body>
