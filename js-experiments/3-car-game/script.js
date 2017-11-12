@@ -10,7 +10,7 @@ function Car(carDiv, track) {
   this.updatePosition = function() {
     this.y = this.y + this.dy;
     this.track.style.backgroundPosition = "center " + this.y + "px";
-    if (this.y == 5000) {
+    if (this.y == 10000) {
      
       alert("Give rest to your eyes");
       
@@ -125,6 +125,6 @@ var collisionInterval=setInterval(function() {
 
     obstacle.updatePosition();
   });
-}, 10);
+}, 50);
 
 var createObsInterval=setInterval(createObstacle, 3000);
