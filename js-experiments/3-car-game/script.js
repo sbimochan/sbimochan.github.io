@@ -10,11 +10,14 @@ function Car(carDiv, track) {
   this.updatePosition = function() {
     this.y = this.y + this.dy;
     this.track.style.backgroundPosition = "center " + this.y + "px";
-    if (this.y > 50000) {
-      // alert("game over");
-      // this.y = 0;
-      gameOver();
+    if (this.y == 5000) {
+     
+      alert("Give rest to your eyes");
+      
     }
+    scoreGame=this.y/1000;
+    var score = document.getElementById("score");
+    score.innerHTML = Math.ceil(scoreGame);
     this.element.style.left = this.x + "px";
     if (this.x > 600 || this.x < 0) {
       gameOver();
@@ -34,15 +37,19 @@ function Car(carDiv, track) {
   };
   this.gameOver = function() {
     alert("Game Over");
+     clearInterval(updateInterval);
+     clearInterval(createObsInterval);
     this.y=0;
   };
 }
 
 carDiv = document.getElementById("car");
 trackDiv = document.getElementById("track");
+gameoverScreen=document.getElementById('gameoverScreen');
+
 var car = new Car(carDiv, trackDiv);
 
-setInterval(function() {
+var updateInterval=setInterval(function() {
   car.updatePosition();
 }, 10);
 document.onkeydown = function(event) {
@@ -76,10 +83,7 @@ function Obstacle() {
   ];
   this.carType = this.possibleImages[getRandomInt(0, 3)];
   this.obstacle.src = this.carType;
-  // this.obstacle.style.backgroundImage="url("+Obstacle.possibleImage[obsImg]+")";
-  // this.obstacle.style.background = "red";
-  // this.obstacle.style.top=this.y+"px";
-  // this.obstacle.style.top=this.y+"px";
+
   this.updatePosition = function() {
     this.y = this.y + 1;
     this.obstacle.style.top = this.y + "px";
@@ -107,17 +111,20 @@ var collisionInterval=setInterval(function() {
   obstacles.forEach(function(obstacle) {
     obstacle.y += car.dy;
 
-    if (obstacle.y > 480 && obstacle.x < car.x && obstacle.x + 80 > car.x) {
-      obstacle.src = "images/boom.png";
-
+    if (obstacle.y > 300 && obstacle.x < car.x && obstacle.x + 80 > car.x) {
+      this.obstacle.src = "images/boom.png";
+      console.log(obstacle);
       trackDiv.removeChild(car.element);
       obstacles = obstacles.splice(1);
       car.gameOver();
       
+     
+      // trackDiv.style.display="none";
+      gameoverScreen.style.display="block";
     }
 
     obstacle.updatePosition();
   });
 }, 10);
 
-setInterval(createObstacle, 3000);
+var createObsInterval=setInterval(createObstacle, 3000);

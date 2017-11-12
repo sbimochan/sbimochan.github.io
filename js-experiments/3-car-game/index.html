@@ -21,14 +21,32 @@
       bottom: 5px;
       background-image: url('images/car2.png');
     }
+    #gameoverScreen{
+        display: none;
+        height: 650px;
+      width: 600px;
+      margin:auto;
+      position: absolute;
+      background-color: "yellow";
+        
+    }
+    #gameoverTitle{
+      font-size: 42px;
+      text-align: center;
+
+    }
 	</style>
 </head>
 <body>
 <div id="track">
 	<div id="car">
 
-	</div>
+  </div>
+  <div id="gameoverScreen">
+<span id="gameoverTitle">Game Over</span>
+  </div>
 </div>
+Score: <span id="score"></span>
 <strong><span id="gameover"></span></strong>
 <script src="script.js"></script>
 </body>
