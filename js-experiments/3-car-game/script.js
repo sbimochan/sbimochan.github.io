@@ -10,7 +10,7 @@ function Car(carDiv, track) {
   this.updatePosition = function() {
     this.y = this.y + this.dy;
     this.track.style.backgroundPosition = "center " + this.y + "px";
-    if (this.y > 5000) {
+    if (this.y > 50000) {
       alert("game over");
       this.y = 0;
     }
@@ -34,7 +34,10 @@ function Car(carDiv, track) {
   gameOver = function() {
     document.getElementById("gameover").innerHTML = "Game Over!";
   };
+
+
 }
+
 carDiv = document.getElementById("car");
 trackDiv = document.getElementById("track");
 var car = new Car(carDiv, trackDiv);
@@ -56,36 +59,45 @@ function getRandomInt(min, max) {
 function Obstacle() {
   this.y = 0;
   var that = this;
-  this.obstacle = document.createElement("div");
-  this.obstacle.style.height = "80px";
-  this.obstacle.style.width = "80px";
-  this.obstacle.style.background = "red";
+  this.x=0;
+ 
+  Obstacle.possibleX = [60, 249, 429];
+  var lane=getRandomInt(0,2);
+  this.x=Obstacle.possibleX[lane];
+  this.obstacle = document.createElement("img");
+  this.obstacle.style.height = "136px";
+  this.obstacle.style.width = "75px";
+  this.obstacle.style.position="absolute";
+  this.possibleImages=['images/cars_mini1.png','images/cars_mini2.png','images/cars_mini3.png','images/cars_mini4.png'];
+  this.carType=this.possibleImages[getRandomInt(0,3)];
+  this.obstacle.src = this.carType;
+  // this.obstacle.style.backgroundImage="url("+Obstacle.possibleImage[obsImg]+")";
+  // this.obstacle.style.background = "red";
   // this.obstacle.style.top=this.y+"px";
   // this.obstacle.style.top=this.y+"px";
   this.updatePosition = function() {
     this.y = this.y + 1;
     this.obstacle.style.top = this.y + "px";
-   
     if(this.y >500){
-      // console.log(trackDiv);
       trackDiv.removeChild(this.obstacle);
+      obstacles=obstacles.splice(1);
     }
   };
   // this.obstacle.style.paddingLeft = getRandomInt(2, 10) + "px";
   this.obstacle.style.paddingRight = getRandomInt(2, 10) + "px";
 
-  this.obstaclePosition = function() {
-    positions = [30, 260, 450];
-    var position = positions[Math.floor(Math.random() * positions.length)];
-    return position;
-  };
-  this.obstacle.style.left = this.obstaclePosition() + "px";
+  // this.obstaclePosition = function() {
+  //   positions = [30, 260, 450];
+  //   var position = positions[Math.floor(Math.random() * positions.length)];
+  //   return position;
+  // };
+  this.obstacle.style.left = this.x + "px";
   this.obstacle.style.position = "absolute";
   trackDiv.appendChild(this.obstacle);
   // setInterval(this.approachCar,1000);
 }
 var obstacles = [];
-function createObstacle(number) {
+function createObstacle(number=1) {
   for (i = 0; i < number; i++) {
     obstacle = new Obstacle();
     obstacles.push(obstacle);
@@ -93,14 +105,26 @@ function createObstacle(number) {
 }
 var track = document.getElementById("track");
 
-createObstacle(3);
+// createObstacle(1);
 setInterval(function() {
   obstacles.forEach(function (obstacle) {
-    
+    obstacle.y +=car.dy;
+    // console.log('car x',car.x);
+    console.log(obstacle);
+    if(obstacle.y >480 &&obstacle.x<car.x && obstacle.x+80 > car.x){
+      obstacle.src = "images/boom.png";
+     
+      trackDiv.removeChild(car.element);
+      
+    }
+    // console.log(obstacle.y);
+
     obstacle.updatePosition();
   })
 }, 10);
-// setInterval(createObstacle, 3000);
 
+setInterval(createObstacle, 3000);
+// console.log('car',car);
+// console.log('obstacle',obstacle);
 // console.log(tracks);
 // console.log(obstacle);
