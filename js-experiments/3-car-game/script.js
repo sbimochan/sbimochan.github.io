@@ -5,12 +5,9 @@ gameoverScreen = document.getElementById("gameoverScreen");
 function Car(carDiv, track) {
   this.element = carDiv;
   this.track = track;
-  // console.log(this.track);
-
   this.x = 250;
   this.y = 0;
   this.dy = 5;
-
   this.updatePosition = function() {
     this.y = this.y + this.dy;
     this.track.style.backgroundPosition = "center " + this.y + "px";
@@ -21,9 +18,6 @@ function Car(carDiv, track) {
     var score = document.getElementById("score");
     score.innerHTML = Math.ceil(scoreGame);
     this.element.style.left = this.x + "px";
-    // if (this.x > 600 || this.x < 0) {
-    //   gameOver();
-    // }
   };
   this.moveLeft = function() {
     this.x -= 180;
@@ -37,11 +31,6 @@ function Car(carDiv, track) {
       this.x = 430;
     }
   };
-  // this.gameOver = function() {
-  //   clearInterval(updateInterval);
-  //   clearInterval(createObsInterval);
-  //   this.y = 0;
-  // };
 }
 var gameOver = function(updateInterval, createObsInterval) {
   clearInterval(updateInterval);
@@ -107,7 +96,7 @@ function gameLoop() {
       obstacles.push(obstacle);
     }
   }
-  // var track = document.getElementById("track");
+
   //colision
   var collisionInterval = setInterval(function() {
     obstacles.forEach(function(obstacle) {
@@ -115,27 +104,20 @@ function gameLoop() {
 
       if (obstacle.y > 300 && obstacle.x < car.x && obstacle.x + 80 > car.x) {
         obstacle.obstacle.src = "images/boom.png";
-
-        // trackDiv.removeChild(car.element);
-        car.element.style.display="none";
+        car.element.style.display = "none";
         obstacles = obstacles.splice(1);
         gameOver(updateInterval, createObsInterval);
 
-        // trackDiv.style.display="none";
         gameoverScreen.style.display = "block";
       }
 
       obstacle.updatePosition();
     });
   }, 50);
-
   var createObsInterval = setInterval(createObstacle, 3000);
 }
 var playBtn = document.getElementById("startGame");
 var playAgainBtn = document.getElementById("playAgainBtn");
-
-
-
 playBtn.onclick = function() {
   playBtn.style.display = "none";
   carDiv.style.display = "block";
@@ -144,7 +126,6 @@ playBtn.onclick = function() {
 playAgainBtn.onclick = function() {
   gameoverScreen.style.display = "none";
   carDiv.style.display = "block";
-  obstacle.obstacle.style.display="none";
- 
+  obstacle.obstacle.style.display = "none";
   gameLoop();
 };
