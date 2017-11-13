@@ -10,7 +10,8 @@ class World{
     };    
   }
 }
-var world = new World;
-var updateInterval=setInterval(function(){
+let world = new World;
+let updateInterval=setInterval(function(){
   world.updatePosition();
 },10);
+
