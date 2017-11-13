@@ -22,13 +22,22 @@
       background-image: url('images/car2.png');
     }
     #gameoverScreen{
-        display: none;
-        height: 650px;
+      display: none;
+      height: 650px;
       width: 600px;
       margin:auto;
       position: absolute;
       background-color: yellow;
         
+    }
+    #homescreen{
+     
+      height: 650px;
+      width: 600px;
+      margin:auto;
+      position: absolute;
+      background-color: yellow;
+
     }
     #gameoverTitle{
       font-size: 42px;
@@ -38,11 +47,21 @@
     .score{
       font-size: 40px;
     }
+    #startGame{
+      padding:20px;
+     margin-left: 250px;
+      display: inline;
+      top:300px;
+      /* margin-top:300px; */
+    }
 	</style>
 </head>
 <body>
-<div id="track">
-	<div id="car">
+  <!-- <div id="homescreen">
+  </div> -->
+  <div id="track">
+    <button id="startGame">Play</button>
+    <div id="car">
 
   </div>
   <div id="gameoverScreen">
@@ -50,10 +69,13 @@
 <div class="score">
    Score:
   <span id="score"></span>
+  <button id="playAgainBtn">
+    play again
+  </button>
 </div> 
   </div>
 </div>
-
+<span id="takeRest"></span>
 <strong><span id="gameover"></span></strong>
 <script src="script.js"></script>
 </body>
