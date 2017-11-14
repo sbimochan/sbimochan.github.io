@@ -4,6 +4,7 @@
   background: url("../images/flappy_bg.png");
   margin: 0 auto;
   position: relative;
+  overflow: hidden;
 }
 @-webkit-keyframes animBird {
   from {
