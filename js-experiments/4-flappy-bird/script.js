@@ -13,15 +13,17 @@ class World {
     return this.x;
     // console.log(this.worldElement);
   }
-    gameOver() {
+  gameOver() {
     let gameOver = document.createElement('div');
     gameOver.style.width = "900px";
     gameOver.style.height = "504px";
     gameOver.style.background = "black";
     gameOver.style.position = "absolute";
     gameOver.style.top = "0";
+    gameOver.style.left = "225px";
     gameOver.style.zIndex = "10";
     gameOver.style.opacity = "0.8";
+
     mainBody[0].appendChild(gameOver);
 
     let gameOverText = document.createElement('div');
@@ -135,67 +137,67 @@ class Pipe {
 
 
 
-  let pipes = [];
-  let elem = document.getElementById("bg");
+let pipes = [];
+let elem = document.getElementById("bg");
 let world = new World(elem);
-  
-  
-  let updateInterval = setInterval(() => {
-    world.updatePosition();
-    if (world.updatePosition() % 155 == 0) {
-      // console.log(world.updatePosition());
-      let pipe = new Pipe;
-  
-      pipes.push(pipe);
-      // pipe.createPipes();
-    }
-    pipes.forEach((pipe) => {
-  
-      pipe.updatePipes();
-      if (pipe.pipeDiv.style.left < 0 + "px") {
-  
-        elem.removeChild(pipe.pipeDiv);
-        pipes.splice(0, 1);
-  
-      }
-  
-      if (pipe.pipeX < bird.x + bird.width && pipe.pipeX + pipe.pipeWidth > bird.x) {
-  
-        //for top
-        if (pipe.topHeight > bird.y) {
-          clearInterval(birdPos);
-          clearInterval(updateInterval);
-          world.gameOver();
-  
-        }
-        if (504 - pipe.bottomHeight < bird.y + bird.height) {
-          clearInterval(birdPos);
-          clearInterval(updateInterval);
-          world.gameOver();
-        }
-  
-      }
-  
-    });
-  
-  }, 10);
-  
-  
-  let bird = new Bird(elem);
-  let birdPos = setInterval(() => {
-    bird.newPosition(true);
-  }, 20);
-  
-  let dx = 2;
-  let position = 0;
-  
-  
-  document.onkeydown = (event) => {
-    if (event.keyCode == 32) {
-      bird.newPosition(false); //false to go up
-  
-    }
+
+
+let updateInterval = setInterval(() => {
+  world.updatePosition();
+  if (world.updatePosition() % 155 == 0) {
+    // console.log(world.updatePosition());
+    let pipe = new Pipe;
+
+    pipes.push(pipe);
+    // pipe.createPipes();
   }
+  pipes.forEach((pipe) => {
+
+    pipe.updatePipes();
+    if (pipe.pipeDiv.style.left < 0 + "px") {
+
+      elem.removeChild(pipe.pipeDiv);
+      pipes.splice(0, 1);
+
+    }
+
+    if (pipe.pipeX < bird.x + bird.width && pipe.pipeX + pipe.pipeWidth > bird.x) {
+
+      //for top
+      if (pipe.topHeight > bird.y) {
+        clearInterval(birdPos);
+        clearInterval(updateInterval);
+        world.gameOver();
+
+      }
+      if (504 - pipe.bottomHeight < bird.y + bird.height) {
+        clearInterval(birdPos);
+        clearInterval(updateInterval);
+        world.gameOver();
+      }
+
+    }
+
+  });
+
+}, 10);
+
+
+let bird = new Bird(elem);
+let birdPos = setInterval(() => {
+  bird.newPosition(true);
+}, 20);
+
+let dx = 2;
+let position = 0;
+
+
+document.onkeydown = (event) => {
+  if (event.keyCode == 32) {
+    bird.newPosition(false); //false to go up
+
+  }
+}
 
 
 
