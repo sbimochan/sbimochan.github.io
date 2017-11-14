@@ -13,12 +13,14 @@ function gameLoop() {
       pipes.push(pipe);
     }
     pipes.forEach((pipe) => {
+
       pipe.updatePipes();
       if (pipe.pipeDiv.style.left < 0 + "px") {
         elem.removeChild(pipe.pipeDiv);
         pipes.splice(0, 1);
       }
       if (pipe.pipeX < bird.x) {
+        
       }
       if (pipe.pipeX < bird.x + bird.width && pipe.pipeX + pipe.pipeWidth > bird.x) {
         //for top
