@@ -1,4 +1,7 @@
-let mainBody = document.getElementsByTagName('body');
+function gameLoop(){
+
+
+
 class World {
   constructor(elem) {
     this.x = 1;
@@ -13,45 +16,6 @@ class World {
     return this.x;
     // console.log(this.worldElement);
   }
-  gameOver() {
-    let gameOver = document.createElement('div');
-    gameOver.style.width = "900px";
-    gameOver.style.height = "504px";
-    gameOver.style.background = "black";
-    gameOver.style.position = "absolute";
-    gameOver.style.top = "0";
-    gameOver.style.left = "225px";
-    gameOver.style.zIndex = "10";
-    gameOver.style.opacity = "0.8";
-
-    mainBody[0].appendChild(gameOver);
-
-    let gameOverText = document.createElement('div');
-    gameOverText.style.color = "white";
-    gameOverText.innerHTML = "Game Over";
-    gameOverText.style.fontSize = "85px";
-    gameOverText.style.textAlign = "center";
-    gameOver.appendChild(gameOverText);
-
-    let playAgainBtn = document.createElement('button');
-    playAgainBtn.innerHTML = "Play Again";
-    playAgainBtn.style.padding = "20px";
-    playAgainBtn.style.top = "300px";
-    playAgainBtn.style.left = "385px";
-    playAgainBtn.style.position = "absolute";
-    gameOver.appendChild(playAgainBtn);
-
-    playAgainBtn.onclick = function () {
-      location.reload();
-    }
-    document.onkeydown = (event) => {
-      if (event.keyCode == null) {
-        bird.newPosition(false); //false to go up
-
-      }
-    }
-  }
-
 
 }
 class Bird {
@@ -167,13 +131,13 @@ let updateInterval = setInterval(() => {
       if (pipe.topHeight > bird.y) {
         clearInterval(birdPos);
         clearInterval(updateInterval);
-        world.gameOver();
+        gameOver();
 
       }
       if (504 - pipe.bottomHeight < bird.y + bird.height) {
         clearInterval(birdPos);
         clearInterval(updateInterval);
-        world.gameOver();
+        gameOver();
       }
 
     }
@@ -199,10 +163,50 @@ document.onkeydown = (event) => {
   }
 }
 
-
+}
 
 //gameover---------------------------------------------------------------
 
+function gameOver() {
+let mainBody = document.getElementsByTagName('body');
+  let gameOver = document.createElement('div');
+  gameOver.style.width = "900px";
+  gameOver.style.height = "504px";
+  gameOver.style.background = "black";
+  gameOver.style.position = "absolute";
+  gameOver.style.top = "0";
+  gameOver.style.left = "225px";
+  gameOver.style.zIndex = "10";
+  gameOver.style.opacity = "0.8";
 
+  mainBody[0].appendChild(gameOver);
 
+  let gameOverText = document.createElement('div');
+  gameOverText.style.color = "white";
+  gameOverText.innerHTML = "Game Over";
+  gameOverText.style.fontSize = "85px";
+  gameOverText.style.textAlign = "center";
+  gameOver.appendChild(gameOverText);
+
+  let playAgainBtn = document.createElement('button');
+  playAgainBtn.innerHTML = "Play Again";
+  playAgainBtn.style.padding = "20px";
+  playAgainBtn.style.top = "300px";
+  playAgainBtn.style.left = "385px";
+  playAgainBtn.style.position = "absolute";
+  gameOver.appendChild(playAgainBtn);
+
+  playAgainBtn.onclick = function () {
+    gameOver.style.display="none";
+    playAgainBtn.style.display="none";
+    gameLoop();
+  }
+  document.onkeydown = (event) => {
+    if (event.keyCode == null) {
+      bird.newPosition(false); //false to go up
+
+    }
+  }
+}
+gameLoop();
 // console.log(createPipeInterval);
