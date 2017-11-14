@@ -2,58 +2,11 @@ elem = document.getElementById("bg");
 let world = new World(elem);
 
 //for play and restart
-function gameLoop() {
-  let pipes = [];
-  
-  let bird = new Bird(elem);
-  let updateInterval = setInterval(() => {
-    world.updatePosition();
-    if (world.updatePosition() % 155 == 0) {
-      let pipe = new Pipe;
-      pipes.push(pipe);
-    }
-    pipes.forEach((pipe) => {
 
-      pipe.updatePipes();
-      if (pipe.pipeDiv.style.left < 0 + "px") {
-        elem.removeChild(pipe.pipeDiv);
-        pipes.splice(0, 1);
-      }
-      if (pipe.pipeX < bird.x) {
-        
-      }
-      if (pipe.pipeX < bird.x + bird.width && pipe.pipeX + pipe.pipeWidth > bird.x) {
-        //for top
-        if (pipe.topHeight > bird.y) {
-          clearInterval(birdPos);
-          clearInterval(updateInterval);
-          gameOver();
-        }
-        if (world.height - pipe.bottomHeight < bird.y + bird.height) {
-          clearInterval(birdPos);
-          clearInterval(updateInterval);
-          gameOver();
-        }
-      }
-    });
-  }, 10);
-
-  let birdPos = setInterval(() => {
-    bird.newPosition(true);
-  }, 20);
-
-  let dx = 2;
-  let position = 0;
-
-  document.onkeydown = (event) => {
-    if (event.keyCode == 32) {
-      bird.newPosition(false); //false to go up
-
-    }
-  }
-}
 //gameover---------------------------------------------------------------
 function gameOver() {
+clearInterval(world.birdPos);
+clearInterval(world.updateInterval);
   let mainBody = document.getElementsByTagName('body');
   let gameOver = document.createElement('div');
   gameOver.style.width = "900px";
@@ -82,14 +35,16 @@ function gameOver() {
   playAgainBtn.style.position = "absolute";
   gameOver.appendChild(playAgainBtn);
 
+ 
   playAgainBtn.onclick = function () {
     // gameOver.style.display="none"; console.log(elem);
     while (elem.children[0]) 
       elem.removeChild(elem.children[0]);
+
     mainBody[0].removeChild(gameOver);
     gameOver.removeChild(playAgainBtn);
     // playAgainBtn.style.display="none";
-    gameLoop();
+    world.gameLoop();
   }
   document.onkeydown = (event) => {
     if (event.keyCode == null) {
@@ -111,7 +66,7 @@ function startGame() {
 
   playBtn.onclick = function () {
     elem.removeChild(playBtn);
-    gameLoop();
+    world.gameLoop();
   }
 }
 startGame();

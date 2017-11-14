@@ -27,8 +27,7 @@ class Bird {
       // console.log(this.topPosition); draw(this.topPosition);
       this.draw();
       if (this.y > 480) {
-        clearInterval(birdPos);
-        clearInterval(updateInterval);
+       
         gameOver();
       }
     } else {

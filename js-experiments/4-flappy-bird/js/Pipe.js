@@ -1,5 +1,6 @@
 class Pipe {
   constructor() {
+    this.isCrossed =false;
     this.pipeX = 900;
     this.pipeHeight = 150;
     this.pipeWidth = 32;
