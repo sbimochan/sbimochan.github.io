@@ -14,6 +14,7 @@ var ball = new Ball(10);
 
 function drawBall(){
   ctx.beginPath();
+  
   ctx.arc(x,y,radius,10,0,2*Math.PI);
   
   y -= dy;
