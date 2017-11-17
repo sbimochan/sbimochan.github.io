@@ -36,6 +36,7 @@ var gameOver = function(updateInterval, createObsInterval) {
   clearInterval(updateInterval);
   clearInterval(createObsInterval);
 };
+
 function gameLoop() {
   var car = new Car(carDiv, trackDiv);
 
