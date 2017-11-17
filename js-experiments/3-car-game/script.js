@@ -180,7 +180,11 @@ function gameLoop() {
         car.element.style.display = "none";
         obstacles = obstacles.splice(1);
         gameOver(updateInterval, createObsInterval);
-
+          document.onkeydown = function(event) {
+            if (event.keyCode == null) {
+              that.bullets.push(car.shootBullet());
+            }
+          };
         gameoverScreen.style.display = "block";
       }
 

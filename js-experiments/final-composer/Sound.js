@@ -40,10 +40,10 @@ let note = new Sound(context);
 // note.play(440.0, now + 2 + 2.5);
 // note.play(493.88, now + 2 + 3);
 // note.play(523.25, now + 2 + 3.5);
-// function playScale() {
-  // let now = context.currentTime;
+function playScale() {
+  let now = context.currentTime;
   // console.log("played")
-  // note.play(hertzFinder(), now, -798);
+  note.play(getFrequency(), now, -798);
   // note.play(261.63, now + 2);
   // note.play(293.66, now + 2 + 0.5);
   // note.play(329.63, now + 2 + 1);
@@ -52,42 +52,47 @@ let note = new Sound(context);
   // note.play(440.0, now + 2 + 2.5);
   // note.play(493.88, now + 2 + 3);
   // note.play(523.25, now + 2 + 3.5);
-// }
+}
 function stopScale() {
   note.stop(0);
 }
-let hertz = {
-  C4: 261.63,
-  D4: 293.66,
-  E4: 329.63,
-  F4: 349.23,
-  G4: 392.0,
-  A4: 440.0,
-  B4: 493.88
-};
+// let hertz = {
+//   C4: 261.63,
+//   D4: 293.66,
+//   E4: 329.63,
+//   F4: 349.23,
+//   G4: 392.0,
+//   A4: 440.0,
+//   B4: 493.88
+// };
 
 let toneSelector = document.getElementById("noteId");
 let composedNotes = [];
 
 function collectNotes(){
-    let hertzValue = toneSelector.options[toneSelector.selectedIndex].value;
-    composedNotes.push(hertzValue);
-    hertzFinder();
+    let note = toneSelector.options[toneSelector.selectedIndex].value;
+    composedNotes.push(note);
+    getFrequency();
     // console.log(composedNotes);
 }
-function hertzFinder(){
+function getFrequency() {
+  
   composedNotes.forEach(function(composedNote){
-    console.log(composedNote);
-    let hertzValue = hertz.composedNote;
-    // console.log("hertzvalue", hertz.composedNote);
-    // return hertzValue;
+    // console.log(composedNote);
+    let hertzValue = hertz[composedNote];
+    // console.log('hertzvalue',hertzValue);
+    
+    return hertzValue;
   });
 }
-function playScale(){
-   let now = context.currentTime;
-   note.play(hertzFinder(), now, -798);
-  //  console.log(hertzFinder());
-}
+  
+// function playScale(){
+//   let now = context.currentTime;
+//   note.play(hertzValue, now+1, -798);
+  
+   console.log("frequency",getFrequency());
+//   //  console.log(hertzFinder());
+// }
 
 // setInterval(playScale, 1000);
 
