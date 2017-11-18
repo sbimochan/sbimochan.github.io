@@ -1,13 +1,20 @@
 class Sound {
-  constructor(context) {
+  constructor(context,waveform) {
     this.context = context; //feed AudioContext. webkit AudioContext for Safari
+    this.waveform = waveform;
   }
   init() {
     this.oscillator = this.context.createOscillator(); //for electronic math sound
     this.gainNode = this.context.createGain(); //for gain
-    this.oscillator.connect(this.gainNode); //transferring to speakers
+    this.analyser = this.context.createAnalyser();
+    this.distortion = this.context.createWaveShaper();
+
+    //connection to middle filters
+    this.oscillator.connect(this.analyser);
+    this.analyser.connect(this.distortion);
+    this.distortion.connect(this.gainNode); 
     this.gainNode.connect(this.context.destination);
-    this.oscillator.type = "triangle"; //could be waveforms like sine,square,triangle,sawtooth
+    this.oscillator.type = waveform; //could be waveforms like sine,square,triangle,sawtooth
   }
   // init(); Creating play method
   play(hertz, time, cents) {
@@ -25,7 +32,13 @@ class Sound {
   }
 }
 let context = new (window.AudioContext || window.webkitAudioContext)();
-let note = new Sound(context);
+function changeSoundType() {
+  let soundType = document.getElementById('soundType');
+  let soundTypeValue = soundType.options[soundType.selectedIndex].value;
+  
+}
+let waveform = "triangle";
+let note = new Sound(context, waveform);
 let toneSelector = document.getElementById("noteId");
 let composedNotes = []; //c4,d4
 let composedHertz = []; //220.6
@@ -36,6 +49,7 @@ let composedButton = document.getElementsByClassName("note");
 let column = document.getElementsByClassName("column");
 let mainWrapper = document.getElementById("mainWrapper");
 let noteButtonsid = document.getElementById("noteButtons");
+
 let notes = {
   C4: "C",
   D4: "D",
@@ -48,28 +62,49 @@ let notes = {
   blank: "-"
 };
 // note.init();
-class ColumnNote {
+class Note {
   constructor() {
     this.noteButtons = document.createElement("button");
     this.noteButtons.style.padding = "20px";
     this.noteButtons.className = "note";
     this.noteButtons.style.margin = "5px";
+    
   }
 }
 
-for (const prop in notes) {
-  let columnNote = new ColumnNote();
-  columnNote.noteButtons.innerHTML = notes[prop];
-  columnNote.noteButtons.value = prop;
-  column[0].appendChild(columnNote.noteButtons);
-  columnNote.noteButtons.addEventListener("click", function () {
-    let note = this.value;
-    composedNotes.push(note);
-    composedHertz.push(notesCollection[note]);
-    maxComposedIndex++;
-    composedNotesArea.value = composedNotes;
-  });
+class ColumnNote{
+  constructor(){
+
+    for (const prop in notes) {
+      let note = new Note();
+      note.noteButtons.innerHTML = notes[prop];
+      note.noteButtons.value = prop;
+      column[0].appendChild(note.noteButtons);
+      note.noteButtons.addEventListener("click", function () {
+        let note = this.value;
+        composedNotes.push(note);
+        composedHertz.push(notesCollection[note]);
+        maxComposedIndex++;
+        composedNotesArea.value = composedNotes;
+      });
+    }
+  }
 }
+let columnNote = new ColumnNote;
+
+// for (const prop in notes) {
+//   let note = new Note();
+//   note.noteButtons.innerHTML = notes[prop];
+//   note.noteButtons.value = prop;
+//   column[0].appendChild(note.noteButtons);
+//   note.noteButtons.addEventListener("click", function () {
+//     let note = this.value;
+//     composedNotes.push(note);
+//     composedHertz.push(notesCollection[note]);
+//     maxComposedIndex++;
+//     composedNotesArea.value = composedNotes;
+//   });
+// }
 
 for (let i = 0; i < composedButton.length; i++) {
   composedButton[i].addEventListener("click", function () {
@@ -94,7 +129,7 @@ function printValue(sliderID, spanID) {
 
 function playScale() {
   let now = context.currentTime;
-  note.play(composedHertz[composedIndex], now, -798);
+  note.play(composedHertz[composedIndex], now, 0);
   composedIndex++;
   if (composedIndex >= maxComposedIndex) {
     composedIndex = 0;
@@ -111,4 +146,3 @@ function checkNotesChosen() {
     return playScale();
   }
 }
-
