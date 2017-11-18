@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,41 +9,59 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-  <div class="compose-container">
-    
+  <div class="mainWrapper" id="mainWrapper">
+    <textarea name="" id="composedNotesArea" cols="30" rows="1"></textarea>
+    <div class="compose-container">
+
       <ul class="instruments">
         <li>zoom</li>
       </ul>
-    
-    <div class="compose-section">
-      <div class="column">
-        <div class="column-edit">
-          <div class="dropdown">
-            <select onchange="collectNotes()" name="noteClass" id="noteId">
-              <option value=C4>C</option>
-              <option value=D4>D</option>
-              <option value=E4>E</option>
-              <option value=F4>F</option>
-              <option value=G4>G</option>
-              <option value=A4>A</option>
-              <option value=B4>B</option>
-              <!-- <input id="noteInput" type="text"> -->
-            </select>
+      <div class="compose-scroll-main">
+        <div class="compose-section">
+          <div class="column">
+            <div class="column-edit">
+              <div class="dropdown-menu">
+                <select onchange="collectNotes()" name="noteClass" id="noteId">
+                  <option value="">Select Note</option>
+                  <option value=C4>C</option>
+                  <option value=D4>D</option>
+                  <option value=E4>E</option>
+                  <option value=F4>F</option>
+                  <option value=G4>G</option>
+                  <option value=A4>A</option>
+                  <option value=B4>B</option>
+                  <!-- <input id="noteInput" type="text"> -->
+                </select>
+              </div>
+              <div class="delete-tone">
+        
+              </div>
+            </div>
+            <!-- <div class="note">
+                    <span></span>
+                  </div>
+                  <div class="note">
+                    <span></span>
+                  </div>
+                  <div class="note">
+                    <span></span>
+                  </div> -->
           </div>
-          <div class="delete-tone">
-            
-          </div>
+        
         </div>
-
-        <input type="checkbox" name="" id="firstCheck">
-        <input type="checkbox" name="" id="secondCheck">
-        <input type="checkbox" name="" id="thirdCheck">
       </div>
-   
+      
+    </div>
+    <button onclick="playScale()">Play</button>
+    <div class="tempo">
+      Tempo
+       <!-- <span id="tempoValue"></span> -->
+       <input type="text" id="tempoValue">
+      <input type="range" id="tempo" min="10" max="200" value="60" onchange="printValue('tempo','tempoValue')">
     </div>
   </div>
-  <button onclick="playScale()">Play</button>
   <!-- <button onclick="gainScale()">Gain</button>
   <button onclick="stopScale()">Stop</button> -->
 
@@ -51,4 +70,5 @@
   <script src="sound.js"></script>
   <!-- <script src="filter.js"></script> -->
 </body>
+
 </html>
