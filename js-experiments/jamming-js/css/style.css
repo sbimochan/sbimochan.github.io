@@ -1,7 +1,10 @@
 ul .instruments{
   list-style-type: none;
 }
-
+.note{
+  line-height: 50px;
+  
+}
 .compose-scroll-main {
   width: 100%;
  
@@ -58,12 +61,16 @@ ul .instruments{
   border: 1px solid #ccc;
 }
 .compose-section .column .selected  {
-  border: 4px solid #399;
-  background-color: #ee5;
+  border: 4px solid #9c5;
+  background-color: #bd7;
 }
 .compose-section .column {
   float: left;
   min-height: 300px;
   width: 100px;
   border-right: 1px solid #eee;
+}
+.compose-section .column .note:nth-child(2n+3).selected{
+  border: 4px solid #399;
+  background-color: #5bb;
 }
