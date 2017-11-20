@@ -200,7 +200,7 @@ tempoSlider.max = 200;
 tempoSlider.value = 60;
 tempoSlider.step = 5;
 
-setInterval(checkNotesChosen,800);
+// let abc = setInterval(checkNotesChosen,800);
 tempoSlider.addEventListener('change', ()=> {
   // console.log('slider',sendTempoValue);
   let sendTempoValue = tempoSlider.value;
@@ -208,7 +208,7 @@ tempoSlider.addEventListener('change', ()=> {
   window.tempo = sendTempoValue
   // clearInterval(abc);
 
-  // let abc = setInterval(checkNotesChosen,window.tempo/60*1000);
+  let abc = setInterval(checkNotesChosen,60/window.tempo*1000);
 });
 // function changeTempoValue() {
 //   let sendTempoValue = tempoSlider.value;
