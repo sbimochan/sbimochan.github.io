@@ -21,7 +21,7 @@ gainNode.connect(audioCtx.destination);
 // Manipulate the Biquad filter
 
 biquadFilter.type = "lowshelf";
-biquadFilter.frequency.value = 1000;
+biquadFilter.frequency.value = 30;
 biquadFilter.gain.value = 25;
 
 biquadFilter.type = "peaking";

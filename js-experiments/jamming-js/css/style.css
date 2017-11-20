@@ -2,7 +2,7 @@ ul .instruments{
   list-style-type: none;
 }
 .note{
-  line-height: 50px;
+  line-height: 25px;
   
 }
 .compose-scroll-main {
@@ -45,7 +45,7 @@ ul .instruments{
   color: #333;
 }
 .compose-section{
-  width:798px;
+  width:1010px;
 }
 .compose-section .column .note{
   padding:20px 10px;
@@ -55,9 +55,9 @@ ul .instruments{
 .compose-section .column .note {
   display: inline-block;
   border-radius:50%;
-  height: 50px;
+  height: 25px;
   
-  width:50px;
+  width:25px;
   border: 1px solid #ccc;
 }
 .compose-section .column .selected  {

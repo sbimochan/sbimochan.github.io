@@ -1,13 +1,14 @@
 {
   "name": "final-composer",
   "version": "1.0.0",
-  "description": "",
-  "main": "Filter.js",
+  "description": "Simple tunes compose made with Pure Javascript and oscillator",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"webpack --watch" 
+    "build":"webpack --watch" ,
+    "build-prod":"webpack -p"
   },
-  "author": "",
+  "author": "Bimochan Shrestha",
   "license": "ISC",
   "devDependencies": {
     "webpack": "^3.8.1"
