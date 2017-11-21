@@ -131,7 +131,8 @@ class ColumnNote {
       });
     }
     for (let i = 0; i < composedButton.length; i++) {
-      composedButton[i].addEventListener('click', function () { //cant use es6 function
+      composedButton[i].addEventListener('click', function(){ //cant use es6 function
+        // console.log(composedButton.contains);
         if (this.classList.contains('note')) {
           // this.classList.remove('selected');
           this.classList.toggle('selected');
@@ -164,13 +165,12 @@ class NewColumn{
 // let columnNote2 = new ColumnNote;
 let newColumn = new NewColumn();
 let columnNote = new ColumnNote();
-newColumn.addColumn.addEventListener('click',function(){ 
+newColumn.addColumn.addEventListener('click',()=>{ 
   new ColumnNote();
 }); 
   
 
-// console.log('2',columnNote2);
-
+//to print value of TIme
 function printValue(sliderID, spanID) {
   // console.log(spanID);
   let slider = document.getElementById(sliderID);
@@ -181,17 +181,32 @@ function printValue(sliderID, spanID) {
 
 }
 
+let currentNote = document.createElement('div');
+currentNote.style.float="right";
+currentNote.style.width="100px";
+currentNote.style.height="50px";
+currentNote.style.border="1px solid #888";
+currentNote.style.lineHeight="50px";
+currentNote.style.textAlign="center";
+currentNote.style.fontSize="24px";
+currentNote.style.marginRight="20px";
+currentNote.style.boxShadow="2px 2px 2px 2px #888888";
+
 function playScale() {
   let now = context.currentTime;
   // console.log(composedHertz[composedIndex]);
   note.play(composedHertz[composedIndex], now, 0);
   // console.log(composedHertz[composedIndex]);
   composedIndex++;
+  currentNote.innerHTML = composedNotes[composedIndex-1];
+  mainWrapper.appendChild(currentNote);
   // console.log(composedIndex);
   if (composedIndex >= maxComposedIndex) {
     composedIndex = 0;
   }
 }
+
+
 function stopScale() {
   note.stop(0);
 }
