@@ -1,7 +1,7 @@
 class Sound {
-  constructor(context, waveform) {
+  constructor(context) {
     this.context = context; //feed AudioContext. webkit AudioContext for Safari
-    this.waveform = waveform;
+    // this.waveform = 'sine';
   }
   init() {
     this.oscillator = this.context.createOscillator(); //for electronic math sound
@@ -13,11 +13,9 @@ class Sound {
     this.analyser.connect(this.distortion);
     this.distortion.connect(this.gainNode);
     this.gainNode.connect(this.context.destination);
-    this.oscillator.type = waveform; //could be waveforms like sine,square,triangle,sawtooth
+    // this.oscillator.type; //could be waveforms like sine,square,triangle,sawtooth
   }
-  // init(); Creating play method
   play(hertz, time, cents) {
-    //generate tone eg play(261.63, now);
     this.init();
     this.oscillator.frequency.value = hertz;
     this.oscillator.detune.value = cents;
@@ -32,11 +30,8 @@ class Sound {
 }
 //Sound Class End*
 let context = new(window.AudioContext || window.webkitAudioContext)();
-waveform = 'sawtooth';
-let sound = new Sound(context, waveform);
-// let composedNotes = []; //c4,d4 let composedHertz = []; //220.6 let
-// composedIndex = 0; let maxComposedIndex = 0;
-// let composedNotesArea = document.getElementById('composedNotesArea');
+// waveform = 'sawtooth';
+let sound = new Sound(context);
 let composedButton = document.getElementsByClassName('note');
 let composeSection = document.getElementsByClassName('compose-section');
 let mainWrapper = document.getElementById('mainWrapper');
@@ -50,15 +45,13 @@ let notes = {
   A4: 'A',
   B4: 'B',
   C5: 'C',
-  blank: '-'
 };
 let sounds = {
-  sawtooth: 'Stranger Things',
   sine: 'peace',
+  triangle: 'smooth',
   square: 'retro',
-  triangle: 'smooth'
+  sawtooth: 'Stranger Things'
 }
-// note.init();
 class Note {
   constructor() {
     this.noteButtons = document.createElement('div');
@@ -68,13 +61,36 @@ class Note {
     this.isClicked = false;
   }
 }
+class MainSound{
+  constructor(){
+    this.waveform = 'sine';
+    this.mainSoundDiv=document.createElement('div');
+    this.mainSoundDiv.className='mainSoundDiv';
+    this.mainSoundDiv.innerHTML="Main sound: ";
+    mainWrapper.insertAdjacentElement('afterbegin',this.mainSoundDiv);
+    this.toneSelector = document.createElement('select');
+    for (const prop in sounds) {
+      this.option = document.createElement('option');
+      this.option.innerHTML = sounds[prop];
+      this.option.value = prop;
+      this.toneSelector.appendChild(this.option);
+    }
+    this.mainSoundDiv.appendChild(this.toneSelector);
+    this.toneSelector.addEventListener('change', () => {
+      columnNotesArray.forEach((column)=>{
+        column.waveform=this.toneSelector.value;
+        column.toneSelector.value=this.toneSelector.value
+      });
+      // this.waveform = this.toneSelector.value; //changing instrument
+    });
+  }
+}
+let mainSound = new MainSound;
 class ColumnNote {
   constructor() {
-    // console.log("ehaa aayo");
     this.composedHertzArray = [];
     this.composedNotesArray = [];
-    this.composedIndex = 0;
-    this.maxComposedIndex = 0;
+    this.waveform='sine';
     this.column = document.createElement('div');
     this.column.setAttribute('class', 'column');
     composeSection[0].appendChild(this.column);
@@ -85,11 +101,10 @@ class ColumnNote {
       this.option.value = prop;
       this.toneSelector.appendChild(this.option);
     }
-    this.toneSelector.addEventListener('change', function() {
-      // console.log(this.value);
-      waveform = this.value; //changin instrument
-    });
     this.column.appendChild(this.toneSelector);
+    this.toneSelector.addEventListener('change',()=> {
+      this.waveform = this.toneSelector.value; //changing instrument
+    });
     for (const prop in notes) {
       let note = new Note();
       note.noteButtons.innerHTML = notes[prop];
@@ -99,9 +114,7 @@ class ColumnNote {
         note.isClicked = !note.isClicked;
         if (note.isClicked) {
           let noteValue = note.noteButtons.value;
-          // console.log(note.noteButtons.value);
           let hertzIndex = notesCollection[noteValue];
-          // console.log();
           this.composedNotesArray.push(noteValue);
           this.composedHertzArray.push(notesCollection[noteValue]);
         } else {
@@ -124,7 +137,6 @@ class ColumnNote {
 class NewColumn {
   constructor() {
     this.addColumn = document.createElement('div');
-    // this.addColumn.className="column";
     this.addColumn.setAttribute("class", "column newColumnAdder");
     this.addColumn.innerHTML = "<i class='fa fa-plus fa-3x' aria-hidden='true'></i>";
     this.addColumn.style.cursor = "pointer";
@@ -132,40 +144,52 @@ class NewColumn {
     this.addColumn.style.textAlign = "center";
     this.addColumn.style.border = "1px solid grey";
     this.addColumn.style.borderRadius = "10px";
-    this.addColumn.style.height = "532px";
+    this.addColumn.style.height = "460px";
     this.addColumn.style.marginRight = "15px";
     this.addColumn.style.boxShadow = "10px 10px 5px #888888";
-    // this.addColumn.style.backgroundColor="khaki";
     composeSection[0].appendChild(this.addColumn);
   }
 }
-let tempoInterval;
-// console.log(addColumn); console.log('1',columnNote); let columnNote2 = new
-// ColumnNote;
+class Exporter{
+  constructor(){
+    this.exporterDiv = document.createElement('div');
+    mainWrapper.appendChild(this.exporterDiv);
+    this.button = document.createElement('a');
+    this.button.innerHTML="Save your song";
+    this.exporterDiv.id="exporter";
+    this.exporterDiv.appendChild(this.button);
+  }
+}
 let columnNotesArray = [];
-let newColumn = new NewColumn();
+let newColumn = new NewColumn(); //Adder
+let exporter = new Exporter;
+exporter.button.addEventListener('click',()=>{
+  //to write into json
+  let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(columnNotesArray));
+  exporter.button.href="data:"+data;
+  exporter.button.download="song.json";
+});
+
 newColumn.addColumn.addEventListener('click', () => {
   let columnNote = new ColumnNote();
-  // new ColumnNote();
   columnNotesArray.push(columnNote);
-  // clearInterval(tempoInterval); playAbc();
 });
-//to print value of TIme
+//to print value of Tempo
 function printValue(sliderID, spanID) {
-  // console.log(spanID);
   let slider = document.getElementById(sliderID);
-  // console.log(slider.value);
   let output = document.getElementById(spanID);
-  output.innerHTML = slider.value;
+  output.innerHTML = slider.value + " bpm";
   return output.value;
 }
+
+let tempoInterval;
 tempoSlider = document.getElementById('tempo');
 tempoSlider.min = 10;
 tempoSlider.max = 200;
 tempoSlider.value = 60;
 tempoSlider.step = 5;
 let i = 0;
-// function playAbc() {
+
 function playComposition(){
   if (columnNotesArray.length != 0) {
     let now = context.currentTime;
@@ -178,7 +202,9 @@ function playComposition(){
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
       sound.play(columnNotesArray[i].composedHertzArray[j], now, 0); //third param = detune in cents
-      // console.log('j', columnNotesArray[i]);
+      sound.oscillator.type=columnNotesArray[i].waveform;
+      // sound.oscillator.type=mainSound.waveform;
+      // console.log(sound.oscillator.type);
     }
     i++;
     if (i >= columnNotesArray.length) {

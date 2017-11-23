@@ -48,7 +48,9 @@ ul .instruments{
   color: #333;
 }
 .compose-section{
-  width:1010px;
+  width:auto;
+  overflow-x:scroll;
+  overflow-y: hidden;
 }
 .compose-section .column .note{
   padding:20px 10px;
@@ -79,4 +81,24 @@ ul .instruments{
 }
 .newColumnAdder:active{
   width: 90px;
+}
+.mainSoundDiv{
+  display: inline-block;
+  
+}
+.mainSoundDiv select{
+  width:200px;
+}
+#exporter{
+  padding:10px;
+  font-size:14px;
+  border-radius: 15px;
+  background-color: #eee;
+  margin-top:20px;
+  display: inline-block;
+  cursor: pointer;
+}
+#exporter a{
+  text-decoration: none;
+  color:#000;
 }
