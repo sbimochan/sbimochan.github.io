@@ -29,12 +29,6 @@ class Sound {
     this.gainNode.gain.exponentialRampToValueAtTime(0.1, time + 1);
     this.oscillator.stop(time + 1);
   }
-  controlVolume(element) {
-    let volume = element.value;
-    let fraction = parseInt(element.value) / parseInt(element.max); //using x*x curve since linear(x) doesn't sound good
-    console.log(this.gainNode.gain);
-    this.gainNode.gain.value = fraction * fraction;
-  }
 }
 //Sound Class End*
 let context = new(window.AudioContext || window.webkitAudioContext)();
@@ -42,7 +36,7 @@ waveform = 'sawtooth';
 let sound = new Sound(context, waveform);
 // let composedNotes = []; //c4,d4 let composedHertz = []; //220.6 let
 // composedIndex = 0; let maxComposedIndex = 0;
-let composedNotesArea = document.getElementById('composedNotesArea');
+// let composedNotesArea = document.getElementById('composedNotesArea');
 let composedButton = document.getElementsByClassName('note');
 let composeSection = document.getElementsByClassName('compose-section');
 let mainWrapper = document.getElementById('mainWrapper');
@@ -110,20 +104,9 @@ class ColumnNote {
           // console.log();
           this.composedNotesArray.push(noteValue);
           this.composedHertzArray.push(notesCollection[noteValue]);
-          for (let i = 0; i < columnNotesArray.length; i++) {
-            columnNotesArray[i].maxComposedIndex = columnNotesArray[i].composedNotesArray.length;
-            // columnNotesArray[i].maxComposedIndex++;
-          }
-          composedNotesArea.value = this.composedNotesArray;
         } else {
           this.composedNotesArray.splice(this.composedNotesArray.indexOf(note.noteButtons.value), 1);
           this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
-          // console.log(this.value);
-          for (let i = 0; i < columnNotesArray.length; i++) {
-            columnNotesArray[i].maxComposedIndex--;
-          }
-          // console.log(composedHertz); console.log(composedNotes);
-          composedNotesArea.value = this.composedNotesArray;
         }
       });
     }
@@ -176,40 +159,6 @@ function printValue(sliderID, spanID) {
   output.innerHTML = slider.value;
   return output.value;
 }
-let currentNote = document.createElement('div');
-currentNote.style.float = "right";
-currentNote.style.width = "100px";
-currentNote.style.height = "50px";
-currentNote.style.border = "1px solid #888";
-currentNote.style.lineHeight = "50px";
-currentNote.style.textAlign = "center";
-currentNote.style.fontSize = "24px";
-currentNote.style.marginRight = "20px";
-currentNote.style.boxShadow = "2px 2px 2px 2px #888888";
-// function playScale() {
-//   for (let i = 0; i < columnNotesArray.length; i++) { //number of columns
-//     let now = context.currentTime;
-//     let cna = columnNotesArray[i]; //choosing objects iteratively
-//     console.log('cna', cna);
-//     for (let j = 0; j < cna.maxComposedIndex; j++) { //number of notes in that column
-//       // console.log(cna);
-//       sound.play(cna.composedHertzArray[j], now + i, 0); //third param = detune in cents
-//       // console.log('notes',cna.composedNotesArray[cna.composedIndex]);
-//     }
-//     // console.log(a); cna.composedIndex++; if (cna.composedIndex >=
-//     // cna.maxComposedIndex) {   cna.composedIndex = 0; }
-//   }
-//   // console.log(composedHertz[composedIndex]);
-//   // console.log(composedHertz[composedIndex]); currentNote.innerHTML =
-//   // composedNotes[composedIndex - 1]; mainWrapper.appendChild(currentNote); //
-//   // console.log(composedIndex);
-// }
-// function stopScale() {
-//   sound.stop(0);
-// }
-// function checkNotesChosen() {   for(let i =0;i<columnNotesArray.length;i++){
-//    if (columnNotesArray[i].maxComposedIndex > 0) {       return playScale();
-//    }   } }
 tempoSlider = document.getElementById('tempo');
 tempoSlider.min = 10;
 tempoSlider.max = 200;
@@ -217,28 +166,29 @@ tempoSlider.value = 60;
 tempoSlider.step = 5;
 let i = 0;
 // function playAbc() {
-tempoInterval = setInterval(() => {
+function playComposition(){
   if (columnNotesArray.length != 0) {
-    if (i >= columnNotesArray.length) { //2
+    let now = context.currentTime;
+    if (i != 0) {
+      columnNotesArray[i - 1].column.style.backgroundColor = 'white';
+    }
+    else {
+      columnNotesArray[columnNotesArray.length - 1].column.style.backgroundColor = 'white';
+    }
+    columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
+    for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
+      sound.play(columnNotesArray[i].composedHertzArray[j], now, 0); //third param = detune in cents
+      // console.log('j', columnNotesArray[i]);
+    }
+    i++;
+    if (i >= columnNotesArray.length) {
       i = 0;
-      // console.log(i)
-    } else {
-      let now = context.currentTime;
-      for (let j = 0; j < columnNotesArray[i].maxComposedIndex; j++) { //3,4
-        sound.play(columnNotesArray[i].composedHertzArray[j], now, 0); //third param = detune in cents
-        // console.log(columnNotesArray[i].composedNotesArea[j])
-        // console.log('j',j);
-      }
-      i++;
     }
   }
-}, 1000); //60->seconds
-// } tempoSlider.addEventListener('change', () => {   let sendTempoValue =
-// tempoSlider.value;   window.tempo = sendTempoValue
-// clearInterval(tempoInterval);   tempoInterval = setInterval(checkNotesChosen,
-// 60 / window.tempo * 1000); });
-let volumeSlider = document.getElementById('volumeControl')
-volumeSlider.addEventListener('input', function() {
-  console.log(volumeSlider.value);
-  sound.controlVolume(volumeSlider);
-})
+}
+tempoInterval = setInterval(playComposition, 1000); 
+tempoSlider.addEventListener('change', () => {
+  let sendTempoValue = tempoSlider.value;
+  clearInterval(tempoInterval);
+  tempoInterval = setInterval(playComposition, 60 / sendTempoValue * 1000);
+});
