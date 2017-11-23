@@ -78,10 +78,9 @@ class MainSound{
     this.mainSoundDiv.appendChild(this.toneSelector);
     this.toneSelector.addEventListener('change', () => {
       columnNotesArray.forEach((column)=>{
-        column.waveform=this.toneSelector.value;
+        column.waveform = this.toneSelector.value;//changing instrument
         column.toneSelector.value=this.toneSelector.value
       });
-      // this.waveform = this.toneSelector.value; //changing instrument
     });
   }
 }
@@ -122,16 +121,14 @@ class ColumnNote {
           this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
         }
       });
-    }
-    for (let i = 0; i < composedButton.length; i++) {
-      composedButton[i].addEventListener('click', function() { //cant use es6 function
-        // console.log(composedButton.contains);
-        if (this.classList.contains('note')) {
-          // this.classList.remove('selected');
-          this.classList.toggle('selected');
+      note.noteButtons.addEventListener('click',()=>{
+        console.log(note.noteButtons);
+        if (note.noteButtons.classList.contains('note')) {
+          note.noteButtons.classList.toggle('selected');
         }
       });
     }
+  
   }
 }
 class NewColumn {

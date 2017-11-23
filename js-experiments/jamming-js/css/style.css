@@ -10,13 +10,9 @@ ul .instruments{
 }
 .compose-scroll-main {
   width: 100%;
- 
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 .compose-section {
-  overflow: auto;
   padding: 20px;
   margin: 0 auto;
 }
@@ -26,6 +22,7 @@ ul .instruments{
   min-height: 300px;
   width: 100px;
   border-right: 1px solid #eee;
+  display: inline-block;
 }
 .compose-section .column:last-child {
   border-right: 0;
@@ -51,6 +48,7 @@ ul .instruments{
   width:auto;
   overflow-x:scroll;
   overflow-y: hidden;
+ 
 }
 .compose-section .column .note{
   padding:20px 10px;
