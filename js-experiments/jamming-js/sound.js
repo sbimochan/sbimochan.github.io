@@ -248,27 +248,27 @@ currentNote.style.fontSize = "24px";
 currentNote.style.marginRight = "20px";
 currentNote.style.boxShadow = "2px 2px 2px 2px #888888";
 
-function playScale() {
-  for (let i = 0; i < columnNotesArray.length; i++) { //number of columns
-    let now = context.currentTime;
-    let cna = columnNotesArray[i]; //choosing objects iteratively
-    console.log('cna', cna);
-    for (let j = 0; j < cna.maxComposedIndex; j++) { //number of notes in that column
-      // console.log(cna);
-      sound.play(cna.composedHertzArray[j], now + i, 0); //third param = detune in cents
-      // console.log('notes',cna.composedNotesArray[cna.composedIndex]);
-    }
-    // console.log(a); cna.composedIndex++; if (cna.composedIndex >=
-    // cna.maxComposedIndex) {   cna.composedIndex = 0; }
-  }
-  // console.log(composedHertz[composedIndex]);
-  // console.log(composedHertz[composedIndex]); currentNote.innerHTML =
-  // composedNotes[composedIndex - 1]; mainWrapper.appendChild(currentNote); //
-  // console.log(composedIndex);
-}
-function stopScale() {
-  sound.stop(0);
-}
+// function playScale() {
+//   for (let i = 0; i < columnNotesArray.length; i++) { //number of columns
+//     let now = context.currentTime;
+//     let cna = columnNotesArray[i]; //choosing objects iteratively
+//     console.log('cna', cna);
+//     for (let j = 0; j < cna.maxComposedIndex; j++) { //number of notes in that column
+//       // console.log(cna);
+//       sound.play(cna.composedHertzArray[j], now + i, 0); //third param = detune in cents
+//       // console.log('notes',cna.composedNotesArray[cna.composedIndex]);
+//     }
+//     // console.log(a); cna.composedIndex++; if (cna.composedIndex >=
+//     // cna.maxComposedIndex) {   cna.composedIndex = 0; }
+//   }
+//   // console.log(composedHertz[composedIndex]);
+//   // console.log(composedHertz[composedIndex]); currentNote.innerHTML =
+//   // composedNotes[composedIndex - 1]; mainWrapper.appendChild(currentNote); //
+//   // console.log(composedIndex);
+// }
+// function stopScale() {
+//   sound.stop(0);
+// }
 // function checkNotesChosen() {   for(let i =0;i<columnNotesArray.length;i++){
 //    if (columnNotesArray[i].maxComposedIndex > 0) {       return playScale();
 //    }   } }
@@ -283,12 +283,15 @@ let i = 0;
 tempoInterval = setInterval(() => {
   if (columnNotesArray.length != 0) {
     if (i >= columnNotesArray.length) { //2
+      console.log(columnNotesArray.length)
+      console.log(i)
       i = 0;
+      console.log("1st condition");
     } else {
       let now = context.currentTime;
       for (let j = 0; j < columnNotesArray[i].maxComposedIndex; j++) { //3,4
         sound.play(columnNotesArray[i].composedHertzArray[j], now, 0); //third param = detune in cents
-        console.log(columnNotesArray[i].composedNotesArray[j]);
+        console.log(columnNotesArray[i],i);
       }
     }
     i++;
