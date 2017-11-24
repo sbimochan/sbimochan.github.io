@@ -12,9 +12,6 @@ ul .instruments{
   width: 100%;
 }
 
-
-
-
 .compose-section .column:last-child {
   border-right: 0;
 }
@@ -91,4 +88,7 @@ ul .instruments{
 #exporter a{
   text-decoration: none;
   color:#000;
+}
+.fileLoadDiv{
+  margin:20px 0px;
 }

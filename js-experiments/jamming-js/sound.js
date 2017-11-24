@@ -76,7 +76,7 @@ class MainSound {
       this.toneSelector.appendChild(this.option);
     }
     this.mainSoundDiv.appendChild(this.toneSelector);
-    this.toneSelector.addEventListener('change', () => {
+    this.toneSelector.addEventListener('click', () => {
       columnNotesArray.forEach((column) => {
         column.waveform = this.toneSelector.value;//changing instrument
         column.toneSelector.value = this.toneSelector.value
@@ -121,7 +121,7 @@ class ColumnNote {
         }
       });
       note.noteButtons.addEventListener('click', () => {
-        console.log(note.noteButtons);
+        // console.log(note.noteButtons);
         if (note.noteButtons.classList.contains('note')) {
           note.noteButtons.classList.toggle('selected');
         }
@@ -145,7 +145,7 @@ let notes = {
   G4: 'G',
   A4: 'A',
   B4: 'B',
-  C5: 'C',
+  C5: 'C'
 };
 let sounds = {
   sine: 'peace',
@@ -208,8 +208,29 @@ function playComposition(){
   }
 }
 tempoInterval = setInterval(playComposition, 1000); 
+
 tempoSlider.addEventListener('change', () => {
   let sendTempoValue = tempoSlider.value;
   clearInterval(tempoInterval);
   tempoInterval = setInterval(playComposition, 60 / sendTempoValue * 1000);
+});
+
+let importer = document.getElementById('import').addEventListener('click',()=>{
+let file = document.getElementById('input_file').files;
+  console.log(file);
+  if(file.length !=1){
+    return false;
+  }
+  let fr = new FileReader;
+  fr.onload = (progressEvent)=>{
+    console.log(progressEvent);
+    let result = JSON.parse(progressEvent.target.result);
+    let formatted = JSON.stringify(result,null,2); //variable,replace by,spaces
+    // console.log(formatted);
+    window.localStorage.setItem('jamming-js',formatted);
+  }
+fr.readAsText(file.item(0));
+let retrieveSong = window.localStorage.getItem('jamming-js');
+// console.log(retrieveSong);
+columnNotesArray=retrieveSong;
 });
