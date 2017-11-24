@@ -33,17 +33,18 @@ ul .instruments{
   color: #333;
 }
 .compose-section{
-  width:auto;
+  /* width:auto; */
   overflow-x:scroll;
   overflow-y: hidden;
    padding: 20px;
   margin: 0 auto;
+  white-space: nowrap;
 }
 .compose-section .column .note {
   padding:20px 10px;
   cursor: pointer;
   text-align: center;
-  display: inline-block;
+  /* display: inline-block; */
   border-radius:50%;
   height: 25px;
   
@@ -56,11 +57,11 @@ ul .instruments{
 }
 
 .compose-section .column {
-  float: left;
+ 
   min-height: 300px;
   width: 100px;
   border-right: 1px solid #eee;
-  /* display: inline-block; */
+  display: inline-block;
 }
 .compose-section .column .note:nth-child(2n+3).selected{
   border: 4px solid #399;
@@ -91,4 +92,16 @@ ul .instruments{
 }
 .fileLoadDiv{
   margin:20px 0px;
+}
+.danger{
+  float: right;
+  color:#d44;
+  border-radius: 5px;
+  padding:5px 10px;
+  font-size: 14px;
+  background: transparent;
+}
+.danger:hover{
+  border:1px solid #a22;
+  color:#a22;
 }

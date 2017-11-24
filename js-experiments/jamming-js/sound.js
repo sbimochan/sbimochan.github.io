@@ -29,9 +29,12 @@ class Sound {
 class NewColumn {
   constructor() {
     this.addColumn = document.createElement('div');
-    this.addColumn.setAttribute("class", "column newColumnAdder");
+this
+  .addColumn
+  .setAttribute("class", "column newColumnAdder");
     this.addColumn.innerHTML = "<i class='fa fa-plus fa-3x' aria-hidden='true'></i>";
     this.addColumn.style.cursor = "pointer";
+    this.addColumn.style.float="left"; 
     this.addColumn.style.lineHeight = "532px";
     this.addColumn.style.textAlign = "center";
     this.addColumn.style.border = "1px solid grey";
@@ -127,7 +130,13 @@ class ColumnNote {
         }
       });
     }
-
+    this.trash = document.createElement('button');
+    this.trash.setAttribute('class','danger');
+    this.trashIconHolder = document.createElement('span');
+    this.trashIconHolder.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
+    this.trash.appendChild(this.trashIconHolder);
+    this.column.appendChild(this.trash);
+    
   }
 }
 let context = new(window.AudioContext || window.webkitAudioContext)();
@@ -168,6 +177,11 @@ exporter.button.addEventListener('click',()=>{
 newColumn.addColumn.addEventListener('click', () => {
   let columnNote = new ColumnNote();
   columnNotesArray.push(columnNote);
+  columnNote.trash.addEventListener('click',()=>{
+    // console.log(columnNotesArray.indexOf(columnNote));
+    columnNotesArray.splice(columnNotesArray.indexOf(columnNote),1);
+    columnNote.column.style.display="none";
+  });
 });
 //to print value of Tempo
 function printValue(sliderID, spanID) {
