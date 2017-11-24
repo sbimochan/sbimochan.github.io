@@ -96,6 +96,7 @@ class ColumnNote {
     this.column.setAttribute('class', 'column');
     composeSection[0].appendChild(this.column);
     this.toneSelector = document.createElement('select');
+    this.toneSelector.style.width="100px";
     for (const prop in sounds) {
       this.option = document.createElement('option');
       this.option.innerHTML = sounds[prop];
@@ -239,12 +240,12 @@ let file = document.getElementById('input_file').files;
   fr.onload = (progressEvent)=>{
     console.log(progressEvent);
     let result = JSON.parse(progressEvent.target.result);
-    let formatted = JSON.stringify(result,null,2); //variable,replace by,spaces
+    columnNotesArray=result;
+    // let formatted = JSON.stringify(result,null,2); //variable,replace by,spaces
     // console.log(formatted);
-    window.localStorage.setItem('jamming-js',formatted);
+    // window.localStorage.setItem('jamming-js',formatted);
   }
 fr.readAsText(file.item(0));
-let retrieveSong = window.localStorage.getItem('jamming-js');
+// let retrieveSong = window.localStorage.getItem('jamming-js');
 // console.log(retrieveSong);
-columnNotesArray=retrieveSong;
 });
