@@ -133,6 +133,7 @@
     height: 12%;
     width: 4%;
     top: 45%;
+    z-index: 5;
     opacity: 1;
     position: absolute;
     bottom: 0;
