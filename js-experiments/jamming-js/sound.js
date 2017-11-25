@@ -195,9 +195,16 @@ function printValue(sliderID, spanID) {
 let tempoInterval;
 tempoSlider = document.getElementById('tempo');
 tempoSlider.min = 10;
-tempoSlider.max = 200;
+tempoSlider.max = 400;
 tempoSlider.value = 60;
 tempoSlider.step = 5;
+
+detuneSlider = document.getElementById('detune');
+detuneSlider.min = -900;
+detuneSlider.max = 900;
+detuneSlider.value = 0;
+detuneSlider.step = 50;
+
 
 let i = 0;
 function playComposition(){
@@ -211,7 +218,8 @@ function playComposition(){
     }
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
-      sound.play(columnNotesArray[i].composedHertzArray[j], now, 0); //third param = detune in cents
+      console.log(detuneSlider.value);
+      sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value); //third param = detune in cents
       sound.oscillator.type=columnNotesArray[i].waveform;
       // sound.oscillator.type=mainSound.waveform;
       // console.log(sound.oscillator.type);
@@ -230,6 +238,7 @@ tempoSlider.addEventListener('change', () => {
   tempoInterval = setInterval(playComposition, 60 / sendTempoValue * 1000);
 });
 
+/*To load JSON file*/
 let importer = document.getElementById('import').addEventListener('click',()=>{
 let file = document.getElementById('input_file').files;
   console.log(file);
