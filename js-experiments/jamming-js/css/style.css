@@ -1,3 +1,4 @@
+
 .mainWrapper{
   padding:20px;
 }
@@ -110,5 +111,10 @@ ul .instruments{
 }
 .detuneDiv{
   float: right;
-  
 }
+input#detune{
+  width:300px;
+}
+ input#tempo{
+   width:200px;
+ }
