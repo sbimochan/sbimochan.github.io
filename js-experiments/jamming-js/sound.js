@@ -1,3 +1,5 @@
+
+
 class Sound {
   constructor(context) {
     this.context = context; //feed AudioContext. webkit AudioContext for Safari
@@ -90,6 +92,11 @@ class ColumnNote {
     this.composedHertzArray = [];
     // this.composedNotesArray = [];
     this.waveform = 'sine';
+    if (typeof (cha) != 'undefined' && typeof (waveform) != 'undefined') {
+      this.waveform = waveform;
+      console.log('cha', waveform);
+      this.composedHertzArray = cha.slice(0);
+    }
     this.column = document.createElement('div');
     this.column.setAttribute('class', 'column');
     composeSection[0].appendChild(this.column);
@@ -107,16 +114,19 @@ class ColumnNote {
     });
     for (const prop in notes) { //or notesCollection
       let note = new Note();
+     
       note.noteButtons.innerHTML = notes[prop]; //name on view .or prop
       note.noteButtons.value = prop;  //value of button. or notesCollection[prop]
       this.column.appendChild(note.noteButtons);
+      let noteValue = note.noteButtons.value;
+      let hertzIndex = notesCollection[noteValue];
       note.noteButtons.addEventListener('click', () => {
         note.isClicked = !note.isClicked;
         if (note.isClicked) {
-          let noteValue = note.noteButtons.value;
-          let hertzIndex = notesCollection[noteValue];
+    
           // this.composedNotesArray.push(noteValue); //or swap with hertzIndex for getting all notes
           this.composedHertzArray.push(hertzIndex);
+          console.log(this.composedHertzArray);
         } else {
           // this.composedNotesArray.splice(this.composedNotesArray.indexOf(note.noteButtons.value), 1);
           this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
@@ -128,6 +138,9 @@ class ColumnNote {
           note.noteButtons.classList.toggle('selected');
         }
       });
+    if(this.composedHertzArray.indexOf(hertzIndex) != -1 ){
+      note.noteButtons.classList.toggle('selected');
+      }
     }
     this.trash = document.createElement('button');
     this.trash.setAttribute('class','danger');
@@ -136,11 +149,7 @@ class ColumnNote {
     this.trash.appendChild(this.trashIconHolder);
     this.column.appendChild(this.trash);
     
-    if(typeof(cha) != 'undefined' &&  typeof(waveform) !='undefined'){
-      this.waveform = waveform;
-      console.log('cha',waveform);
-      this.composedHertzArray = cha.slice(0);
-    }
+   
   }
 }
 let context = new(window.AudioContext || window.webkitAudioContext)();
