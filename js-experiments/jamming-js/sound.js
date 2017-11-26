@@ -86,9 +86,9 @@ class MainSound {
   }
 }
 class ColumnNote {
-  constructor() {
+  constructor(cha,waveform) {
     this.composedHertzArray = [];
-    this.composedNotesArray = [];
+    // this.composedNotesArray = [];
     this.waveform = 'sine';
     this.column = document.createElement('div');
     this.column.setAttribute('class', 'column');
@@ -115,10 +115,10 @@ class ColumnNote {
         if (note.isClicked) {
           let noteValue = note.noteButtons.value;
           let hertzIndex = notesCollection[noteValue];
-          this.composedNotesArray.push(noteValue); //or swap with hertzIndex for getting all notes
+          // this.composedNotesArray.push(noteValue); //or swap with hertzIndex for getting all notes
           this.composedHertzArray.push(hertzIndex);
         } else {
-          this.composedNotesArray.splice(this.composedNotesArray.indexOf(note.noteButtons.value), 1);
+          // this.composedNotesArray.splice(this.composedNotesArray.indexOf(note.noteButtons.value), 1);
           this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
         }
       });
@@ -136,6 +136,11 @@ class ColumnNote {
     this.trash.appendChild(this.trashIconHolder);
     this.column.appendChild(this.trash);
     
+    if(typeof(cha) != 'undefined' &&  typeof(waveform) !='undefined'){
+      this.waveform = waveform;
+      console.log('cha',waveform);
+      this.composedHertzArray = cha.slice(0);
+    }
   }
 }
 let context = new(window.AudioContext || window.webkitAudioContext)();
@@ -170,7 +175,7 @@ let exporter = new Exporter;
 exporter.button.addEventListener('click',()=>{
   //to write into json
  
-  let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(cha));
+  let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(columnNotesArray));
   exporter.button.href="data:"+data;
   exporter.button.download="song.json";
 });
@@ -249,16 +254,20 @@ let file = document.getElementById('input_file').files;
   let fr = new FileReader;
   fr.onload = (progressEvent)=>{
     console.log(progressEvent);
-    let result = JSON.parse(progressEvent.target.result);
-
-    let hertz = result.map(function(a){
-      return a.composedNotesArray+'has frequency of'+a.composedHertzArray;
-    });
-    console.log(hertz);
+    let results = JSON.parse(progressEvent.target.result);
+    console.log(results);
+    // let hertz = result.map(function(a){
+    //   return a.composedNotesArray+'has frequency of'+a.composedHertzArray;
+    // });
+    // console.log(hertz);
     // let loadSong = new ColumnNote;
     // loadSong.composedHertzArray = result[0].composedHertzArray;
     // loadSong.composedNotesArray = result[0].composedNotesArray;
-
+    results.forEach((result)=>{
+      console.log(result.composedHertzArray);
+      let column = new ColumnNote(result.composedHertzArray, result.waveform)
+      columnNotesArray.push(column);
+    });
     // columnNotesArray=result;
     // let formatted = JSON.stringify(result,null,2); //variable,replace by,spaces
     // console.log(formatted);
