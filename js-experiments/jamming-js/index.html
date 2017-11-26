@@ -13,11 +13,7 @@
 
 <body>
   <div class="mainWrapper" id="mainWrapper">
-    <div class="detuneDiv">
-      Detune:
-      <span id="detuneValue"></span>
-        <input type="range" id="detune" onchange="printValue('detune','detuneValue')">
-    </div>
+  
     <!-- <textarea name="" id="composedNotesArea" cols="50" rows="5"></textarea> -->
     <div class="compose-container">
 
@@ -41,6 +37,11 @@
        <span id="tempoValue"></span>
        <!-- <input type="text" id="tempoValue" > -->
       <input type="range" id="tempo" min="10" max="400" value="60" onchange="printValue('tempo','tempoValue')">
+    </div>
+    <div class="detuneDiv">
+      Detune:
+      <span id="detuneValue"></span>
+      <input type="range" id="detune" onchange="printValue('detune','detuneValue')">
     </div>
   </div>
   <!-- <button onclick="gainScale()">Gain</button>

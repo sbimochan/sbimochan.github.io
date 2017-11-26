@@ -5,8 +5,6 @@ export class Exporter {
     this.button = document.createElement('a');
     this.button.innerHTML = "Save your song";
     this.exporterDiv.id = "exporter";
-    this
-      .exporterDiv
-      .appendChild(this.button);
+    this.exporterDiv.appendChild(this.button);
   }
 }

@@ -2,7 +2,7 @@
   "name": "final-composer",
   "version": "1.0.0",
   "description": "Simple tunes compose made with Pure Javascript and oscillator",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build":"webpack --watch" ,

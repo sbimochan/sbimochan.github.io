@@ -1,6 +1,7 @@
 
 .mainWrapper{
   padding:20px;
+  background: #ecf0f1;
 }
 ul .instruments{
   list-style-type: none;
@@ -85,10 +86,14 @@ ul .instruments{
   padding:10px;
   font-size:14px;
   border-radius: 15px;
-  background-color: #eee;
+  background-color:#fff;
+  border:2px solid #5bb;
   margin-top:20px;
   display: inline-block;
   cursor: pointer;
+}
+#exporter:hover{
+  background: #eee;
 }
 #exporter a{
   text-decoration: none;
@@ -103,7 +108,8 @@ ul .instruments{
   border-radius: 5px;
   padding:5px 10px;
   font-size: 14px;
-  background: transparent;
+  border: 1px solid #d44;
+  background: #fff;
 }
 .danger:hover{
   border:1px solid #a22;
@@ -118,3 +124,39 @@ input#detune{
  input#tempo{
    width:200px;
  }
+ input[type="range"]{
+  -webkit-appearance:none;
+  width:200px;
+  height:2px;
+  background:#5bb;
+  background-position:center;
+  background-repeat:no-repeat;
+  top: 0px;
+  bottoM: 0px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:20px;
+  height:20px;
+  border-radius: 100%;
+  background: #5bb;
+  border: 3px solid#5bb;
+  cursor: pointer;
+}
+#import{
+  padding:10px;
+  font-size:14px;
+  border-radius: 15px;
+  background-color:#fff;
+  margin-top:20px;
+  display: inline-block;
+  cursor: pointer;
+  border:2px solid #5bb;
+}
+#import:hover{
+  background: #eee;
+}

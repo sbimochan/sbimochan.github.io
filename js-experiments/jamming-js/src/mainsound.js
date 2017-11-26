@@ -1,4 +1,4 @@
-class MainSound {
+export class MainSound {
   constructor() {
     this.waveform = 'sine';
     this.mainSoundDiv = document.createElement('div');
@@ -10,20 +10,14 @@ class MainSound {
       this.option = document.createElement('option');
       this.option.innerHTML = sounds[prop];
       this.option.value = prop;
-      this
-        .toneSelector
-        .appendChild(this.option);
+      this.toneSelector.appendChild(this.option);
     }
-    this
-      .mainSoundDiv
-      .appendChild(this.toneSelector);
-    this
-      .toneSelector
-      .addEventListener('change', () => {
-        columnNotesArray.forEach((column) => {
-          column.waveform = this.toneSelector.value; //changing instrument
-          column.toneSelector.value = this.toneSelector.value
-        });
+    this.mainSoundDiv.appendChild(this.toneSelector);
+    this.toneSelector.addEventListener('click', () => {
+      columnNotesArray.forEach((column) => {
+        column.waveform = this.toneSelector.value;//changing instrument
+        column.toneSelector.value = this.toneSelector.value
       });
+    });
   }
 }

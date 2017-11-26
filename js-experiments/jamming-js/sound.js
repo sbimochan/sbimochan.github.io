@@ -105,18 +105,18 @@ class ColumnNote {
     this.toneSelector.addEventListener('change', () => {
       this.waveform = this.toneSelector.value; //changing instrument
     });
-    for (const prop in notes) {
+    for (const prop in notes) { //or notesCollection
       let note = new Note();
-      note.noteButtons.innerHTML = notes[prop];
-      note.noteButtons.value = prop;
+      note.noteButtons.innerHTML = notes[prop]; //name on view .or prop
+      note.noteButtons.value = prop;  //value of button. or notesCollection[prop]
       this.column.appendChild(note.noteButtons);
       note.noteButtons.addEventListener('click', () => {
         note.isClicked = !note.isClicked;
         if (note.isClicked) {
           let noteValue = note.noteButtons.value;
           let hertzIndex = notesCollection[noteValue];
-          this.composedNotesArray.push(noteValue);
-          this.composedHertzArray.push(notesCollection[noteValue]);
+          this.composedNotesArray.push(noteValue); //or swap with hertzIndex for getting all notes
+          this.composedHertzArray.push(hertzIndex);
         } else {
           this.composedNotesArray.splice(this.composedNotesArray.indexOf(note.noteButtons.value), 1);
           this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
@@ -166,12 +166,15 @@ let mainSound = new MainSound;
 let columnNotesArray = [];
 let newColumn = new NewColumn(); //Adder
 let exporter = new Exporter;
+
 exporter.button.addEventListener('click',()=>{
   //to write into json
-  let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(columnNotesArray));
+ 
+  let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(cha));
   exporter.button.href="data:"+data;
   exporter.button.download="song.json";
 });
+
 
 newColumn.addColumn.addEventListener('click', () => {
   let columnNote = new ColumnNote();
@@ -209,10 +212,10 @@ function playComposition(){
   if (columnNotesArray.length != 0) {
     let now = context.currentTime;
     if (i != 0) {
-      columnNotesArray[i - 1].column.style.backgroundColor = 'white';
+      columnNotesArray[i - 1].column.style.backgroundColor = '#ecf0f1';
     }
     else {
-      columnNotesArray[columnNotesArray.length - 1].column.style.backgroundColor = 'white';
+      columnNotesArray[columnNotesArray.length - 1].column.style.backgroundColor = '#ecf0f1';
     }
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
@@ -247,7 +250,16 @@ let file = document.getElementById('input_file').files;
   fr.onload = (progressEvent)=>{
     console.log(progressEvent);
     let result = JSON.parse(progressEvent.target.result);
-    columnNotesArray=result;
+
+    let hertz = result.map(function(a){
+      return a.composedNotesArray+'has frequency of'+a.composedHertzArray;
+    });
+    console.log(hertz);
+    // let loadSong = new ColumnNote;
+    // loadSong.composedHertzArray = result[0].composedHertzArray;
+    // loadSong.composedNotesArray = result[0].composedNotesArray;
+
+    // columnNotesArray=result;
     // let formatted = JSON.stringify(result,null,2); //variable,replace by,spaces
     // console.log(formatted);
     // window.localStorage.setItem('jamming-js',formatted);
