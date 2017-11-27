@@ -61,7 +61,7 @@ ul .instruments{
 .compose-section .column {
  
   min-height: 300px;
-  width: 100px;
+  width: 100px; /* another case 175*/
   border-right: 1px solid #eee;
   display: inline-block;
 }
@@ -73,7 +73,7 @@ ul .instruments{
   width:19px;
 }
 .newColumnAdder:active{
-  width: 90px;
+  width: 75px; /*another case 150*/
 }
 .mainSoundDiv{
   display: inline-block;
@@ -101,6 +101,32 @@ ul .instruments{
 }
 .fileLoadDiv{
   margin:20px 0px;
+}
+.halfNote{
+  float: right;
+  color:rgb(68, 134, 221);
+  border-radius: 5px;
+  padding:4px 12px;
+  font-size: 14px;
+  border: 1px solid rgb(101, 206, 233);
+  background: #fff;
+}
+.halfNote:hover{
+  border:1px solid rgb(28, 148, 172);
+  background: rgb(241, 235, 235);
+}
+.quarterNote{
+  float: right;
+  color:rgb(68, 129, 221);
+  border-radius: 5px;
+  padding:4px 12px;
+  font-size: 14px;
+  border: 1px solid rgb(68, 109, 221);
+  background: #fff;
+}
+.quarterNote:hover{
+  border:1px solid rgb(28, 77, 150);
+  background: rgb(248, 236, 236);
 }
 .danger{
   float: right;

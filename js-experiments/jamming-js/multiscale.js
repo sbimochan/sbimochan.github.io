@@ -13,19 +13,17 @@ class Sound {
     this.distortion.connect(this.gainNode);
     this.gainNode.connect(this.context.destination);
   }
-  play(hertz, time, cents,endTime) {
+  play(hertz, time, cents) {
     this.init();
     this.oscillator.frequency.value = hertz;
     this.oscillator.detune.value = cents;
     this.gainNode.gain.setValueAtTime(1, this.context.currentTime); //currentTime is 2x accurate than Date
     this.oscillator.start(time);
-    // endTime=1;
-    this.stop(time,endTime);
+    this.stop(time);
   }
-  stop(time,endTime) {
-    console.log(endTime);
-    this.gainNode.gain.exponentialRampToValueAtTime(0.1, time+endTime);
-    this.oscillator.stop(time+endTime);
+  stop(time) {
+    this.gainNode.gain.exponentialRampToValueAtTime(0.1, time+1);
+    this.oscillator.stop(time + 1);
   }
 } 
 class NewColumn {
@@ -90,7 +88,6 @@ class MainSound {
 class ColumnNote {
   constructor(hertzArr,waveform) {
     this.composedHertzArray = [];
-    this.noteValue=1;
     this.waveform = 'sine';
     if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined') {
       this.waveform = waveform;
@@ -98,24 +95,33 @@ class ColumnNote {
     }
     this.column = document.createElement('div');
     this.column.setAttribute('class', 'column');
+    this.columnChild1 = document.createElement('div');
+    this.columnChild1.style.float="left";
+    this.column.appendChild(this.columnChild1);
+    this.columnChild2 = document.createElement('div');
+    this.columnChild2.style.float="left";
+    this.column.appendChild(this.columnChild2);
+    this.columnChild3 = document.createElement('div');
+    this.columnChild3.style.float="right";
+    this.column.appendChild(this.columnChild3);
     composeSection[0].appendChild(this.column);
     this.toneSelector = document.createElement('select');
-    this.toneSelector.style.width="100px";
+    this.toneSelector.style.width="170px";
     for (const prop in sounds) {
       this.option = document.createElement('option');
       this.option.innerHTML = sounds[prop];
       this.option.value = prop;
       this.toneSelector.appendChild(this.option);
     }
-    this.column.appendChild(this.toneSelector);
+    this.column.insertAdjacentElement('afterbegin',this.toneSelector);
     this.toneSelector.addEventListener('change', () => {
       this.waveform = this.toneSelector.value; //changing instrument
     });
-    for (const prop in notes) { //or notesCollection
+    for (const prop in notes3) { //or notesCollection
       let note = new Note();
-      note.noteButtons.innerHTML = notes[prop]; //name on view .or prop
+      note.noteButtons.innerHTML = notes3[prop]; //name on view .or prop
       note.noteButtons.value = prop;  //value of button. or notesCollection[prop]
-      this.column.appendChild(note.noteButtons);
+      this.columnChild1.appendChild(note.noteButtons);
       let noteValue = note.noteButtons.value;
       let hertzIndex = notesCollection[noteValue];
       note.noteButtons.addEventListener('click', () => {
@@ -135,21 +141,54 @@ class ColumnNote {
       note.noteButtons.classList.toggle('selected');
       }
     }
-    this.quarterNote = document.createElement('button');
-    this.quarterNote.setAttribute('class','quarterNote');
-    this.quarterNoteHolder = document.createElement('img');
-    this.quarterNoteHolder.src="images/quarter-note.png";
-    this.quarterNote.appendChild(this.quarterNoteHolder);
-    this.column.appendChild(this.quarterNote);
-
-    this.halfNote = document.createElement('button');
-    this.halfNote.setAttribute('class','halfNote');
-    
-    this.halfNoteHolder = document.createElement('img');
-    this.halfNoteHolder.src = "images/half-note.png";
-    this.halfNote.appendChild(this.halfNoteHolder);
-    this.column.appendChild(this.halfNote);
-
+    for (const prop in notes4) { //or notesCollection
+      let note = new Note();
+      note.noteButtons.innerHTML = notes4[prop]; //name on view .or prop
+      note.noteButtons.value = prop;  //value of button. or notesCollection[prop]
+      this.columnChild2.appendChild(note.noteButtons);
+      let noteValue = note.noteButtons.value;
+      let hertzIndex = notesCollection[noteValue];
+      note.noteButtons.addEventListener('click', () => {
+        note.isClicked = !note.isClicked;
+        if (note.isClicked) {
+          this.composedHertzArray.push(hertzIndex);
+        } else {
+          this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
+        }
+      });
+      note.noteButtons.addEventListener('click', () => {
+        if (note.noteButtons.classList.contains('note')) {
+          note.noteButtons.classList.toggle('selected');
+        }
+      });
+    if(this.composedHertzArray.indexOf(hertzIndex) != -1 ){
+      note.noteButtons.classList.toggle('selected');
+      }
+    }
+    for (const prop in notes5) { //or notesCollection
+      let note = new Note();
+      note.noteButtons.innerHTML = notes5[prop]; //name on view .or prop
+      note.noteButtons.value = prop;  //value of button. or notesCollection[prop]
+      this.columnChild3.appendChild(note.noteButtons);
+      let noteValue = note.noteButtons.value;
+      let hertzIndex = notesCollection[noteValue];
+      note.noteButtons.addEventListener('click', () => {
+        note.isClicked = !note.isClicked;
+        if (note.isClicked) {
+          this.composedHertzArray.push(hertzIndex);
+        } else {
+          this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
+        }
+      });
+      note.noteButtons.addEventListener('click', () => {
+        if (note.noteButtons.classList.contains('note')) {
+          note.noteButtons.classList.toggle('selected');
+        }
+      });
+    if(this.composedHertzArray.indexOf(hertzIndex) != -1 ){
+      note.noteButtons.classList.toggle('selected');
+      }
+    }
     this.trash = document.createElement('button');
     this.trash.setAttribute('class','danger');
     this.trashIconHolder = document.createElement('span');
@@ -175,7 +214,17 @@ let composedButton = document.getElementsByClassName('note');
 let composeSection = document.getElementsByClassName('compose-section');
 let mainWrapper = document.getElementById('mainWrapper');
 let noteButtonsid = document.getElementById('noteButtons');
-let notes = {
+let notes3 = {
+  C3: 'C',
+  D3: 'D',
+  E3: 'E',
+  F3: 'F',
+  G3: 'G',
+  A3: 'A',
+  B3: 'B',
+  C4: 'C'
+};
+let notes4 = {
   C4: 'C',
   D4: 'D',
   E4: 'E',
@@ -184,6 +233,16 @@ let notes = {
   A4: 'A',
   B4: 'B',
   C5: 'C'
+};
+let notes5 = {
+  C5: 'C',
+  D5: 'D',
+  E5: 'E',
+  F5: 'F',
+  G5: 'G',
+  A5: 'A',
+  B5: 'B',
+  C6: 'C'
 };
 let sounds = {
   sine: 'peace',
@@ -212,19 +271,12 @@ newColumn.addColumn.addEventListener('click', () => {
     columnNotesArray.splice(columnNotesArray.indexOf(columnNote),1);
     columnNote.column.style.display="none";
   });
-  columnNote.halfNote.addEventListener('click',()=>{
-    columnNote.noteValue = 0.5;
-  });
-  columnNote.quarterNote.addEventListener('click',()=>{
-    columnNote.noteValue = 0.25;
-  });
 });
-
 //to print value of Tempo
-function printValue(sliderID, spanID,unit) {
+function printValue(sliderID, spanID) {
   let slider = document.getElementById(sliderID);
   let output = document.getElementById(spanID);
-  output.innerHTML = slider.value + unit;
+  output.innerHTML = slider.value + " bpm";
   return output.value;
 }
 
@@ -252,8 +304,7 @@ function playComposition(){
     }
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
-      sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value,columnNotesArray[i].noteValue); //third param = detune in cents
-      
+      sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value); //third param = detune in cents
       sound.oscillator.type=columnNotesArray[i].waveform;
     }
     i++;
