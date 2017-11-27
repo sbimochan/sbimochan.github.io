@@ -88,13 +88,14 @@ class MainSound {
   }
 }
 class ColumnNote {
-  constructor(hertzArr,waveform) {
+  constructor(hertzArr,waveform,noteTime) {
     this.composedHertzArray = [];
-    this.noteValue=1;
+    this.noteTime=1;
     this.waveform = 'sine';
-    if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined') {
+    if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined' && typeof(noteTime)!='undefined') {
       this.waveform = waveform;
       this.composedHertzArray = hertzArr.slice(0);
+      this.noteTime =noteTime;
     }
     this.column = document.createElement('div');
     this.column.setAttribute('class', 'column');
@@ -160,11 +161,12 @@ class ColumnNote {
 }
 class Tempo{
   constructor(){
-    this.tempoInterval = setInterval(playComposition, 1000); 
+    this.tempoDuration = 1000;
+    this.tempoInterval = setInterval(playComposition, this.tempoDuration); 
     tempoSlider.addEventListener('change', () => {
     this.sendTempoValue = tempoSlider.value;
     clearInterval(this.tempoInterval);
-    this.value = 60 / this.sendTempoValue * 1000;
+    this.value = 60 / this.sendTempoValue * this.tempoDuration;
     this.tempoInterval = setInterval(playComposition, this.value);
   });
   }
@@ -213,10 +215,10 @@ newColumn.addColumn.addEventListener('click', () => {
     columnNote.column.style.display="none";
   });
   columnNote.halfNote.addEventListener('click',()=>{
-    columnNote.noteValue = 0.5;
+    columnNote.noteTime = 0.5;
   });
   columnNote.quarterNote.addEventListener('click',()=>{
-    columnNote.noteValue = 0.25;
+    columnNote.noteTime = 0.25;
   });
 });
 
@@ -241,6 +243,7 @@ detuneSlider.max = 900;
 detuneSlider.value = 0;
 detuneSlider.step = 50;
 let i = 0;
+
 function playComposition(){
   if (columnNotesArray.length != 0) {
     let now = context.currentTime;
@@ -252,14 +255,19 @@ function playComposition(){
     }
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
-      sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value,columnNotesArray[i].noteValue); //third param = detune in cents
+      sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value,columnNotesArray[i].noteTime); //third param = detune in cents
       
       sound.oscillator.type=columnNotesArray[i].waveform;
     }
+    tempo.tempoDuration = columnNotesArray[i].noteTime*1000;
     i++;
     if (i >= columnNotesArray.length) {
       i = 0;
     }
+    clearInterval(tempo.tempoInterval);
+    tempo.tempoInterval = setInterval(playComposition,tempo.tempoDuration)
+    // console.log(tempo.tempoDuration);
+    
   }
 }
 
@@ -272,10 +280,10 @@ let file = document.getElementById('input_file').files;
   }
   let fr = new FileReader;
   fr.onload = (progressEvent)=>{
- 
+
     let results = JSON.parse(progressEvent.target.result);
     results.forEach((result)=>{
-      let column = new ColumnNote(result.composedHertzArray, result.waveform)
+      let column = new ColumnNote(result.composedHertzArray, result.waveform,result.noteTime)
       columnNotesArray.push(column);
     });
   }
