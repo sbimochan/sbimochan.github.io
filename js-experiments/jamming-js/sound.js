@@ -23,14 +23,14 @@ class Sound {
     this.stop(time,endTime);
   }
   stop(time,endTime) {
-    console.log(endTime);
+    // console.log(endTime);
     this.gainNode.gain.exponentialRampToValueAtTime(0.1, time+endTime);
     this.oscillator.stop(time+endTime);
   }
 } 
 class NewColumn {
   constructor() {
-    this.addColumn = document.createElement('div');
+    this.addColumn = document.createElement('button');
     this.addColumn.setAttribute("class", "column newColumnAdder");
     this.addColumn.innerHTML = "<i class='fa fa-plus fa-3x' aria-hidden='true'></i>";
     this.addColumn.style.cursor = "pointer";
@@ -136,21 +136,15 @@ class ColumnNote {
       note.noteButtons.classList.toggle('selected');
       }
     }
-    this.quarterNote = document.createElement('button');
-    this.quarterNote.setAttribute('class','quarterNote');
-    this.quarterNoteHolder = document.createElement('img');
-    this.quarterNoteHolder.src="images/quarter-note.png";
-    this.quarterNote.appendChild(this.quarterNoteHolder);
-    this.column.appendChild(this.quarterNote);
-
-    this.halfNote = document.createElement('button');
-    this.halfNote.setAttribute('class','halfNote');
-    
-    this.halfNoteHolder = document.createElement('img');
-    this.halfNoteHolder.src = "images/half-note.png";
-    this.halfNote.appendChild(this.halfNoteHolder);
-    this.column.appendChild(this.halfNote);
-
+    this.noteDuration = document.createElement('select');
+    this.noteDuration.style.width="60px";
+    for(const prop in noteTypes){
+      this.option = document.createElement('option');
+      this.option.innerHTML = noteTypes[prop];
+      this.option.value = prop;
+      this.noteDuration.appendChild(this.option);
+    }
+    this.column.appendChild(this.noteDuration);
     this.trash = document.createElement('button');
     this.trash.setAttribute('class','danger');
     this.trashIconHolder = document.createElement('span');
@@ -161,7 +155,7 @@ class ColumnNote {
 }
 class Tempo{
   constructor(){
-    this.tempoDuration = 1000;
+    // this.tempoDuration = 1000;
     this.tempoInterval = setInterval(playComposition, this.tempoDuration); 
     tempoSlider.addEventListener('change', () => {
     this.sendTempoValue = tempoSlider.value;
@@ -193,7 +187,11 @@ let sounds = {
   square: 'retro',
   sawtooth: 'Stranger Things'
 }
-
+let noteTypes = {
+  '1':'whole note',
+  '0.5':'half note',
+  '0.25':'quarter note'
+}
 let mainSound = new MainSound;
 let columnNotesArray = [];
 let newColumn = new NewColumn(); //Adder
@@ -210,15 +208,11 @@ newColumn.addColumn.addEventListener('click', () => {
   let columnNote = new ColumnNote();
   columnNotesArray.push(columnNote);
   columnNote.trash.addEventListener('click',()=>{
-    // console.log(columnNotesArray.indexOf(columnNote));
     columnNotesArray.splice(columnNotesArray.indexOf(columnNote),1);
     columnNote.column.style.display="none";
   });
-  columnNote.halfNote.addEventListener('click',()=>{
-    columnNote.noteTime = 0.5;
-  });
-  columnNote.quarterNote.addEventListener('click',()=>{
-    columnNote.noteTime = 0.25;
+  columnNote.noteDuration.addEventListener('change',()=>{
+    columnNote.noteTime = Number(columnNote.noteDuration.value);
   });
 });
 
@@ -256,18 +250,16 @@ function playComposition(){
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
       sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value,columnNotesArray[i].noteTime); //third param = detune in cents
-      
       sound.oscillator.type=columnNotesArray[i].waveform;
     }
+    // console.log(columnNotesArray[i].noteTime*1000);
     tempo.tempoDuration = columnNotesArray[i].noteTime*1000;
     i++;
     if (i >= columnNotesArray.length) {
       i = 0;
     }
     clearInterval(tempo.tempoInterval);
-    tempo.tempoInterval = setInterval(playComposition,tempo.tempoDuration)
-    // console.log(tempo.tempoDuration);
-    
+    tempo.tempoInterval = setInterval(playComposition,tempo.tempoDuration);
   }
 }
 
@@ -280,7 +272,6 @@ let file = document.getElementById('input_file').files;
   }
   let fr = new FileReader;
   fr.onload = (progressEvent)=>{
-
     let results = JSON.parse(progressEvent.target.result);
     results.forEach((result)=>{
       let column = new ColumnNote(result.composedHertzArray, result.waveform,result.noteTime)
