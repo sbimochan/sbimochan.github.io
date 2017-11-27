@@ -1,5 +1,3 @@
-
-
 class Sound {
   constructor(context) {
     this.context = context; //feed AudioContext. webkit AudioContext for Safari
@@ -88,14 +86,12 @@ class MainSound {
   }
 }
 class ColumnNote {
-  constructor(cha,waveform) {
+  constructor(hertzArr,waveform) {
     this.composedHertzArray = [];
-    // this.composedNotesArray = [];
     this.waveform = 'sine';
-    if (typeof (cha) != 'undefined' && typeof (waveform) != 'undefined') {
+    if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined') {
       this.waveform = waveform;
-      console.log('cha', waveform);
-      this.composedHertzArray = cha.slice(0);
+      this.composedHertzArray = hertzArr.slice(0);
     }
     this.column = document.createElement('div');
     this.column.setAttribute('class', 'column');
@@ -114,7 +110,6 @@ class ColumnNote {
     });
     for (const prop in notes) { //or notesCollection
       let note = new Note();
-     
       note.noteButtons.innerHTML = notes[prop]; //name on view .or prop
       note.noteButtons.value = prop;  //value of button. or notesCollection[prop]
       this.column.appendChild(note.noteButtons);
@@ -123,17 +118,12 @@ class ColumnNote {
       note.noteButtons.addEventListener('click', () => {
         note.isClicked = !note.isClicked;
         if (note.isClicked) {
-    
-          // this.composedNotesArray.push(noteValue); //or swap with hertzIndex for getting all notes
           this.composedHertzArray.push(hertzIndex);
-          console.log(this.composedHertzArray);
         } else {
-          // this.composedNotesArray.splice(this.composedNotesArray.indexOf(note.noteButtons.value), 1);
           this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
         }
       });
       note.noteButtons.addEventListener('click', () => {
-        // console.log(note.noteButtons);
         if (note.noteButtons.classList.contains('note')) {
           note.noteButtons.classList.toggle('selected');
         }
@@ -148,12 +138,10 @@ class ColumnNote {
     this.trashIconHolder.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
     this.trash.appendChild(this.trashIconHolder);
     this.column.appendChild(this.trash);
-    
-   
+    this.tempoInterval= tempoSlider.value;
   }
 }
 let context = new(window.AudioContext || window.webkitAudioContext)();
-// waveform = 'sawtooth';
 let sound = new Sound(context);
 let composedButton = document.getElementsByClassName('note');
 let composeSection = document.getElementsByClassName('compose-section');
@@ -183,12 +171,10 @@ let exporter = new Exporter;
 
 exporter.button.addEventListener('click',()=>{
   //to write into json
- 
   let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(columnNotesArray));
   exporter.button.href="data:"+data;
   exporter.button.download="song.json";
 });
-
 
 newColumn.addColumn.addEventListener('click', () => {
   let columnNote = new ColumnNote();
@@ -207,7 +193,7 @@ function printValue(sliderID, spanID) {
   return output.value;
 }
 
-let tempoInterval;
+// let tempoInterval;
 tempoSlider = document.getElementById('tempo');
 tempoSlider.min = 10;
 tempoSlider.max = 400;
@@ -219,8 +205,6 @@ detuneSlider.min = -900;
 detuneSlider.max = 900;
 detuneSlider.value = 0;
 detuneSlider.step = 50;
-
-
 let i = 0;
 function playComposition(){
   if (columnNotesArray.length != 0) {
@@ -233,11 +217,8 @@ function playComposition(){
     }
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
-      console.log(detuneSlider.value);
       sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value); //third param = detune in cents
       sound.oscillator.type=columnNotesArray[i].waveform;
-      // sound.oscillator.type=mainSound.waveform;
-      // console.log(sound.oscillator.type);
     }
     i++;
     if (i >= columnNotesArray.length) {
@@ -245,44 +226,29 @@ function playComposition(){
     }
   }
 }
-tempoInterval = setInterval(playComposition, 1000); 
-
+let tempoInterval = setInterval(playComposition, 1000); 
 tempoSlider.addEventListener('change', () => {
   let sendTempoValue = tempoSlider.value;
+  let x = new ColumnNote;
+  x.tempoInterval;
+  console.log(x);
+  
   clearInterval(tempoInterval);
   tempoInterval = setInterval(playComposition, 60 / sendTempoValue * 1000);
 });
-
 /*To load JSON file*/
 let importer = document.getElementById('import').addEventListener('click',()=>{
 let file = document.getElementById('input_file').files;
-  console.log(file);
   if(file.length !=1){
     return false;
   }
   let fr = new FileReader;
   fr.onload = (progressEvent)=>{
-    console.log(progressEvent);
     let results = JSON.parse(progressEvent.target.result);
-    console.log(results);
-    // let hertz = result.map(function(a){
-    //   return a.composedNotesArray+'has frequency of'+a.composedHertzArray;
-    // });
-    // console.log(hertz);
-    // let loadSong = new ColumnNote;
-    // loadSong.composedHertzArray = result[0].composedHertzArray;
-    // loadSong.composedNotesArray = result[0].composedNotesArray;
     results.forEach((result)=>{
-      console.log(result.composedHertzArray);
       let column = new ColumnNote(result.composedHertzArray, result.waveform)
       columnNotesArray.push(column);
     });
-    // columnNotesArray=result;
-    // let formatted = JSON.stringify(result,null,2); //variable,replace by,spaces
-    // console.log(formatted);
-    // window.localStorage.setItem('jamming-js',formatted);
   }
 fr.readAsText(file.item(0));
-// let retrieveSong = window.localStorage.getItem('jamming-js');
-// console.log(retrieveSong);
 });

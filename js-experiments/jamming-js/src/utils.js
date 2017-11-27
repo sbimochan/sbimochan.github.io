@@ -1,4 +1,4 @@
-export
+export 
 let context = new (window.AudioContext || window.webkitAudioContext)();
 // waveform = 'sawtooth';
 let sound = new Sound(context);

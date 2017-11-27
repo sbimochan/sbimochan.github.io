@@ -75,7 +75,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mainsound__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__newcolumn__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__exporter__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__utils__ = __webpack_require__(7);
 
 
 
@@ -83,25 +82,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+let context = new(window.AudioContext || window.webkitAudioContext)();
+let sound = new __WEBPACK_IMPORTED_MODULE_0__sound__["a" /* Sound */](context);
+let composedButton = document.getElementsByClassName('note');
+let composeSection = document.getElementsByClassName('compose-section');
+let mainWrapper = document.getElementById('mainWrapper');
+let noteButtonsid = document.getElementById('noteButtons');
+let notes = {
+  C4: 'C',
+  D4: 'D',
+  E4: 'E',
+  F4: 'F',
+  G4: 'G',
+  A4: 'A',
+  B4: 'B',
+  C5: 'C'
+};
+let sounds = {
+  sine: 'peace',
+  triangle: 'smooth',
+  square: 'retro',
+  sawtooth: 'Stranger Things'
+}
 
 let mainSound = new __WEBPACK_IMPORTED_MODULE_3__mainsound__["a" /* MainSound */];
 let columnNotesArray = [];
 let newColumn = new __WEBPACK_IMPORTED_MODULE_4__newcolumn__["a" /* NewColumn */](); //Adder
 let exporter = new __WEBPACK_IMPORTED_MODULE_5__exporter__["a" /* Exporter */];
-exporter.button.addEventListener('click', () => {
+
+exporter.button.addEventListener('click',()=>{
   //to write into json
   let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(columnNotesArray));
-  exporter.button.href = "data:" + data;
-  exporter.button.download = "song.json";
+  exporter.button.href="data:"+data;
+  exporter.button.download="song.json";
 });
 
 newColumn.addColumn.addEventListener('click', () => {
   let columnNote = new __WEBPACK_IMPORTED_MODULE_2__columnnote__["a" /* ColumnNote */]();
   columnNotesArray.push(columnNote);
-  columnNote.trash.addEventListener('click', () => {
+  columnNote.trash.addEventListener('click',()=>{
     // console.log(columnNotesArray.indexOf(columnNote));
-    columnNotesArray.splice(columnNotesArray.indexOf(columnNote), 1);
-    columnNote.column.style.display = "none";
+    columnNotesArray.splice(columnNotesArray.indexOf(columnNote),1);
+    columnNote.column.style.display="none";
   });
 });
 //to print value of Tempo
@@ -124,25 +146,20 @@ detuneSlider.min = -900;
 detuneSlider.max = 900;
 detuneSlider.value = 0;
 detuneSlider.step = 50;
-
-
 let i = 0;
-function playComposition() {
+function playComposition(){
   if (columnNotesArray.length != 0) {
     let now = context.currentTime;
     if (i != 0) {
-      columnNotesArray[i - 1].column.style.backgroundColor = 'white';
+      columnNotesArray[i - 1].column.style.backgroundColor = '#ecf0f1';
     }
     else {
-      columnNotesArray[columnNotesArray.length - 1].column.style.backgroundColor = 'white';
+      columnNotesArray[columnNotesArray.length - 1].column.style.backgroundColor = '#ecf0f1';
     }
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
-      console.log(detuneSlider.value);
       sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value); //third param = detune in cents
-      sound.oscillator.type = columnNotesArray[i].waveform;
-      // sound.oscillator.type=mainSound.waveform;
-      // console.log(sound.oscillator.type);
+      sound.oscillator.type=columnNotesArray[i].waveform;
     }
     i++;
     if (i >= columnNotesArray.length) {
@@ -150,43 +167,29 @@ function playComposition() {
     }
   }
 }
-tempoInterval = setInterval(playComposition, 1000);
-
+tempoInterval = setInterval(playComposition, 1000); 
 tempoSlider.addEventListener('change', () => {
   let sendTempoValue = tempoSlider.value;
   clearInterval(tempoInterval);
   tempoInterval = setInterval(playComposition, 60 / sendTempoValue * 1000);
 });
-
 /*To load JSON file*/
-let importer = document.getElementById('import').addEventListener('click', () => {
-  let file = document.getElementById('input_file').files;
-  console.log(file);
-  if (file.length != 1) {
+let importer = document.getElementById('import').addEventListener('click',()=>{
+let file = document.getElementById('input_file').files;
+  if(file.length !=1){
     return false;
   }
   let fr = new FileReader;
-  fr.onload = (progressEvent) => {
-    console.log(progressEvent);
-    let result = JSON.parse(progressEvent.target.result);
-
-    let hertz = result.map(function (a) {
-      return a.composedNotesArray + 'has frequency of' + a.composedHertzArray;
+  fr.onload = (progressEvent)=>{
+    let results = JSON.parse(progressEvent.target.result);
+    results.forEach((result)=>{
+      let column = new __WEBPACK_IMPORTED_MODULE_2__columnnote__["a" /* ColumnNote */](result.composedHertzArray, result.waveform)
+      columnNotesArray.push(column);
     });
-    console.log(hertz);
-    // let loadSong = new ColumnNote;
-    // loadSong.composedHertzArray = result[0].composedHertzArray;
-    // loadSong.composedNotesArray = result[0].composedNotesArray;
-
-    // columnNotesArray=result;
-    // let formatted = JSON.stringify(result,null,2); //variable,replace by,spaces
-    // console.log(formatted);
-    // window.localStorage.setItem('jamming-js',formatted);
   }
-  fr.readAsText(file.item(0));
-  // let retrieveSong = window.localStorage.getItem('jamming-js');
-  // console.log(retrieveSong);
+fr.readAsText(file.item(0));
 });
+
 
 /***/ }),
 /* 1 */
@@ -221,7 +224,7 @@ class Sound {
     this.oscillator.stop(time + 1);
   }
 }
-/* unused harmony export Sound */
+/* harmony export (immutable) */ __webpack_exports__["a"] = Sound;
  
 
 /***/ }),
@@ -247,15 +250,18 @@ class Note {
 
 "use strict";
 class ColumnNote {
-  constructor() {
+  constructor(hertzArr,waveform) {
     this.composedHertzArray = [];
-    this.composedNotesArray = [];
     this.waveform = 'sine';
+    if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined') {
+      this.waveform = waveform;
+      this.composedHertzArray = hertzArr.slice(0);
+    }
     this.column = document.createElement('div');
     this.column.setAttribute('class', 'column');
     composeSection[0].appendChild(this.column);
     this.toneSelector = document.createElement('select');
-    this.toneSelector.style.width = "100px";
+    this.toneSelector.style.width="100px";
     for (const prop in sounds) {
       this.option = document.createElement('option');
       this.option.innerHTML = sounds[prop];
@@ -266,37 +272,36 @@ class ColumnNote {
     this.toneSelector.addEventListener('change', () => {
       this.waveform = this.toneSelector.value; //changing instrument
     });
-    for (const prop in notes) {
+    for (const prop in notes) { //or notesCollection
       let note = new Note();
-      note.noteButtons.innerHTML = notes[prop];
-      note.noteButtons.value = prop;
+      note.noteButtons.innerHTML = notes[prop]; //name on view .or prop
+      note.noteButtons.value = prop;  //value of button. or notesCollection[prop]
       this.column.appendChild(note.noteButtons);
+      let noteValue = note.noteButtons.value;
+      let hertzIndex = notesCollection[noteValue];
       note.noteButtons.addEventListener('click', () => {
         note.isClicked = !note.isClicked;
         if (note.isClicked) {
-          let noteValue = note.noteButtons.value;
-          let hertzIndex = notesCollection[noteValue];
-          this.composedNotesArray.push(noteValue);
-          this.composedHertzArray.push(notesCollection[noteValue]);
+          this.composedHertzArray.push(hertzIndex);
         } else {
-          this.composedNotesArray.splice(this.composedNotesArray.indexOf(note.noteButtons.value), 1);
           this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
         }
       });
       note.noteButtons.addEventListener('click', () => {
-        // console.log(note.noteButtons);
         if (note.noteButtons.classList.contains('note')) {
           note.noteButtons.classList.toggle('selected');
         }
       });
+    if(this.composedHertzArray.indexOf(hertzIndex) != -1 ){
+      note.noteButtons.classList.toggle('selected');
+      }
     }
     this.trash = document.createElement('button');
-    this.trash.setAttribute('class', 'danger');
+    this.trash.setAttribute('class','danger');
     this.trashIconHolder = document.createElement('span');
     this.trashIconHolder.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
     this.trash.appendChild(this.trashIconHolder);
     this.column.appendChild(this.trash);
-
   }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = ColumnNote;
@@ -374,37 +379,6 @@ class Exporter {
   }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Exporter;
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export context */
-let context = new (window.AudioContext || window.webkitAudioContext)();
-// waveform = 'sawtooth';
-let sound = new Sound(context);
-let composedButton = document.getElementsByClassName('note');
-let composeSection = document.getElementsByClassName('compose-section');
-let mainWrapper = document.getElementById('mainWrapper');
-let noteButtonsid = document.getElementById('noteButtons');
-let notes = {
-  C4: 'C',
-  D4: 'D',
-  E4: 'E',
-  F4: 'F',
-  G4: 'G',
-  A4: 'A',
-  B4: 'B',
-  C5: 'C'
-};
-let sounds = {
-  sine: 'peace',
-  triangle: 'smooth',
-  square: 'retro',
-  sawtooth: 'Stranger Things'
-}
 
 
 /***/ })
