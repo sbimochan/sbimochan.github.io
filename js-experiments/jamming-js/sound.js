@@ -1,3 +1,5 @@
+
+
 class Sound {
   constructor(context) {
     this.context = context; //feed AudioContext. webkit AudioContext for Safari
@@ -87,6 +89,7 @@ class MainSound {
     });
   }
 }
+let flag = true;
 
 class ColumnNote {
   constructor(hertzArr,waveform,noteTime,noteTimeLength) {
@@ -126,7 +129,12 @@ class ColumnNote {
       let hertzIndex = notesCollection[noteValue];
       note.noteButtons.addEventListener('click', () => {
         note.isClicked = !note.isClicked;
-        let flag= false;
+        if(flag){
+          playComposition();
+          flag=false;
+        }else{
+          console.log("already running");
+        }
         if (note.isClicked) {
           this.composedHertzArray.push(hertzIndex);
          
@@ -231,25 +239,25 @@ tempoSlider = document.getElementById('tempo');
 tempoSlider.min = 10;
 tempoSlider.max = 400;
 tempoSlider.value = 60;
-tempoSlider.step = 5;
+tempoSlider.step = 10;
 
 detuneSlider = document.getElementById('detune');
 detuneSlider.min = -900;
 detuneSlider.max = 900;
 detuneSlider.value = 0;
 detuneSlider.step = 50;
+let oldValue=1;
 // let newArray =[];
 tempoSlider.addEventListener('change', () => {
-  sendTempoValue = tempoSlider.value;
-  newArray = durations.slice(0);
+  sendTempoValue = tempoSlider.value; //120bpm
   value = sendTempoValue/60;
-  newArray.forEach((item, index, arr) => {
-    arr[index] = item / value;
-    tempTempo = newArray.slice(0);
+  durations.forEach((item,index,arr)=>{
+    arr[index]=(item*oldValue) /value;
   });
-  durations=tempTempo.splice(0);
+  oldValue=value;
+  console.log(durations);
+  
 });
-
 let i = 0;
 let index=0;
 function playComposition(){
