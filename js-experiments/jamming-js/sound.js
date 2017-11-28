@@ -263,18 +263,8 @@ tempoSlider.addEventListener('change', () => {
 let i = 0;
 let index=0;
 function playComposition(){
-  let now =context.currentTime;
-  for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
-    sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value, columnNotesArray[i].noteTime); //third param = detune in cents
-    sound.oscillator.type = columnNotesArray[i].waveform;
-  }
-    setTimeout(playComposition, durations[index]);
-  index++;
-  if(index>=durations.length){
-    index=0;
-  }
-  if (columnNotesArray.length != 0) {
-    let now = context.currentTime;
+  if(columnNotesArray.length !=0){
+    let now =context.currentTime;
     if (i != 0) {
       columnNotesArray[i - 1].column.style.backgroundColor = '#ecf0f1';
     }
@@ -283,14 +273,18 @@ function playComposition(){
     }
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
-      sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value,columnNotesArray[i].noteTime); //third param = detune in cents
-      sound.oscillator.type=columnNotesArray[i].waveform;
+      sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value, columnNotesArray[i].noteTime); //third param = detune in cents
+      sound.oscillator.type = columnNotesArray[i].waveform;
     }
-    i++;
+      setTimeout(playComposition, durations[index]);
+      i++;
+    index++;
+    if(index>=durations.length){
+      index=0;
+    }
     if (i >= columnNotesArray.length) {
       i = 0;
     }
-   
   }
 }
 
