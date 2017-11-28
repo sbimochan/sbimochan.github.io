@@ -26,7 +26,7 @@ class Sound {
   }
   stop(time,endTime) {
     // console.log(endTime);
-    this.gainNode.gain.exponentialRampToValueAtTime(0.1, time+endTime);
+    this.gainNode.gain.exponentialRampToValueAtTime(0.01, time+endTime);
     this.oscillator.stop(time+endTime);
   }
 } 
@@ -193,7 +193,7 @@ let sounds = {
   square: 'retro',
   sawtooth: 'Stranger Things'
 }
-let noteTypes = {
+const noteTypes = {
   '1':'whole note',
   '0.5':'half note',
   '0.25':'quarter note'
