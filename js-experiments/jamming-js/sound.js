@@ -104,6 +104,7 @@ class ColumnNote {
       this.noteTime =noteTime;
       this.noteTimeLength = noteTimeLength;
       durations.push(noteTimeLength);
+      
     }
     this.column = document.createElement('div');
     this.column.setAttribute('class', 'column');
@@ -294,6 +295,7 @@ function playComposition(){
 
 /*To load JSON file*/
 let importer = document.getElementById('import').addEventListener('click',()=>{
+
 let file = document.getElementById('input_file').files;
   if(file.length !=1){
     return false;
@@ -307,4 +309,5 @@ let file = document.getElementById('input_file').files;
     });
   }
 fr.readAsText(file.item(0));
+  setTimeout(playComposition,1000);
 });
