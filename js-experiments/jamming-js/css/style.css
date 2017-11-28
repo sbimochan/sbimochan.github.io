@@ -186,3 +186,10 @@ input[type="range"]::-webkit-slider-thumb{
 #import:hover{
   background: #eee;
 }
+.playBtn{
+  float: right;
+  padding:20px;
+  border-radius: 5px;
+  font-size: 32px;
+  letter-spacing: 8px;
+}

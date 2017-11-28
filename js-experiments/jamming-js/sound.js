@@ -87,10 +87,12 @@ class MainSound {
     });
   }
 }
+
 class ColumnNote {
   constructor(hertzArr,waveform,noteTime) {
     this.composedHertzArray = [];
     this.noteTime=1;
+    this.noteTimeLength=1000;
     this.waveform = 'sine';
     if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined' && typeof(noteTime)!='undefined') {
       this.waveform = waveform;
@@ -121,8 +123,10 @@ class ColumnNote {
       let hertzIndex = notesCollection[noteValue];
       note.noteButtons.addEventListener('click', () => {
         note.isClicked = !note.isClicked;
+        let flag= false;
         if (note.isClicked) {
           this.composedHertzArray.push(hertzIndex);
+         
         } else {
           this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
         }
@@ -153,18 +157,7 @@ class ColumnNote {
     this.column.appendChild(this.trash);
   }
 }
-class Tempo{
-  constructor(){
-    // this.tempoDuration = 1000;
-    this.tempoInterval = setInterval(playComposition, this.tempoDuration); 
-    tempoSlider.addEventListener('change', () => {
-    this.sendTempoValue = tempoSlider.value;
-    clearInterval(this.tempoInterval);
-    this.value = 60 / this.sendTempoValue * this.tempoDuration;
-    this.tempoInterval = setInterval(playComposition, this.value);
-  });
-  }
-}
+
 let context = new(window.AudioContext || window.webkitAudioContext)();
 let sound = new Sound(context);
 let composedButton = document.getElementsByClassName('note');
@@ -203,16 +196,22 @@ exporter.button.addEventListener('click',()=>{
   exporter.button.href="data:"+data;
   exporter.button.download="song.json";
 });
-
+let durations=[];
 newColumn.addColumn.addEventListener('click', () => {
   let columnNote = new ColumnNote();
   columnNotesArray.push(columnNote);
+  durations.push(columnNote.noteTimeLength); //durations
   columnNote.trash.addEventListener('click',()=>{
     columnNotesArray.splice(columnNotesArray.indexOf(columnNote),1);
     columnNote.column.style.display="none";
   });
   columnNote.noteDuration.addEventListener('change',()=>{
+    // console.log(columnNotesArray.indexOf(columnNote));
+    durations.splice(columnNotesArray.indexOf(columnNote),1); //durations splice
     columnNote.noteTime = Number(columnNote.noteDuration.value);
+    columnNote.noteTimeLength = columnNote.noteTime*1000;
+    // durations.push(columnNote.noteTimeLength,);
+    durations.splice(columnNotesArray.indexOf(columnNote),0,columnNote.noteTimeLength);
   });
 });
 
@@ -223,7 +222,6 @@ function printValue(sliderID, spanID,unit) {
   output.innerHTML = slider.value + unit;
   return output.value;
 }
-
 // let tempoInterval;
 tempoSlider = document.getElementById('tempo');
 tempoSlider.min = 10;
@@ -236,9 +234,31 @@ detuneSlider.min = -900;
 detuneSlider.max = 900;
 detuneSlider.value = 0;
 detuneSlider.step = 50;
-let i = 0;
+// let newArray =[];
+tempoSlider.addEventListener('change', () => {
+  sendTempoValue = tempoSlider.value;
+  newArray = durations.slice(0);
+  value = sendTempoValue/60;
+  newArray.forEach((item, index, arr) => {
+    arr[index] = item / value;
+    tempTempo = newArray.slice(0);
+  });
+  durations=tempTempo.splice(0);
+});
 
+let i = 0;
+let index=0;
 function playComposition(){
+  let now =context.currentTime;
+  for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
+    sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value, columnNotesArray[i].noteTime); //third param = detune in cents
+    sound.oscillator.type = columnNotesArray[i].waveform;
+  }
+    setTimeout(playComposition, durations[index]);
+  index++;
+  if(index>=durations.length){
+    index=0;
+  }
   if (columnNotesArray.length != 0) {
     let now = context.currentTime;
     if (i != 0) {
@@ -252,18 +272,14 @@ function playComposition(){
       sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value,columnNotesArray[i].noteTime); //third param = detune in cents
       sound.oscillator.type=columnNotesArray[i].waveform;
     }
-    // console.log(columnNotesArray[i].noteTime*1000);
-    tempo.tempoDuration = columnNotesArray[i].noteTime*1000;
     i++;
     if (i >= columnNotesArray.length) {
       i = 0;
     }
-    clearInterval(tempo.tempoInterval);
-    tempo.tempoInterval = setInterval(playComposition,tempo.tempoDuration);
+   
   }
 }
 
-let tempo = new Tempo;
 /*To load JSON file*/
 let importer = document.getElementById('import').addEventListener('click',()=>{
 let file = document.getElementById('input_file').files;
