@@ -89,15 +89,18 @@ class MainSound {
 }
 
 class ColumnNote {
-  constructor(hertzArr,waveform,noteTime) {
+  constructor(hertzArr,waveform,noteTime,noteTimeLength) {
+    
     this.composedHertzArray = [];
     this.noteTime=1;
     this.noteTimeLength=1000;
     this.waveform = 'sine';
-    if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined' && typeof(noteTime)!='undefined') {
+    if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined' && typeof(noteTime)!='undefined' && noteTimeLength !='undefined') {
       this.waveform = waveform;
       this.composedHertzArray = hertzArr.slice(0);
       this.noteTime =noteTime;
+      this.noteTimeLength = noteTimeLength;
+      durations.push(noteTimeLength);
     }
     this.column = document.createElement('div');
     this.column.setAttribute('class', 'column');
@@ -155,6 +158,7 @@ class ColumnNote {
     this.trashIconHolder.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
     this.trash.appendChild(this.trashIconHolder);
     this.column.appendChild(this.trash);
+    
   }
 }
 
@@ -290,7 +294,7 @@ let file = document.getElementById('input_file').files;
   fr.onload = (progressEvent)=>{
     let results = JSON.parse(progressEvent.target.result);
     results.forEach((result)=>{
-      let column = new ColumnNote(result.composedHertzArray, result.waveform,result.noteTime)
+      let column = new ColumnNote(result.composedHertzArray, result.waveform,result.noteTime,result.noteTimeLength);
       columnNotesArray.push(column);
     });
   }
