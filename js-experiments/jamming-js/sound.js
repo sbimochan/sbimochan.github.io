@@ -27,7 +27,7 @@ class Sound {
   }
   stop(time,endTime) {
     console.log(endTime);
-    this.gainNode.gain.exponentialRampToValueAtTime(0.01, time+endTime);
+    this.gainNode.gain.exponentialRampToValueAtTime(0.1, time+endTime);
     this.oscillator.stop(time+endTime);
   }
 } 
@@ -69,7 +69,6 @@ class Note {
 }
 class MainSound {
   constructor() {
-    this.waveform = 'sine';
     this.mainSoundDiv = document.createElement('div');
     this.mainSoundDiv.className = 'mainSoundDiv';
     this.mainSoundDiv.innerHTML = "Main sound: ";
@@ -94,18 +93,16 @@ let flag = true;
 
 class ColumnNote {
   constructor(hertzArr,waveform,noteTime,noteTimeLength) {
-    
     this.composedHertzArray = [];
     this.noteTime=1;
     this.noteTimeLength=1000;
-    this.waveform = 'sine';
+    //for file load and play
     if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined' && typeof(noteTime)!='undefined' && noteTimeLength !='undefined') {
       this.waveform = waveform;
       this.composedHertzArray = hertzArr.slice(0);
       this.noteTime =noteTime;
       this.noteTimeLength = noteTimeLength;
       durations.push(noteTimeLength);
-      
     }
     this.column = document.createElement('div');
     this.column.setAttribute('class', 'column');
@@ -131,7 +128,7 @@ class ColumnNote {
       let hertzIndex = notesCollection[noteValue];
       note.noteButtons.addEventListener('click', () => {
         note.isClicked = !note.isClicked;
-        if(flag){
+        if(flag){ //to start playing only on first click
           playComposition();
           flag=false;
         }else{
@@ -168,7 +165,6 @@ class ColumnNote {
     this.trashIconHolder.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
     this.trash.appendChild(this.trashIconHolder);
     this.column.appendChild(this.trash);
-    
   }
 }
 
@@ -178,7 +174,7 @@ let composedButton = document.getElementsByClassName('note');
 let composeSection = document.getElementsByClassName('compose-section');
 let mainWrapper = document.getElementById('mainWrapper');
 let noteButtonsid = document.getElementById('noteButtons');
-let notes = {
+const notes = {
   C4: 'C',
   D4: 'D',
   E4: 'E',
@@ -186,9 +182,17 @@ let notes = {
   G4: 'G',
   A4: 'A',
   B4: 'B',
-  C5: 'C'
+  C5: 'C',
+  'C#4': 'C#',
+  'D#4': 'D#',
+  'F#4': 'F#',
+  'G#4': 'G#',
+  'A#4': 'A#',
+  'B#4': 'B#',
+  'C#5': 'C#'
 };
-let sounds = {
+
+const sounds = {
   sine: 'peace',
   triangle: 'smooth',
   square: 'retro',
@@ -275,6 +279,8 @@ function playComposition(){
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
       sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value, columnNotesArray[i].noteTime); //third param = detune in cents
       sound.oscillator.type = columnNotesArray[i].waveform;
+      console.log(sound.oscillator.type);
+      
     }
       setTimeout(playComposition, durations[index]);
       i++;
