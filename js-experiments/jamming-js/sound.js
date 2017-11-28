@@ -69,6 +69,7 @@ class Note {
 }
 class MainSound {
   constructor() {
+    this.waveform = 'sine';
     this.mainSoundDiv = document.createElement('div');
     this.mainSoundDiv.className = 'mainSoundDiv';
     this.mainSoundDiv.innerHTML = "Main sound: ";
@@ -96,6 +97,7 @@ class ColumnNote {
     this.composedHertzArray = [];
     this.noteTime=1;
     this.noteTimeLength=1000;
+    this.waveform = 'sine';
     //for file load and play
     if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined' && typeof(noteTime)!='undefined' && noteTimeLength !='undefined') {
       this.waveform = waveform;
@@ -183,13 +185,13 @@ const notes = {
   A4: 'A',
   B4: 'B',
   C5: 'C',
-  'C#4': 'C#',
-  'D#4': 'D#',
-  'F#4': 'F#',
-  'G#4': 'G#',
-  'A#4': 'A#',
-  'B#4': 'B#',
-  'C#5': 'C#'
+    'C#4': 'C#',
+    'D#4': 'D#',
+    'F#4': 'F#',
+    'G#4': 'G#',
+    'A#4': 'A#',
+    'B#4': 'B#',
+    'C#5': 'C#'
 };
 
 const sounds = {
