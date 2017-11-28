@@ -22,10 +22,11 @@ class Sound {
     this.gainNode.gain.setValueAtTime(1, this.context.currentTime); //currentTime is 2x accurate than Date
     this.oscillator.start(time);
     // endTime=1;
+    
     this.stop(time,endTime);
   }
   stop(time,endTime) {
-    // console.log(endTime);
+    console.log(endTime);
     this.gainNode.gain.exponentialRampToValueAtTime(0.01, time+endTime);
     this.oscillator.stop(time+endTime);
   }
