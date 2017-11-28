@@ -73,7 +73,7 @@ ul .instruments{
   width:19px;
 }
 .newColumnAdder:active{
-  width: 75px; /*another case 150*/
+  width:80px;
 }
 .mainSoundDiv{
   display: inline-block;
