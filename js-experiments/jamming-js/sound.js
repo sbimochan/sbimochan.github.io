@@ -42,7 +42,7 @@ class NewColumn {
 class Exporter {
   constructor() {
     this.exporterDiv = document.createElement('div');
-    mainWrapper.appendChild(this.exporterDiv);
+    container.appendChild(this.exporterDiv);
     this.button = document.createElement('a');
     this.button.innerHTML = "Save your song";
     this.exporterDiv.id = "exporter";
@@ -61,10 +61,12 @@ class Note {
 class MainSound {
   constructor() {
     this.waveform = 'sine';
+
     this.mainSoundDiv = document.createElement('div');
     this.mainSoundDiv.className = 'mainSoundDiv';
     this.mainSoundDiv.innerHTML = "Main sound: ";
-    mainWrapper.insertAdjacentElement('afterbegin', this.mainSoundDiv);
+    // container.insertAdjacentElement('afterbegin', this.mainSoundDiv);
+    mainSoundContainer.appendChild(this.mainSoundDiv);
     this.toneSelector = document.createElement('select');
     for (const prop in sounds) {
       this.option = document.createElement('option');
@@ -167,7 +169,8 @@ let context = new(window.AudioContext || window.webkitAudioContext)();
 let sound = new Sound(context);
 let composedButton = document.getElementsByClassName('note');
 let composeSection = document.getElementsByClassName('compose-section');
-let mainWrapper = document.getElementById('mainWrapper');
+let container = document.getElementById('container');
+let mainSoundContainer = document.getElementById('mainSoundContainer');
 let noteButtonsid = document.getElementById('noteButtons');
 const notes = {
   C4: 'C',
@@ -258,10 +261,10 @@ function playComposition(){
   if(columnNotesArray.length !=0){
     let now =context.currentTime;
     if (i != 0) {
-      columnNotesArray[i - 1].column.style.backgroundColor = '#fff';
+      columnNotesArray[i - 1].column.style.backgroundColor = '#f3f3f3';
     }
     else {
-      columnNotesArray[columnNotesArray.length - 1].column.style.backgroundColor = '#fff';
+      columnNotesArray[columnNotesArray.length - 1].column.style.backgroundColor = '#f3f3f3';
     }
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4

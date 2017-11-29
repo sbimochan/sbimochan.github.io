@@ -1,8 +1,9 @@
-.mainWrapper{
-  padding:20px;
-
+.container{
+  padding:0px 20px;
+  background: #f3f3f3;
+  padding-bottom:30px;
 }
-.mainWrapper *{
+.container *{
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -10,7 +11,25 @@
 ul .instruments{
   list-style-type: none;
 }
+#mainSoundContainerWrapper{
+  height: 78px;
+  background:rgb(0, 188, 212);
+}
+#mainSoundContainer{
+  padding:0px 40px;
+  line-height: 78px;
+  color:rgba(255, 255, 255, 0.87);
+  font-size:32px;
+}
+.utilitiesRow{
+  background: rgb(33, 33, 33);
+  color:white;
+  height: 300px;
+}
+.utitlitiesContents{
+  padding:72px 40px;
 
+}
 .compose-scroll-main {
   width: 100%;
 }

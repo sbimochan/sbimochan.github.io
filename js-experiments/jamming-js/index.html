@@ -14,8 +14,12 @@
 
 <body>
   <div class="mainWrapper" id="mainWrapper">
-  
+    <div class="mainSoundContainerWrapper" id="mainSoundContainerWrapper">
+
+      <div id="mainSoundContainer"></div>
+    </div>
     <!-- <textarea name="" id="composedNotesArea" cols="50" rows="5"></textarea> -->
+    <div class="container" id="container">
     <div class="compose-container">
 
       <div class="compose-scroll-main">
@@ -26,23 +30,29 @@
       </div>
       
     </div>
-    <div id="fileLoadDiv" class="fileLoadDiv">
-      <div>Load your composition: </div>
-      <input id="input_file" class="input_file" type="file">
-      <button id="import">Submit</button>
     </div>
+    <div class="utilitiesRow" id="utilitiesRow">
+      <div class="utitlitiesContents">
 
-     <!-- <button onclick="playScale()">Play</button> -->
-    <div class="tempoDiv">
-      Tempo:
-       <span id="tempoValue"></span>
-       <!-- <input type="text" id="tempoValue" > -->
-      <input type="range" id="tempo" min="10" max="400" value="60" onchange="printValue('tempo','tempoValue','bpm')">
-    </div>
-    <div class="detuneDiv">
-      Detune:
-      <span id="detuneValue"></span>
-      <input type="range" id="detune" onchange="printValue('detune','detuneValue','cents')">
+        <div id="fileLoadDiv" class="fileLoadDiv">
+          <div>Load your composition: </div>
+          <input id="input_file" class="input_file" type="file">
+          <button id="import">Submit</button>
+        </div>
+    
+         <!-- <button onclick="playScale()">Play</button> -->
+        <div class="tempoDiv">
+          Tempo:
+           <span id="tempoValue"></span>
+           <!-- <input type="text" id="tempoValue" > -->
+          <input type="range" id="tempo" min="10" max="400" value="60" onchange="printValue('tempo','tempoValue','bpm')">
+        </div>
+        <div class="detuneDiv">
+          Detune:
+          <span id="detuneValue"></span>
+          <input type="range" id="detune" onchange="printValue('detune','detuneValue','cents')">
+        </div>
+      </div>
     </div>
   </div>
   <!-- <button onclick="gainScale()">Gain</button>
