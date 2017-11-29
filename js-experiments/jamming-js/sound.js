@@ -75,7 +75,7 @@ class MainSound {
       this.toneSelector.appendChild(this.option);
     }
     this.mainSoundDiv.appendChild(this.toneSelector);
-    this.toneSelector.addEventListener('click', () => {
+    this.toneSelector.addEventListener('change', () => {
       columnNotesArray.forEach((column) => {
         column.waveform = this.toneSelector.value;//changing instrument
         column.toneSelector.value = this.toneSelector.value
