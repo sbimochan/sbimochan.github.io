@@ -1,5 +1,3 @@
-
-
 class Sound {
   constructor(context) {
     this.context = context; //feed AudioContext. webkit AudioContext for Safari
@@ -26,7 +24,6 @@ class Sound {
     this.stop(time,endTime);
   }
   stop(time,endTime) {
-    console.log(endTime);
     this.gainNode.gain.exponentialRampToValueAtTime(0.1, time+endTime);
     this.oscillator.stop(time+endTime);
   }
@@ -211,6 +208,7 @@ newColumn.addColumn.addEventListener('click', () => {
   columnNotesArray.push(columnNote);
   durations.push(columnNote.noteTimeLength); //durations
   columnNote.trash.addEventListener('click',()=>{
+    durations.splice(columnNotesArray.indexOf(columnNote),1);
     columnNotesArray.splice(columnNotesArray.indexOf(columnNote),1);
     columnNote.column.style.display="none";
   });
@@ -252,7 +250,7 @@ tempoSlider.addEventListener('change', () => {
     arr[index]=(item*oldValue) /value;
   });
   oldValue=value;
-  console.log(durations);
+  // console.log(durations);
   
 });
 let i = 0;
@@ -270,7 +268,7 @@ function playComposition(){
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
       sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value, columnNotesArray[i].noteTime); //third param = detune in cents
       sound.oscillator.type = columnNotesArray[i].waveform;
-      console.log(sound.oscillator.type);
+      // console.log(sound.oscillator.type);
       
     }
       setTimeout(playComposition, durations[index]);
