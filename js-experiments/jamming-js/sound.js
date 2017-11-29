@@ -32,7 +32,11 @@ class NewColumn {
   constructor() {
     this.addColumn = document.createElement('button');
     this.addColumn.setAttribute("class", "column newColumnAdder");
-    this.addColumn.innerHTML = "<i class='fa fa-plus fa-3x' aria-hidden='true'></i>";
+    this.clef=document.createElement('img');
+    this.clef.src="images/clef.png";
+    this.clef.style.width="100%";
+    this.addColumn.appendChild(this.clef);
+    // this.addColumn.innerHTML = "<i class='fa fa-plus fa-3x' aria-hidden='true'></i>";
     composeSection[0].appendChild(this.addColumn);
   }
 }
@@ -287,6 +291,7 @@ let file = document.getElementById('input_file').files;
   }
   let fr = new FileReader;
   fr.onload = (progressEvent)=>{
+    // columnNotesArray=[];
     let results = JSON.parse(progressEvent.target.result);
     results.forEach((result)=>{
       let column = new ColumnNote(result.composedHertzArray, result.waveform,result.noteTime,result.noteTimeLength);
