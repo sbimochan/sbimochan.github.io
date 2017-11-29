@@ -36,15 +36,6 @@ class NewColumn {
     this.addColumn = document.createElement('button');
     this.addColumn.setAttribute("class", "column newColumnAdder");
     this.addColumn.innerHTML = "<i class='fa fa-plus fa-3x' aria-hidden='true'></i>";
-    this.addColumn.style.cursor = "pointer";
-    this.addColumn.style.float="left"; 
-    this.addColumn.style.lineHeight = "532px";
-    this.addColumn.style.textAlign = "center";
-    this.addColumn.style.border = "1px solid grey";
-    this.addColumn.style.borderRadius = "10px";
-    this.addColumn.style.height = "460px";
-    this.addColumn.style.marginRight = "15px";
-    this.addColumn.style.boxShadow = "10px 10px 5px #888888";
     composeSection[0].appendChild(this.addColumn);
   }
 }
@@ -136,6 +127,8 @@ class ColumnNote {
         }else{
           console.log("already running");
         }
+      
+        
         if (note.isClicked) {
           this.composedHertzArray.push(hertzIndex);
          
@@ -184,14 +177,7 @@ const notes = {
   G4: 'G',
   A4: 'A',
   B4: 'B',
-  C5: 'C',
-    'C#4': 'C#',
-    'D#4': 'D#',
-    'F#4': 'F#',
-    'G#4': 'G#',
-    'A#4': 'A#',
-    'B#4': 'B#',
-    'C#5': 'C#'
+  C5: 'C'
 };
 
 const sounds = {
@@ -272,10 +258,10 @@ function playComposition(){
   if(columnNotesArray.length !=0){
     let now =context.currentTime;
     if (i != 0) {
-      columnNotesArray[i - 1].column.style.backgroundColor = '#ecf0f1';
+      columnNotesArray[i - 1].column.style.backgroundColor = '#fff';
     }
     else {
-      columnNotesArray[columnNotesArray.length - 1].column.style.backgroundColor = '#ecf0f1';
+      columnNotesArray[columnNotesArray.length - 1].column.style.backgroundColor = '#fff';
     }
     columnNotesArray[i].column.style.backgroundColor = '#e5f6ff';
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4

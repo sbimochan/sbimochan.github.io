@@ -1,7 +1,11 @@
-
 .mainWrapper{
   padding:20px;
-  background: #ecf0f1;
+
+}
+.mainWrapper *{
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 ul .instruments{
   list-style-type: none;
@@ -74,6 +78,20 @@ ul .instruments{
 }
 .newColumnAdder:active{
   width:80px;
+  margin-right: 35px;
+}
+.newColumnAdder{
+  transition:0.25s;
+  margin-right:15px;
+  outline: none;
+  cursor: pointer;
+  float: left;
+  line-height: 532px;
+  text-align: center;
+  border:1px solid grey;
+  border-radius: 10px;
+  height: 460px;
+  box-shadow: 10px 10px 5px #888888;
 }
 .mainSoundDiv{
   display: inline-block;
