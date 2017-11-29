@@ -127,7 +127,6 @@ class ColumnNote {
           console.log("already running");
         }
       
-        
         if (note.isClicked) {
           this.composedHertzArray.push(hertzIndex);
          
@@ -222,13 +221,7 @@ newColumn.addColumn.addEventListener('click', () => {
   });
 });
 
-//to print value of Tempo
-function printValue(sliderID, spanID,unit) {
-  let slider = document.getElementById(sliderID);
-  let output = document.getElementById(spanID);
-  output.innerHTML = slider.value + unit;
-  return output.value;
-}
+
 // let tempoInterval;
 tempoSlider = document.getElementById('tempo');
 tempoSlider.min = 10;
@@ -242,13 +235,17 @@ detuneSlider.max = 900;
 detuneSlider.value = 0;
 detuneSlider.step = 50;
 let oldValue=1;
-// let newArray =[];
+
+//tempo
 tempoSlider.addEventListener('change', () => {
   sendTempoValue = tempoSlider.value; //120bpm
   value = sendTempoValue/60;
   durations.forEach((item,index,arr)=>{
     arr[index]=(item*oldValue) /value;
   });
+  for(let i=0;i<durations.length;i++){
+    columnNotesArray[i].noteTimeLength = (columnNotesArray[i].noteTimeLength*oldValue)/value;
+  }
   oldValue=value;
   // console.log(durations);
   
@@ -268,8 +265,6 @@ function playComposition(){
     for (let j = 0; j < columnNotesArray[i].composedHertzArray.length; j++) { //3,4
       sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value, columnNotesArray[i].noteTime); //third param = detune in cents
       sound.oscillator.type = columnNotesArray[i].waveform;
-      // console.log(sound.oscillator.type);
-      
     }
       setTimeout(playComposition, durations[index]);
       i++;
@@ -299,5 +294,12 @@ let file = document.getElementById('input_file').files;
     });
   }
 fr.readAsText(file.item(0));
-  setTimeout(playComposition,1000);
+  setTimeout(playComposition,100);
 });
+//to print value of ranges
+function printValue(sliderID, spanID,unit) {
+  let slider = document.getElementById(sliderID);
+  let output = document.getElementById(spanID);
+  output.innerHTML = slider.value + unit;
+  return output.value;
+}
