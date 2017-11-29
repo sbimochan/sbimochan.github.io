@@ -1,4 +1,18 @@
 
+var slider = {
+  0: {
+    title: 'Donec faucibus ultricies congue',
+    images: ['scene (1).jpeg','scene (2).jpeg','scene (3).jpeg','scene (4).jpeg']
+  },
+  1:{
+    title:'Faucibus donec congue ultricies',
+    images:['images/slider1.jpg', 'images/slider2.jpg', 'images/slider3.jpg', 'images/slider4.jpg', 'images/slider5.jpg']
+  }
+ 
+};
+var sliderKeys = Object.keys(slider[0]);
+console.log(sliderKeys);
+
 var imageViewer = document.getElementsByClassName('slider-images');
 var imageContainer = document.createElement('ul');
 var slideLeft = document.getElementById('slideLeft');
@@ -80,32 +94,11 @@ slideRight.onclick = function(){
     imgNumber++;
     // imgNumber = check(imgNumber);
     var percent = -(imgNumber-1)*100;
-    
-    switch (percent) {
-      
-      case -0:
-      carouselIndicatorLi[0].style.backgroundColor="#B0B8B9";
-        carouselIndicatorLi[1].style.backgroundColor="#E2534B";
-        break;
-      case -100:
-        carouselIndicatorLi[1].style.backgroundColor="#B0B8B9";
-        carouselIndicatorLi[2].style.backgroundColor="#E2534B";
-      break;
-      case -200:
-      carouselIndicatorLi[2].style.backgroundColor="#B0B8B9";
-        carouselIndicatorLi[3].style.backgroundColor="#E2534B";
-      break;
-      
-      case -300:
-        carouselIndicatorLi[3].style.backgroundColor="#B0B8B9";
-        carouselIndicatorLi[4].style.backgroundColor="#E2534B";
-      
-    }
     console.log('newnext', percent);
   
     animateNext(percent);
     preventClick();
-
+    setSliderBtnActive();
   }
 }
 slideLeft.onclick = function(){
@@ -114,48 +107,56 @@ slideLeft.onclick = function(){
     imgNumber--;
     // imgNumber = check(imgNumber);
     var percent = -(imgNumber+1)*100;
-    // console.log('prev', percent);
-    switch (percent) {
-      
-      case -100:
-      carouselIndicatorLi[1].style.backgroundColor="#B0B8B9";
-        carouselIndicatorLi[0].style.backgroundColor="#E2534B";
-        break;
-      case -200:
-        carouselIndicatorLi[2].style.backgroundColor="#B0B8B9";
-        carouselIndicatorLi[1].style.backgroundColor="#E2534B";
-      break;
-      case -300:
-      carouselIndicatorLi[3].style.backgroundColor="#B0B8B9";
-        carouselIndicatorLi[2].style.backgroundColor="#E2534B";
-      break;
-      
-      case -400:
-        carouselIndicatorLi[4].style.backgroundColor="#B0B8B9";
-        carouselIndicatorLi[3].style.backgroundColor="#E2534B";
-    }
+    
     animatePrev(percent);
     preventClick();
- 
+    setSliderBtnActive();
   }
 }
-console.log(imgNumber);
 
 //dynamic carousel indicators
 // console.log(imgNumber);
-for(i=0;i<sliderImages.length;i++){
+for(var index=0;index<sliderImages.length;index++){
   carouselIndicatorLists = document.createElement('li');
   carouselIndicatorLists.className="custom-indicator";
+  carouselIndicatorLists.setAttribute('id','sliderBtn'+index);
   carouselIndicator[0].appendChild(carouselIndicatorLists);
+// console.log(imgNumber);
+if(index ==imgNumber){
+  carouselIndicatorLists.setAttribute('class','active');
 }
+  
+}
+//to highlight active indicator
+function setSliderBtnActive(){
+  for(var i=0;i<sliderImages.length;i++){
+    var tempBtn = document.getElementById('sliderBtn'+i);
+    if(i==imgNumber){
+      tempBtn.setAttribute('class','active');
+    }
+    else{
+      tempBtn.setAttribute('class','carousel-indicator');
+    }
+  }
+}
+ for(var i=0;i<sliderImages.length;i++) {
+    var tempBtn = document.getElementById('sliderBtn'+i);
+    tempBtn.onclick = function (i) {
+      return function () {
+        changeSliderImage(i);
+      }
+    }(i);
+  }
+
+  function changeSliderImage(index){
+    imgNumber = index;
+    imageContainer.style.left = -(100*index) + "%";
+    setSliderBtnActive();
+  }
 
 //related images slider
 var relatedPreview = document.getElementsByClassName('related-preview');
 var relatedImageUl = document.getElementsByClassName('related-image-ul');
-// relatedPreview[0].style.position = "relative";
-// relatedPreview[0].style.overflow="hidden";
-// relatedImageUl[0].style.width=(1170*4)/16+"em";
-// relatedImageUl[0].style.position="absolute";
 
 var projectNext = document.getElementById('projectNext');
 var projectSlider = document.getElementById('projectSlider');
@@ -247,6 +248,7 @@ projectNext.onclick = function() {
     slideProject(++projectSliderPosition);
   }
 }
-if(imgNumber==0){
-  carouselIndicatorLi[0].style.backgroundColor="#E2534B";
-}
+
+// if(imgNumber==0){
+//   carouselIndicatorLi[0].style.backgroundColor="#E2534B";
+// }
