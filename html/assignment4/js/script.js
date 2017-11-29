@@ -1,8 +1,10 @@
+
 let imageViewer = document.getElementsByClassName('slider-images');
 let imageContainer = document.createElement('ul');
 let slideLeft = document.getElementById('slideLeft');
 let slideRight = document.getElementById('slideRight');
 let carouselIndicator = document.getElementsByClassName('carousel-indicators');
+let carouselIndicatorLi= document.getElementsByClassName('custom-indicator');
 //image urls
 let sliderImages = ['images/slider1.jpg', 'images/slider2.jpg', 'images/slider3.jpg', 'images/slider4.jpg', 'images/slider5.jpg'];
 imageViewer[0].appendChild(imageContainer);
@@ -14,7 +16,7 @@ imageContainer.style.width=1170*sliderImages.length+"px"; //width of image times
 
 //counter
 let imgNumber =0;
-let addImg = (imgName)=>{
+let addImg = function(imgName){
   let image = document.createElement('img');
   image.src = imgName;
   let list = document.createElement('li');
@@ -25,16 +27,7 @@ let addImg = (imgName)=>{
 for(let i = 0;i<sliderImages.length;i++){
   addImg(sliderImages[i]);
 }
-//function for setting image loop
-function check(value){
-  if(value >sliderImages.length-1){
-    return 0;
-  }
-  if(value < 0){
-    return sliderImages.length-1;
-  }
-  return value;
-}
+
 let prevStopper = null;
 
 function animateNext(percent){
@@ -61,7 +54,7 @@ function animatePrev(percent) {
   prevStopper = setInterval(function () {
     percent += 2.5;
     if (percent == -400) {
-      slideLeft.addEventListener('click', (event)=>{
+      slideLeft.addEventListener('click', function(event){
         event.preventDefault();
       })
     }
@@ -82,24 +75,46 @@ function preventClick(){
     flag = true;
   },1000); 
 }
-slideRight.onclick = ()=>{
-  if(flag ==true){
+
+slideRight.onclick = function(){
+  if(flag ==true && imgNumber<4){
     flag =false;
     imgNumber++;
-    imgNumber = check(imgNumber);
+    // imgNumber = check(imgNumber);
     let percent = -(imgNumber-1)*100;
-    // console.log('newnext', percent);
+    switch (percent) {
+      
+      case -0:
+      carouselIndicatorLi[0].style.backgroundColor="#B0B8B9";
+        carouselIndicatorLi[1].style.backgroundColor="red";
+        break;
+      case -100:
+        carouselIndicatorLi[1].style.backgroundColor="#B0B8B9";
+        carouselIndicatorLi[2].style.backgroundColor="red";
+      break;
+      case -200:
+      carouselIndicatorLi[2].style.backgroundColor="#B0B8B9";
+        carouselIndicatorLi[3].style.backgroundColor="red";
+      break;
+      
+      default:
+        carouselIndicatorLi[3].style.backgroundColor="#B0B8B9";
+        carouselIndicatorLi[4].style.backgroundColor="red";
+      
+        break;
+    }
+    console.log('newnext', percent);
   
     animateNext(percent);
     preventClick();
 
   }
 }
-slideLeft.onclick = ()=>{
-  if(flag ==true){
+slideLeft.onclick = function(){
+  if(flag ==true && imgNumber>0){
     flag = false;
     imgNumber--;
-    imgNumber = check(imgNumber);
+    // imgNumber = check(imgNumber);
     let percent = -(imgNumber+1)*100;
     // console.log('prev', percent);
 
@@ -108,6 +123,8 @@ slideLeft.onclick = ()=>{
  
   }
 }
+console.log(imgNumber);
+
 //dynamic carousel indicators
 // console.log(imgNumber);
 for(i=0;i<sliderImages.length;i++){
@@ -121,5 +138,5 @@ let relatedPreview = document.getElementsByClassName('related-preview');
 let relatedImageUl = document.getElementsByClassName('related-image-ul');
 relatedPreview[0].style.position = "relative";
 relatedPreview[0].style.overflow="hidden";
-relatedImageUl[0].style.width=1170*4+"px";
+relatedImageUl[0].style.width=(1170*4)/16+"em";
 relatedImageUl[0].style.position="absolute";
