@@ -41,17 +41,20 @@
         </div>
     
          <!-- <button onclick="playScale()">Play</button> -->
-        <div class="tempoDiv">
-          Tempo:
-           <span id="tempoValue"></span>
-           <!-- <input type="text" id="tempoValue" > -->
-          <input type="range" id="tempo" min="10" max="400" value="60" onchange="printValue('tempo','tempoValue','bpm')">
+        <div class="tempoAndDetune clearfix">
+          <div class="tempoDiv">
+            Tempo:
+            <span id="tempoValue"></span>
+            <!-- <input type="text" id="tempoValue" > -->
+            <input type="range" id="tempo" min="10" max="400" value="60" onchange="printValue('tempo','tempoValue','bpm')">
+          </div>
+          <div class="detuneDiv">
+            Detune:
+            <span id="detuneValue"></span>
+            <input type="range" id="detune" onchange="printValue('detune','detuneValue','cents')">
+          </div>
         </div>
-        <div class="detuneDiv">
-          Detune:
-          <span id="detuneValue"></span>
-          <input type="range" id="detune" onchange="printValue('detune','detuneValue','cents')">
-        </div>
+         
       </div>
     </div>
   </div>
