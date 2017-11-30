@@ -271,15 +271,17 @@
 
 li.related-image {
     position: relative;
-    width: 16.875em;
+    float: left;
+    width: 47%;
+    padding: 8px 8px;
     /*height: 270px;*/
 }
 
 li.related-image .overlay {
     position: absolute;
     display: none;
-    top: 0;
-    left: 0;
+    top: 8px;
+    left: 8px;
     width: 16.875em;
     height: 16.875em;
     color: #fff;
@@ -487,7 +489,9 @@ span.overlay-desc {
 .main-slider{
     height: auto;
 }
-
+.related-slide-buttons{
+    width:100%;
+}
 
 /*responsive start for desktop*/
 
@@ -576,7 +580,14 @@ span.overlay-desc {
     margin-top: -5px;
     /*background-image: url("../images/header-triangle.png");*/
 }
-
+.search-field{
+    border-radius: 10px;
+    border: solid 1px;
+    border-color: white;
+    background-color: white;
+    text-indent: 5px;
+    padding: 5px;
+}
 .title-box {
     float: left;
 }
@@ -592,7 +603,13 @@ span.overlay-desc {
     line-height: 80px;
     float: right;
 }
-
+.search-box{
+    display: none;
+    position: absolute;
+    top: 53px;
+    right: 0px;
+    float: right;
+}
 .breadcrumb li {
     display: inline;
     list-style-type: none;
@@ -832,7 +849,7 @@ li.related-image {
 
 li.related-image:not(:last-child) {
     /*float: left;*/
-    margin-right: 30px;
+    /* margin-right: 30px; */
 }
 
 li.related-image {
@@ -844,8 +861,8 @@ li.related-image {
 li.related-image .overlay {
     position: absolute;
     display: none;
-    top: 0;
-    left: 0;
+    top: 8px;
+    left: 8px;
     width: 270px;
     height: 270px;
     color: #fff;
@@ -1071,6 +1088,9 @@ span.overlay-desc {
     color:#fff;
 }
 .title-slide-buttons{
-    margin-top:45px;
+    /* margin-top:45px; */
 } 
+.related-slide-buttons{
+    width:115px;
+}
 }

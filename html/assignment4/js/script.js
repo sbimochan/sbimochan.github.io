@@ -7,12 +7,24 @@ var slider = {
   1:{
     title:'Faucibus donec congue ultricies',
     images:['images/slider1.jpg', 'images/slider2.jpg', 'images/slider3.jpg', 'images/slider4.jpg', 'images/slider5.jpg']
+  },
+  3: {
+    title: 'Abcd',
+    images: ['scene (1).jpeg','scene (2).jpeg','scene (3).jpeg','scene (4).jpeg']
   }
  
 };
-var sliderKeys = Object.keys(slider[0]);
-console.log(sliderKeys);
+var sliderKeys = Object.keys(slider[0]); //(2) title,images
+var sliderType = 0;
+const SLIDER_IMAGE_NO = slider[sliderType][sliderKeys[1]].length;
+var titleText = document.getElementById('titleText');
+//Slider Title button left
+var sliderTitleBtnLeft=document.getElementById('sliderTitleBtnLeft');
 
+//Slider Title button right
+var sliderTitleBtnRight=document.getElementById('sliderTitleBtnRight');
+var sliderDiv = document.getElementById('sliderImages');
+var carouselNav = document.getElementById('slider-nav');
 var imageViewer = document.getElementsByClassName('slider-images');
 var imageContainer = document.createElement('ul');
 var slideLeft = document.getElementById('slideLeft');
@@ -21,13 +33,39 @@ var carouselIndicator = document.getElementsByClassName('carousel-indicators');
 var carouselIndicatorLi= document.getElementsByClassName('custom-indicator');
 //image urls
 var sliderImages = ['images/slider1.jpg', 'images/slider2.jpg', 'images/slider3.jpg', 'images/slider4.jpg', 'images/slider5.jpg'];
+
+init();
+function init(){
+
+  this.sliderType = 0;
+  this.SLIDER_IMAGE_NO = slider[sliderType][sliderKeys[1]].length;
+  titleText.textContent = slider[sliderType][sliderKeys[0]];
+
+sliderTitleBtnRight.onclick = function(){
+  if(sliderType<2){
+    sliderType++;
+    
+    removeChildren(sliderDiv);
+    removeChildren(carouselIndicator[0]);
+    init();
+  }
+}
+sliderTitleBtnLeft.onclick = function(){
+  if(sliderType>0){
+    sliderType--;
+    removeChildren(carouselIndicator[0]);
+    removeChildren(sliderDiv);
+    init();
+  }
+}
+
 imageViewer[0].appendChild(imageContainer);
 imageViewer[0].style.overflow = "hidden";
 imageViewer[0].style.liststyle="none";
 imageViewer[0].style.position="relative";
 imageContainer.style.position="absolute";
 imageContainer.style.width=(1170*sliderImages.length)/16+"em"; //width of image times number of slides
-imageContainer.style.height=700/16+'em';
+// imageContainer.style.height=700/16+'em';
 //counter
 var imgNumber =0;
 var addImg = function(imgName){
@@ -60,9 +98,7 @@ function animateNext(percent){
 }
 
 function animatePrev(percent) {
-  // if (prevStopper) {
-  //   return;
-  // }
+  
   prevStopper = setInterval(function () {
     percent += 2.5;
     if (percent == -400) {
@@ -153,7 +189,7 @@ function setSliderBtnActive(){
     imageContainer.style.left = -(100*index) + "%";
     setSliderBtnActive();
   }
-
+}
 //related images slider
 var relatedPreview = document.getElementsByClassName('related-preview');
 var relatedImageUl = document.getElementsByClassName('related-image-ul');
@@ -248,7 +284,26 @@ projectNext.onclick = function() {
     slideProject(++projectSliderPosition);
   }
 }
-
+function removeChildren(parent){
+  while (parent.hasChildNodes()) {
+    parent.removeChild(parent.lastChild);
+  }
+}
+var searchIcon = document.getElementById('searchIcon');
+var searchBox = document.getElementById('searchBox');
+searchBox.style.display = "none";
+document.onclick = function(event){
+  console.log(document);
+  
+  var searchIconClicked = searchIcon.contains(event.target);
+  var searchBoxClicked = searchBox.contains(event.target);
+  if(searchIconClicked || searchBoxClicked) {
+    searchBox.style.display = "block";
+  }
+  else {
+    searchBox.style.display = "none";
+  }
+};
 // if(imgNumber==0){
 //   carouselIndicatorLi[0].style.backgroundColor="#E2534B";
 // }
