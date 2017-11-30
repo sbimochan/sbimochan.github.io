@@ -282,8 +282,10 @@ li.related-image .overlay {
     display: none;
     top: 8px;
     left: 8px;
-    width: 16.875em;
-    height: 16.875em;
+    width:92%;
+    height: 92%;
+    /* width: 16.875em;
+    height: 16.875em; */
     color: #fff;
 }
 
@@ -304,7 +306,8 @@ li.related-image:hover .overlay {
 }
 
 .overlay-icons {
-    margin-top: 115px;
+    /* margin-top: 115px; */
+    margin-top:20%;
     /* margin-left: 20px; */
 }
 
