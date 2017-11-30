@@ -34,7 +34,7 @@ class NewColumn {
     this.addColumn.setAttribute("class", "column newColumnAdder");
     this.clef=document.createElement('img');
     this.clef.src="images/clef.png";
-    this.clef.style.width="100%";
+    this.clef.style.width="70%";
     this.addColumn.appendChild(this.clef);
     // this.addColumn.innerHTML = "<i class='fa fa-plus fa-3x' aria-hidden='true'></i>";
     composeSection[0].appendChild(this.addColumn);
@@ -85,7 +85,6 @@ class MainSound {
   }
 }
 let flag = true;
-
 class ColumnNote {
   constructor(hertzArr,waveform,noteTime,noteTimeLength) {
     this.composedHertzArray = [];
@@ -128,9 +127,8 @@ class ColumnNote {
           playComposition();
           flag=false;
         }else{
-          console.log("already running");
+          console.log("note selected");
         }
-      
         if (note.isClicked) {
           this.composedHertzArray.push(hertzIndex);
          
@@ -216,15 +214,12 @@ newColumn.addColumn.addEventListener('click', () => {
     columnNote.column.style.display="none";
   });
   columnNote.noteDuration.addEventListener('change',()=>{
-    // console.log(columnNotesArray.indexOf(columnNote));
     durations.splice(columnNotesArray.indexOf(columnNote),1); //durations splice
     columnNote.noteTime = Number(columnNote.noteDuration.value);
     columnNote.noteTimeLength = columnNote.noteTime*1000;
-    // durations.push(columnNote.noteTimeLength,);
     durations.splice(columnNotesArray.indexOf(columnNote),0,columnNote.noteTimeLength);
   });
 });
-
 
 // let tempoInterval;
 tempoSlider = document.getElementById('tempo');
@@ -251,7 +246,6 @@ tempoSlider.addEventListener('change', () => {
     columnNotesArray[i].noteTimeLength = (columnNotesArray[i].noteTimeLength*oldValue)/value;
   }
   oldValue=value;
-  // console.log(durations);
   
 });
 let i = 0;
@@ -284,7 +278,6 @@ function playComposition(){
 
 /*To load JSON file*/
 let importer = document.getElementById('import').addEventListener('click',()=>{
-
 let file = document.getElementById('input_file').files;
   if(file.length !=1){
     return false;
