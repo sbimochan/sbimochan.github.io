@@ -12,14 +12,13 @@ ul .instruments{
   list-style-type: none;
 }
 #mainSoundContainerWrapper{
-  height: 78px;
+  max-height: 78px;
   background:rgb(0, 188, 212);
 }
 #mainSoundContainer{
   padding:0px 40px;
   line-height: 78px;
   color:rgba(255, 255, 255, 0.87);
-  font-size:32px;
 }
 .utilitiesRow{
   background: rgb(33, 33, 33);
@@ -114,10 +113,13 @@ ul .instruments{
 }
 .mainSoundDiv{
   display: inline-block;
+  font-size:x-large;
   
 }
 .mainSoundDiv select{
-  width:200px;
+  /* width:200px;
+   */
+   width:12.5em;
 }
 #exporter{
   padding:10px;
@@ -182,10 +184,14 @@ ul .instruments{
   float: right;
 }
 input#detune{
-  width:300px;
+  /* width:300px;
+   */
+   width:18.75em;
 }
  input#tempo{
-   width:200px;
+   /* width:200px;
+    */
+    width:12.5em
  }
  input[type="range"]{
   -webkit-appearance:none;
