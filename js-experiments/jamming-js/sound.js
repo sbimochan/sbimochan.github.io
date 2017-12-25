@@ -168,6 +168,7 @@ let sound = new Sound(context);
 let composedButton = document.getElementsByClassName('note');
 let composeSection = document.getElementsByClassName('compose-section');
 let container = document.getElementById('container');
+let columnDiv = document.getElementsByClassName('column');
 let mainSoundContainer = document.getElementById('mainSoundContainer');
 let noteButtonsid = document.getElementById('noteButtons');
 const notes = {
@@ -264,9 +265,9 @@ function playComposition(){
       sound.play(columnNotesArray[i].composedHertzArray[j], now, detuneSlider.value, columnNotesArray[i].noteTime); //third param = detune in cents
       sound.oscillator.type = columnNotesArray[i].waveform;
     }
-      setTimeout(playComposition, durations[index]);
-      i++;
-    index++;
+    setTimeout(playComposition, durations[index]);
+    i++;
+  index++;
     if(index>=durations.length){
       index=0;
     }
@@ -276,15 +277,17 @@ function playComposition(){
   }
 }
 
+
 /*To load JSON file*/
 let importer = document.getElementById('import').addEventListener('click',()=>{
+
 let file = document.getElementById('input_file').files;
   if(file.length !=1){
     return false;
   }
   let fr = new FileReader;
   fr.onload = (progressEvent)=>{
-    // columnNotesArray=[];
+
     let results = JSON.parse(progressEvent.target.result);
     results.forEach((result)=>{
       let column = new ColumnNote(result.composedHertzArray, result.waveform,result.noteTime,result.noteTimeLength);
