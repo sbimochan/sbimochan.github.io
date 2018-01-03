@@ -35,9 +35,10 @@ var nodes = [];
 function draw() {
 	requestAnimationFrame(draw);
 
-	ctx.font = "72px OpenSans";
-	ctx.fillText("Whose Turn Today?????",340,300);
-	ctx.fillText("Its " + names[turn],500,400);
+	ctx.font = "2.5em OpenSans";
+	ctx.fillText("Whose Turn Today??",w/9,h/3);
+	ctx.fillStyle="rgb(255,255,255)";
+	ctx.fillText(names[turn],w/3.5,h/2);
 
 	ctx.globalCompositeOperation = "xor";  //defines how new image is drawn in to a existing image
 	ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
