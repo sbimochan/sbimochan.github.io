@@ -12,13 +12,12 @@ for (i = 1; i <= currD; i++) {
   }
 }
 
-const names = ['Sushan', 'Bimochan','Sachit', 'Chumlung', 'Holiday'];
+const names = ['Chumlung', 'Sachit','Sushan',  'Holiday'];
 if (bkoday !== 0 && bkoday !== 6) {
-  var turn = (currD - count) % 4;
-  //document.getElementById('name').innerHTML = names[turn];
-  //document.querySelector('.congratulation').style.display = 'block';
+  var turn = (currD - count) % 3;
+
 } else {
-  var turn = 4;
+  var turn = 3;
 }
 
 
