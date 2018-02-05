@@ -12,7 +12,7 @@ for (i = 1; i <= currD; i++) {
   }
 }
 
-const names = ['Chumlung', 'Sushan','Bimochan','Sachit',  'Holiday'];
+const names = ['Sachit','Chumlung', 'Sushan','Bimochan','Holiday'];
 if (bkoday !== 0 && bkoday !== 6) {
   var turn = (currD - count) % 4;
 
