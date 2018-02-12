@@ -7,5 +7,8 @@
 			"path": "/Users/grim/Downloads/scribbletune-master"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"eslint.enable": false,
+		"tslint.enable": false
+	}
 }

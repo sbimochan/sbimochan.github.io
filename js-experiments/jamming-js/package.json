@@ -5,12 +5,13 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"webpack --watch" ,
-    "build-prod":"webpack -p"
+    "build": "webpack --watch",
+    "build-prod": "webpack -p"
   },
   "author": "Bimochan Shrestha",
   "license": "ISC",
   "devDependencies": {
     "webpack": "^3.8.1"
-  }
+  },
+  "dependencies": {}
 }

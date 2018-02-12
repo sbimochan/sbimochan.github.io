@@ -4,7 +4,8 @@ var profile = {
     dob: "1994-09-12",
     college: "Himalaya College of Engineering",
     location: "Shantinagar",
-    github: "https://github.com/sbimochan"
+    github: "https://github.com/sbimochan",
+    work:"Leapfrog Technology"
 }
 //Age Calculation
 var dob = profile.dob;
@@ -18,7 +19,7 @@ document.getElementById('dob').innerHTML = profile.dob;
 document.getElementById('age').innerHTML = age;
 document.getElementById('college').innerHTML = profile.college;
 document.getElementById('location').innerHTML = profile.location;
-document.getElementById('github').innerHTML = profile.github;
+document.getElementById('work').innerHTML = profile.work;
 
 //creating link
 var a = document.createElement('a');
