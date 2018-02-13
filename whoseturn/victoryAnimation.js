@@ -1,5 +1,5 @@
 let date = new Date();
-var count = 0;
+var count = 1;
 currY = date.getYear();
 currM = date.getMonth();
 currD = date.getDate();
