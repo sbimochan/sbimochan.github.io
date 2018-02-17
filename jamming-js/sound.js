@@ -13,28 +13,28 @@ class Sound {
     this.distortion.connect(this.gainNode);
     this.gainNode.connect(this.context.destination);
   }
-  play(hertz, time, cents,endTime) {
+  play(hertz, time, cents, endTime) {
     this.init();
     this.oscillator.frequency.setValueAtTime(hertz, this.context.currentTime);
     this.oscillator.detune.setValueAtTime(cents, this.context.currentTime);
     this.gainNode.gain.setValueAtTime(1, this.context.currentTime); //currentTime is 2x accurate than Date
     this.oscillator.start(time);
     // endTime=1;
-    
-    this.stop(time,endTime);
+
+    this.stop(time, endTime);
   }
-  stop(time,endTime) {
-    this.gainNode.gain.exponentialRampToValueAtTime(0.1, time+endTime);
-    this.oscillator.stop(time+endTime);
+  stop(time, endTime) {
+    this.gainNode.gain.exponentialRampToValueAtTime(0.1, time + endTime);
+    this.oscillator.stop(time + endTime);
   }
-} 
+}
 class NewColumn {
   constructor() {
     this.addColumn = document.createElement('button');
     this.addColumn.setAttribute("class", "column newColumnAdder");
-    this.clef=document.createElement('img');
-    this.clef.src="images/clef.png";
-    this.clef.style.width="70%";
+    this.clef = document.createElement('img');
+    this.clef.src = "images/clef.png";
+    this.clef.style.width = "70%";
     this.addColumn.appendChild(this.clef);
     // this.addColumn.innerHTML = "<i class='fa fa-plus fa-3x' aria-hidden='true'></i>";
     composeSection[0].appendChild(this.addColumn);
@@ -86,16 +86,16 @@ class MainSound {
 }
 let flag = true;
 class ColumnNote {
-  constructor(hertzArr,waveform,noteTime,noteTimeLength) {
+  constructor(hertzArr, waveform, noteTime, noteTimeLength) {
     this.composedHertzArray = [];
-    this.noteTime=1;
-    this.noteTimeLength=1000;
+    this.noteTime = 1;
+    this.noteTimeLength = 1000;
     this.waveform = 'sine';
     //for file load and play
-    if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined' && typeof(noteTime)!='undefined' && noteTimeLength !='undefined') {
+    if (typeof (hertzArr) != 'undefined' && typeof (waveform) != 'undefined' && typeof (noteTime) != 'undefined' && noteTimeLength != 'undefined') {
       this.waveform = waveform;
       this.composedHertzArray = hertzArr.slice(0);
-      this.noteTime =noteTime;
+      this.noteTime = noteTime;
       this.noteTimeLength = noteTimeLength;
       durations.push(noteTimeLength);
     }
@@ -103,7 +103,7 @@ class ColumnNote {
     this.column.setAttribute('class', 'column');
     composeSection[0].appendChild(this.column);
     this.toneSelector = document.createElement('select');
-    this.toneSelector.style.width="100px";
+    this.toneSelector.style.width = "100px";
     for (const prop in sounds) {
       this.option = document.createElement('option');
       this.option.innerHTML = sounds[prop];
@@ -123,15 +123,15 @@ class ColumnNote {
       let hertzIndex = notesCollection[noteValue];
       note.noteButtons.addEventListener('click', () => {
         note.isClicked = !note.isClicked;
-        if(flag){ //to start playing only on first click
+        if (flag) { //to start playing only on first click
           playComposition();
-          flag=false;
-        }else{
+          flag = false;
+        } else {
           console.log("note selected");
         }
         if (note.isClicked) {
           this.composedHertzArray.push(hertzIndex);
-         
+
         } else {
           this.composedHertzArray.splice(this.composedHertzArray.indexOf(notesCollection[note.noteButtons.value]), 1);
         }
@@ -141,13 +141,13 @@ class ColumnNote {
           note.noteButtons.classList.toggle('selected');
         }
       });
-    if(this.composedHertzArray.indexOf(hertzIndex) != -1 ){
-      note.noteButtons.classList.toggle('selected');
+      if (this.composedHertzArray.indexOf(hertzIndex) != -1) {
+        note.noteButtons.classList.toggle('selected');
       }
     }
     this.noteDuration = document.createElement('select');
-    this.noteDuration.style.width="60px";
-    for(const prop in noteTypes){
+    this.noteDuration.style.width = "60px";
+    for (const prop in noteTypes) {
       this.option = document.createElement('option');
       this.option.innerHTML = noteTypes[prop];
       this.option.value = prop;
@@ -155,7 +155,7 @@ class ColumnNote {
     }
     this.column.appendChild(this.noteDuration);
     this.trash = document.createElement('button');
-    this.trash.setAttribute('class','danger');
+    this.trash.setAttribute('class', 'danger');
     this.trashIconHolder = document.createElement('span');
     this.trashIconHolder.innerHTML = "<i class='fa fa-trash-o' aria-hidden='true'></i>";
     this.trash.appendChild(this.trashIconHolder);
@@ -163,7 +163,7 @@ class ColumnNote {
   }
 }
 
-let context = new(window.AudioContext || window.webkitAudioContext)();
+let context = new (window.AudioContext || window.webkitAudioContext)();
 let sound = new Sound(context);
 let composedButton = document.getElementsByClassName('note');
 let composeSection = document.getElementsByClassName('compose-section');
@@ -189,42 +189,42 @@ const sounds = {
   sawtooth: 'Stranger Things'
 }
 const noteTypes = {
-  '1':'whole note',
-  '0.5':'half note',
-  '0.25':'quarter note'
+  '1': 'whole note',
+  '0.5': 'half note',
+  '0.25': 'quarter note'
 }
 let mainSound = new MainSound;
 let columnNotesArray = [];
 let newColumn = new NewColumn(); //Adder
 let exporter = new Exporter;
 
-exporter.button.addEventListener('click',()=>{
+exporter.button.addEventListener('click', () => {
   //to write into json
   let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(columnNotesArray));
-  exporter.button.href="data:"+data;
-  exporter.button.download="song.json";
-  firebase.database().ref().child('composition/'+ID()).set({
+  exporter.button.href = "data:" + data;
+  exporter.button.download = "song.json";
+  firebase.database().ref().child('composition/' + ID()).set({
     song: JSON.stringify(columnNotesArray)
   })
 });
 var ID = function () {
   return '_' + Math.random().toString(36).substr(2, 9);
 };
-let durations=[];
+let durations = [];
 newColumn.addColumn.addEventListener('click', () => {
   let columnNote = new ColumnNote();
   columnNotesArray.push(columnNote);
   durations.push(columnNote.noteTimeLength); //durations
-  columnNote.trash.addEventListener('click',()=>{
-    durations.splice(columnNotesArray.indexOf(columnNote),1);
-    columnNotesArray.splice(columnNotesArray.indexOf(columnNote),1);
-    columnNote.column.style.display="none";
+  columnNote.trash.addEventListener('click', () => {
+    durations.splice(columnNotesArray.indexOf(columnNote), 1);
+    columnNotesArray.splice(columnNotesArray.indexOf(columnNote), 1);
+    columnNote.column.style.display = "none";
   });
-  columnNote.noteDuration.addEventListener('change',()=>{
-    durations.splice(columnNotesArray.indexOf(columnNote),1); //durations splice
+  columnNote.noteDuration.addEventListener('change', () => {
+    durations.splice(columnNotesArray.indexOf(columnNote), 1); //durations splice
     columnNote.noteTime = Number(columnNote.noteDuration.value);
-    columnNote.noteTimeLength = columnNote.noteTime*1000;
-    durations.splice(columnNotesArray.indexOf(columnNote),0,columnNote.noteTimeLength);
+    columnNote.noteTimeLength = columnNote.noteTime * 1000;
+    durations.splice(columnNotesArray.indexOf(columnNote), 0, columnNote.noteTimeLength);
   });
 });
 
@@ -240,26 +240,26 @@ detuneSlider.min = -900;
 detuneSlider.max = 900;
 detuneSlider.value = 0;
 detuneSlider.step = 50;
-let oldValue=1;
+let oldValue = 1;
 
 //tempo
 tempoSlider.addEventListener('change', () => {
   sendTempoValue = tempoSlider.value; //120bpm
-  value = sendTempoValue/60;
-  durations.forEach((item,index,arr)=>{
-    arr[index]=(item*oldValue) /value;
+  value = sendTempoValue / 60;
+  durations.forEach((item, index, arr) => {
+    arr[index] = (item * oldValue) / value;
   });
-  for(let i=0;i<durations.length;i++){
-    columnNotesArray[i].noteTimeLength = (columnNotesArray[i].noteTimeLength*oldValue)/value;
+  for (let i = 0; i < durations.length; i++) {
+    columnNotesArray[i].noteTimeLength = (columnNotesArray[i].noteTimeLength * oldValue) / value;
   }
-  oldValue=value;
-  
+  oldValue = value;
+
 });
 let i = 0;
-let index=0;
-function playComposition(){
-  if(columnNotesArray.length !=0){
-    let now =context.currentTime;
+let index = 0;
+function playComposition() {
+  if (columnNotesArray.length != 0) {
+    let now = context.currentTime;
     if (i != 0) {
       columnNotesArray[i - 1].column.style.backgroundColor = '#f3f3f3';
     }
@@ -273,9 +273,9 @@ function playComposition(){
     }
     setTimeout(playComposition, durations[index]);
     i++;
-  index++;
-    if(index>=durations.length){
-      index=0;
+    index++;
+    if (index >= durations.length) {
+      index = 0;
     }
     if (i >= columnNotesArray.length) {
       i = 0;
@@ -285,25 +285,25 @@ function playComposition(){
 
 
 /*To load JSON file*/
-let importer = document.getElementById('import').addEventListener('click',()=>{
+let importer = document.getElementById('import').addEventListener('click', () => {
 
-let file = document.getElementById('input_file').files;
-  if(file.length !=1){
+  let file = document.getElementById('input_file').files;
+  if (file.length != 1) {
     return false;
   }
   let fr = new FileReader;
-  fr.onload = (progressEvent)=>{
+  fr.onload = (progressEvent) => {
     let results = JSON.parse(progressEvent.target.result);
-    results.forEach((result)=>{
-      let column = new ColumnNote(result.composedHertzArray, result.waveform,result.noteTime,result.noteTimeLength);
+    results.forEach((result) => {
+      let column = new ColumnNote(result.composedHertzArray, result.waveform, result.noteTime, result.noteTimeLength);
       columnNotesArray.push(column);
     });
   }
-fr.readAsText(file.item(0));
-  setTimeout(playComposition,100);
+  fr.readAsText(file.item(0));
+  setTimeout(playComposition, 100);
 });
 //to print value of ranges
-function printValue(sliderID, spanID,unit) {
+function printValue(sliderID, spanID, unit) {
   let slider = document.getElementById(sliderID);
   let output = document.getElementById(spanID);
   output.innerHTML = slider.value + unit;
