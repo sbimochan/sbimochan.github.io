@@ -19,17 +19,22 @@ const dbRefObject = firebase.database().ref().child('composition');
 // snap is data snapshot 
 dbRefObject.on('value', snap => {
   const numOfSong = snap.numChildren()
-  if( numOfSong !==0){
-    for(let i= 0; i< numOfSong; i++){
+  if (numOfSong !== 0) {
+    for (let i = 0; i < numOfSong; i++) {
       var newSong = document.createElement('button');
       newSong.innerHTML = Object.keys(snap.val())[i];
-      newSong.value = snap.val();
+      newSong.value = Object.values(snap.val())[i].song;
       linebreak = document.createElement("br");
       newSong.appendChild(linebreak);
       songListDiv.appendChild(newSong);
-     
+      newSong.addEventListener('click', () => {
+        let results = JSON.parse(newSong.value);
+        results.forEach((result) => {
+          let column = new ColumnNote(result.composedHertzArray, result.waveform, result.noteTime, result.noteTimeLength);
+          columnNotesArray.push(column);
+            setTimeout(playComposition, 100);
+        });
+      })
     }
   }
 });
-// dbRefObject.on('value', snap => preObject.innerHTML = Object.keys(snap.val()));
-
