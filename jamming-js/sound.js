@@ -15,8 +15,8 @@ class Sound {
   }
   play(hertz, time, cents,endTime) {
     this.init();
-    this.oscillator.frequency.value = hertz;
-    this.oscillator.detune.value = cents;
+    this.oscillator.frequency.setValueAtTime(hertz, this.context.currentTime);
+    this.oscillator.detune.setValueAtTime(cents, this.context.currentTime);
     this.gainNode.gain.setValueAtTime(1, this.context.currentTime); //currentTime is 2x accurate than Date
     this.oscillator.start(time);
     // endTime=1;
@@ -203,7 +203,13 @@ exporter.button.addEventListener('click',()=>{
   let data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(columnNotesArray));
   exporter.button.href="data:"+data;
   exporter.button.download="song.json";
+  firebase.database().ref().child('composition/'+ID()).set({
+    song: JSON.stringify(columnNotesArray)
+  })
 });
+var ID = function () {
+  return '_' + Math.random().toString(36).substr(2, 9);
+};
 let durations=[];
 newColumn.addColumn.addEventListener('click', () => {
   let columnNote = new ColumnNote();
@@ -287,7 +293,6 @@ let file = document.getElementById('input_file').files;
   }
   let fr = new FileReader;
   fr.onload = (progressEvent)=>{
-
     let results = JSON.parse(progressEvent.target.result);
     results.forEach((result)=>{
       let column = new ColumnNote(result.composedHertzArray, result.waveform,result.noteTime,result.noteTimeLength);
