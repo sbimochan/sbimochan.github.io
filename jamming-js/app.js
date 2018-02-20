@@ -21,10 +21,10 @@ dbRefObject.on('value', snap => {
   const numOfSong = snap.numChildren()
   if (numOfSong !== 0) {
     for (let i = 0; i < numOfSong; i++) {
-      var newSong = document.createElement('button');
+      let newSong = document.createElement('button');
       newSong.innerHTML = Object.keys(snap.val())[i];
       newSong.value = Object.values(snap.val())[i].song;
-      linebreak = document.createElement("br");
+      linebreak = document.createElement('br');
       newSong.appendChild(linebreak);
       songListDiv.appendChild(newSong);
       newSong.addEventListener('click', () => {
@@ -33,6 +33,8 @@ dbRefObject.on('value', snap => {
           let column = new ColumnNote(result.composedHertzArray, result.waveform, result.noteTime, result.noteTimeLength);
           columnNotesArray.push(column);
             setTimeout(playComposition, 100);
+            console.log(playComposition);
+            
         });
       })
     }
