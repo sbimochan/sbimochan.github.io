@@ -18,7 +18,7 @@ let ul = document.createElement('ul');
 ul.style="list-style-type: none"
 songListDiv.appendChild(ul);
 // sync object changes with on menthod
-// snap is data snapshot 
+// snap is data snapshot
 dbRefObject.on('value', snap => {
   const numOfSong = snap.numChildren()
   if (numOfSong !== 0) {
