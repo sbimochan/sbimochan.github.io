@@ -10,7 +10,9 @@ body {
     /* Fix for webkit rendering */
     -webkit-text-size-adjust: 100%;
 }
-
+.github-widget{
+    max-width: none !important;
+}
 
 
 
@@ -274,7 +276,7 @@ body .ui-tooltip {
 /* Profile Image (Full background) */
 
 #section-profileImage {
-    background: #222 url(http://sbimochan.com.np/images/bigimages/landing.jpg) no-repeat center center;
+    background: #222 url(/images/himalayas.jpg) no-repeat center center;
     
     background-size: cover;
     height: 510px;
@@ -1243,7 +1245,7 @@ video#myvideo {
 
 @media only screen and (min-width: 400px) {
     #working-section {
-        background-image: url(http://sbimochan.com.np/images/bigimages/landing.jpg);
+        background-image: url(/images/himalayas.jpg);
         height: 750px;
         background-size: cover;
         background-attachment: fixed;
@@ -1254,7 +1256,7 @@ video#myvideo {
 }
 
 #working-section-iphone {
-    background-image: url(http://sbimochan.com.np/images/bigimages/landing.jpg);
+    background-image: url(/images/himalayas.jpg);
     height: 400px;
     background-size: cover;
     background-position: top center;
