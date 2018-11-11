@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Word Finder</title>
+</head>
+
+<body>
+	<form method="POST" id="wordFinderForm">
+		<label for="letters">Enter the letters without spaces.</label><br />
+		<input type="text" placeholder="xtapch" id="letters" /><br />
+
+		<label for="size">Enter the length of word you want. (Optional)</label><br />
+		<input type="number" placeholder="4" id="size" /><br />
+		<button type="submit">Submit</button>
+	</form>
+	<div id="result">
+		<h3 id="heading2"></h2>
+			<textarea name="" id="resultArea" cols="30" rows="10"></textarea>
+	</div>
+</body>
+<script>
+	const URL = "http://sbimochan.pythonanywhere.com";
+	window.addEventListener('load', function () {
+		function sendData(form){
+			var data = { letters: form.letters.value, size: form.size.value };
+			return fetch(URL, {
+				method: "POST",
+				mode: "cors",
+				cache: "no-cache",
+				credentials: "same-origin",
+				headers: {
+					"Content-Type": "application/json; charset=utf-8"
+				},
+				redirect: "follow",
+				body: JSON.stringify(data)
+			}).then(response => response.json())
+		};
+
+		var form = document.getElementById('wordFinderForm');
+		form.addEventListener('submit', function (event) {
+			event.preventDefault();
+			document.getElementById('heading2').innerHTML = "Loading...";
+			sendData(form).then(data=>{
+				document.getElementById('heading2').innerHTML = data.msg;
+				document.getElementById('resultArea').innerHTML = data.result;
+			}).catch(err=>console.log(err));
+		});
+	});
+</script>
+
+</html>
