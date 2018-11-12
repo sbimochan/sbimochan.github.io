@@ -46,7 +46,7 @@
 			sendData(form).then(data=>{
 				document.getElementById('heading2').innerHTML = data.msg;
 				document.getElementById('resultArea').innerHTML = data.result;
-			}).catch(err=>console.log(err));
+			}).catch(err=>document.getElementById('heading2).innerHTML = "Sorry, something went wrong. "+ err;
 		});
 	});
 </script>
