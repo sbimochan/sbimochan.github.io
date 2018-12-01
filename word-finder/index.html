@@ -1,54 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<!--
+			Basic Page Needs
+			––––––––––––––––––––––––––––––––––––––––––––––––––
+		-->
+		<meta charset="utf-8" />
+		<title>Word finder</title>
+		<meta name="description" content="Finds word by letters given by you" />
+		<meta name="author" content="Bimochan Shrestha" />
 
-<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-	<title>Word Finder</title>
-</head>
+		<!--
+			Mobile Specific Metas
+			––––––––––––––––––––––––––––––––––––––––––––––––––
+		-->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<body>
-	<form method="POST" id="wordFinderForm">
-		<label for="letters">Enter the letters without spaces.</label><br />
-		<input type="text" placeholder="xtapch" id="letters" /><br />
+		<!--
+			FONT
+			––––––––––––––––––––––––––––––––––––––––––––––––––
+		-->
+		<link
+			href="//fonts.googleapis.com/css?family=Raleway:400,300,600"
+			rel="stylesheet"
+			type="text/css"
+		/>
 
-		<label for="size">Enter the length of word you want. (Optional)</label><br />
-		<input type="number" placeholder="4" id="size" /><br />
-		<button type="submit">Submit</button>
-	</form>
-	<div id="result">
-		<h3 id="heading2"></h2>
-			<textarea name="" id="resultArea" cols="30" rows="10"></textarea>
-	</div>
-</body>
-<script>
-	const URL = "https://sbimochan.pythonanywhere.com";
-	window.addEventListener('load', function () {
-		function sendData(form){
-			var data = { letters: form.letters.value, size: form.size.value };
-			return fetch(URL, {
-				method: "POST",
-				cache: "no-cache",
-				credentials: "same-origin",
-				headers: {
-					"Content-Type": "application/json; charset=utf-8"
-				},
-				redirect: "follow",
-				body: JSON.stringify(data)
-			}).then(response => response.json())
-		};
+		<!--
+			CSS
+			––––––––––––––––––––––––––––––––––––––––––––––––––
+		-->
+		<link rel="stylesheet" href="css/normalize.css" />
+		<link rel="stylesheet" href="css/skeleton.css" />
 
-		var form = document.getElementById('wordFinderForm');
-		form.addEventListener('submit', function (event) {
-			event.preventDefault();
-			document.getElementById('heading2').innerHTML = "Loading...";
-			sendData(form).then(data=>{
-				document.getElementById('heading2').innerHTML = data.msg;
-				document.getElementById('resultArea').innerHTML = data.result;
-			}).catch(err=>document.getElementById('heading2').innerHTML = "Sorry, something went wrong. "+ err)
-		});
-	});
-</script>
+		<!--
+			Favicon
+			––––––––––––––––––––––––––––––––––––––––––––––––––
+		-->
+		<link rel="icon" type="image/png" href="images/favicon.png" />
+	</head>
+	<body>
+		<!--
+			Primary Page Layout
+			––––––––––––––––––––––––––––––––––––––––––––––––––
+		-->
+		<div class="container">
+			<div class="row">
+				<div class="one-half column" style="margin-top: 15%">
+					<h4>Word Finder</h4>
+					<form method="POST" id="wordFinderForm">
+						<div class="row">
+							<div class="six columns">
+								<label for="letters">Enter the letters without spaces.</label
+								><br />
+								<input
+									type="text"
+									placeholder="E.g: dlocu"
+									id="letters"
+								/><br />
+							</div>
+							<div class="six columns">
+								<label for="size"
+									>Enter the length of word you want. (Optional)</label
+								><br />
+								<input type="number" placeholder="E.g: 4" id="size" /><br />
+							</div>
+						</div>
+						<button type="submit" class="button-primary">Submit</button>
+					</form>
+				</div>
+				<div class="one-half column" style="margin-top: 20%">
+          <textarea
+          class="u-full-width"
+          placeholder="Your results will be displayed here."
+          id="resultArea"
+          style="height:200px"
+          ></textarea>
+          <h4 id="heading4"></h4>
+				</div>
+			</div>
+		</div>
 
+		<!--
+			End Document
+			––––––––––––––––––––––––––––––––––––––––––––––––––
+		-->
+		<script src="./js/wordFinder.js"></script>
+	</body>
 </html>
