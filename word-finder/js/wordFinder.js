@@ -19,6 +19,11 @@ window.addEventListener('load', function () {
     event.preventDefault();
     document.getElementById('heading4').innerHTML = "Loading...";
     sendData(form).then(data => {
+      if (data.error) {
+        console.log(data)
+        document.getElementById('heading4').innerHTML = data.error.msg;
+        return;
+      }
       document.getElementById('heading4').innerHTML = data.msg;
       document.getElementById('resultArea').innerHTML = data.result;
     }).catch(err => document.getElementById('heading4').innerHTML = "Sorry, something went wrong. " + err)
